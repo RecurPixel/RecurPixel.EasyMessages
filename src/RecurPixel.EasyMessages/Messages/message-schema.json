@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EasyMessages Schema",
+  "description": "Schema for RecurPixel.EasyMessages default message library",
+  "type": "object",
+  "required": ["version", "messages"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the message library"
+    },
+    "messages": {
+      "type": "object",
+      "description": "Collection of message definitions",
+      "patternProperties": {
+        "^[A-Z]+_\\d{3}$": {
+          "type": "object",
+          "required": ["type", "title", "description"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["Success", "Error", "Warning", "Info", "Critical"],
+              "description": "Message severity level"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 100,
+              "description": "Short, user-friendly title"
+            },
+            "description": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 500,
+              "description": "Detailed message description (supports placeholders like {field})"
+            },
+            "hint": {
+              "type": "string",
+              "maxLength": 300,
+              "description": "Optional helpful hint or suggestion"
+            },
+            "httpStatusCode": {
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 599,
+              "description": "HTTP status code for API responses"
+            },
+            "category": {
+              "type": "string",
+              "description": "Optional grouping category"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Optional tags for filtering/searching"
+            }
+          },
+          "additionalProperties": false
+        },
+        "^_comment": {
+          "type": "string",
+          "description": "Comments are allowed and ignored"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
