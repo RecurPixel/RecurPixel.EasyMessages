@@ -1,9 +1,13 @@
+using System.Text.Json.Serialization;
+
 namespace RecurPixel.EasyMessages.Core;
 
 internal sealed class MessageTemplate
 {
     public MessageType Type { get; set; }
+
     public string Title { get; set; } = string.Empty;
+
     public string Description { get; set; } = string.Empty;
     public int? HttpStatusCode { get; set; }
     

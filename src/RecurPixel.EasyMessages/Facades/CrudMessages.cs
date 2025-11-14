@@ -3,7 +3,7 @@ using RecurPixel.EasyMessages.Core.Extensions;
 
 namespace RecurPixel.EasyMessages.Facades;
 
-public static class CrudMessages
+public class CrudMessages
 {
     public static Message Created(string resource) =>
         MessageRegistry.Get("CRUD_001").WithParams(new { resource });

@@ -4,7 +4,7 @@ using RecurPixel.EasyMessages.Core.Extensions;
 
 namespace RecurPixel.EasyMessages.Facades;
 
-public static class FileMessages
+public class FileMessages
 {
     public static Message Uploaded() => MessageRegistry.Get("FILE_001");
     

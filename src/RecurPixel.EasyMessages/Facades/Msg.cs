@@ -1,4 +1,4 @@
-using RecurPixel.EasyMessages.Facades;
+using RecurPixel.EasyMessages.Core;
 
 namespace RecurPixel.EasyMessages.Facades;
 
@@ -10,5 +10,9 @@ public static class Msg
     public static SystemMessages System => new();
     public static DatabaseMessages Database => new();
     public static FileMessages File => new();
-    public static CustomMessages Custom => new();
+
+    public static Message Custom(string code)
+    {
+        return CustomMessages.Get(code);
+    }
 }

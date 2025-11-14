@@ -3,7 +3,7 @@ using RecurPixel.EasyMessages.Core.Extensions;
 
 namespace RecurPixel.EasyMessages.Facades;
 
-public static class ValidationMessages
+public class ValidationMessages
 {
     public static Message Failed() => MessageRegistry.Get("VAL_001");
     

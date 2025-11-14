@@ -54,7 +54,7 @@ public static class MessageRegistry
     private static Dictionary<string, MessageTemplate> LoadEmbeddedMessages()
     {
         var assembly = typeof(MessageRegistry).Assembly;
-        var resourceName = "EasyMessages.Core.Messages.defaults.json";
+        var resourceName = "RecurPixel.EasyMessages.Messages.defaults.json";
         
         using var stream = assembly.GetManifestResourceStream(resourceName);
         if (stream == null)
@@ -62,8 +62,8 @@ public static class MessageRegistry
         
         using var reader = new StreamReader(stream);
         var json = reader.ReadToEnd();
-        
-        return JsonSerializer.Deserialize<Dictionary<string, MessageTemplate>>(json)
+
+        return JsonSerializer.Deserialize<MessageCatalog>(json)?.Messages
             ?? throw new InvalidOperationException("Failed to deserialize default messages");
     }
 }
