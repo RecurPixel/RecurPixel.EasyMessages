@@ -160,7 +160,7 @@ public void MessageTemplate_ShouldMapToMessage()
 // Precedence (highest to lowest):
 1. .WithStatusCode(xxx)           // Explicit override wins
 2. defaults.json httpStatusCode   // Template value
-3. MessageType default mapping    // Fallback only
+3. MessageType default mapping    // Fallback only * we will not use Mapping if it is absend first 2 steps we will keep it empty
 ```
 
 ---

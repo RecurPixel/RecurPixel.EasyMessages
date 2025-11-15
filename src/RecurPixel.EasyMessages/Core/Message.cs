@@ -18,7 +18,10 @@ public sealed record Message
     public string? CorrelationId { get; init; }
     
     // HTTP
-    public int HttpStatusCode { get; init; }
+    public int? HttpStatusCode { get; init; }
+
+    // Hint
+    public string? Hint { get; set; }
     
     // Internal constructor - force creation through MessageRegistry
     internal Message()
