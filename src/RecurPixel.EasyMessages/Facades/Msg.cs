@@ -1,6 +1,7 @@
 using RecurPixel.EasyMessages.Core;
+using RecurPixel.EasyMessages.Facades;
 
-namespace RecurPixel.EasyMessages.Facades;
+namespace RecurPixel.EasyMessages;
 
 public static class Msg
 {

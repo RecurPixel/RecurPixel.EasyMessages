@@ -32,7 +32,7 @@ public class MessageCatalog
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             Converters = { new JsonStringEnumConverter() },
             AllowTrailingCommas = true,
-            ReadCommentHandling = JsonCommentHandling.Skip
+            ReadCommentHandling = JsonCommentHandling.Skip,
         };
 
         try
@@ -44,7 +44,8 @@ public class MessageCatalog
             if (root.ValueKind != JsonValueKind.Object)
             {
                 throw new InvalidMessageFileException(
-                    "Message file must be a JSON object at the root level.");
+                    "Message file must be a JSON object at the root level."
+                );
             }
 
             // Full format with "messages" property
@@ -53,65 +54,77 @@ public class MessageCatalog
                 if (messagesProperty.ValueKind != JsonValueKind.Object)
                 {
                     throw new InvalidMessageFileException(
-                        "The 'messages' property must be a JSON object containing message definitions.");
+                        "The 'messages' property must be a JSON object containing message definitions."
+                    );
                 }
 
                 var catalog = JsonSerializer.Deserialize<MessageCatalog>(json, options);
-                
-                if (catalog == null || catalog.RawMessages == null || catalog.RawMessages.Count == 0)
+
+                if (
+                    catalog == null
+                    || catalog.RawMessages == null
+                    || catalog.RawMessages.Count == 0
+                )
                 {
                     throw new InvalidMessageFileException(
-                        "No valid messages found in the 'messages' section.");
+                        "No valid messages found in the 'messages' section."
+                    );
                 }
 
                 return catalog;
             }
 
             // Simple format - check for common typos
-            if (root.TryGetProperty("message", out var _) || 
-                root.TryGetProperty("mssages", out var _) ||
-                root.TryGetProperty("mesages", out var _))
+            if (
+                root.TryGetProperty("message", out var _)
+                || root.TryGetProperty("mssages", out var _)
+                || root.TryGetProperty("mesages", out var _)
+            )
             {
                 throw new InvalidMessageFileException(
-                    "Found typo in property name. Did you mean 'messages'? " +
-                    "For full format use: { \"messages\": { ... } }. " +
-                    "For simple format, put message codes directly at root level.");
+                    "Found typo in property name. Did you mean 'messages'? "
+                        + "For full format use: { \"messages\": { ... } }. "
+                        + "For simple format, put message codes directly at root level."
+                );
             }
 
             // Simple format - root is the messages dictionary
-            var rawMessages = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json, options);
-            
+            var rawMessages = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(
+                json,
+                options
+            );
+
             if (rawMessages == null || rawMessages.Count == 0)
             {
                 throw new InvalidMessageFileException(
-                    "No valid message definitions found. " +
-                    "Ensure your JSON contains message codes as keys with message objects as values.");
+                    "No valid message definitions found. "
+                        + "Ensure your JSON contains message codes as keys with message objects as values."
+                );
             }
 
-            return new MessageCatalog
-            {
-                RawMessages = rawMessages
-            };
+            return new MessageCatalog { RawMessages = rawMessages };
         }
         catch (JsonException ex)
         {
             throw new InvalidMessageFileException(
-                $"Malformed JSON in message file: {ex.Message}. " +
-                $"Please check your JSON syntax at line {ex.LineNumber}, position {ex.BytePositionInLine}.",
-                ex);
+                $"Malformed JSON in message file: {ex.Message}. "
+                    + $"Please check your JSON syntax at line {ex.LineNumber}, position {ex.BytePositionInLine}.",
+                ex
+            );
         }
     }
 
     private Dictionary<string, MessageTemplate> ConvertRawMessages(
-        Dictionary<string, JsonElement> rawData)
+        Dictionary<string, JsonElement> rawData
+    )
     {
         var cleanMessages = new Dictionary<string, MessageTemplate>();
         var errors = new List<string>();
-        
+
         var options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            Converters = { new JsonStringEnumConverter() }
+            Converters = { new JsonStringEnumConverter() },
         };
 
         foreach (var kvp in rawData)
@@ -129,7 +142,7 @@ public class MessageCatalog
             try
             {
                 var message = kvp.Value.Deserialize<MessageTemplate>(options);
-                
+
                 if (message != null)
                 {
                     cleanMessages.TryAdd(kvp.Key, message);
@@ -148,8 +161,9 @@ public class MessageCatalog
         // If we have errors but also some valid messages, log warnings
         if (errors.Any())
         {
-            var errorMessage = $"Warning: {errors.Count} message(s) could not be parsed:\n" +
-                             string.Join("\n", errors.Select(e => $"  - {e}"));
+            var errorMessage =
+                $"Warning: {errors.Count} message(s) could not be parsed:\n"
+                + string.Join("\n", errors.Select(e => $"  - {e}"));
             Console.WriteLine(errorMessage);
         }
 
@@ -157,8 +171,9 @@ public class MessageCatalog
         if (cleanMessages.Count == 0)
         {
             throw new InvalidMessageFileException(
-                "No valid messages could be parsed from the file. Errors:\n" +
-                string.Join("\n", errors.Select(e => $"  - {e}")));
+                "No valid messages could be parsed from the file. Errors:\n"
+                    + string.Join("\n", errors.Select(e => $"  - {e}"))
+            );
         }
 
         return cleanMessages;

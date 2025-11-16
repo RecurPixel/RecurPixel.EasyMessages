@@ -1,4 +1,4 @@
-using RecurPixel.EasyMessages.Facades;
+using RecurPixel.EasyMessages;
 using RecurPixel.EasyMessages.Core;
 
 
