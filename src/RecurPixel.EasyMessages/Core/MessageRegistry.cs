@@ -65,7 +65,7 @@ public static class MessageRegistry
         }
     }
 
-    internal static void LoadCustomMessages(Dictionary<string, MessageTemplate> messages)
+    public static void LoadCustomMessages(Dictionary<string, MessageTemplate> messages)
     {
         if (messages == null || messages.Count == 0)
         {

@@ -1,8 +1,8 @@
 using RecurPixel.EasyMessages.Core;
 
-namespace RecurPixel.EasyMessages.Facades;
+namespace RecurPixel.EasyMessages;
 
-public static class CustomMessages
+public static partial class Msg
 {
-    public static Message Get(string code) => MessageRegistry.Get(code);
+    public static Message Custom(string code) => MessageRegistry.Get(code);
 }

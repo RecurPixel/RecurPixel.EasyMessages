@@ -1,4 +1,6 @@
+using System.Text.Json;
 using RecurPixel.EasyMessages.Core;
+using RecurPixel.EasyMessages.Formatters;
 
 namespace RecurPixel.EasyMessages.Core.Extensions;
 
@@ -46,5 +48,20 @@ public static class MessageExtensions
             Title = title,
             Description = description,
         };
+    }
+
+    public static string ToJson(this Message message, JsonSerializerOptions? options = null)
+    {
+        return new JsonFormatter(options).Format(message);
+    }
+
+    public static object ToJsonObject(this Message message)
+    {
+        return new JsonFormatter().FormatAsObject(message);
+    }
+
+    public static void ToConsole(this Message message, bool useColors = true)
+    {
+        new ConsoleFormatter(useColors).WriteToConsole(message);
     }
 }

@@ -1,8 +1,11 @@
 using RecurPixel.EasyMessages.Core;
 
-namespace RecurPixel.EasyMessages.Facades;
+namespace RecurPixel.EasyMessages;
 
-public class DatabaseMessages
+public static partial class Msg
 {
-    public static Message ConnectionFailed() => MessageRegistry.Get("DB_001");
+    public static class Database
+    {
+        public static Message ConnectionFailed() => MessageRegistry.Get("DB_001");
+    }
 }
