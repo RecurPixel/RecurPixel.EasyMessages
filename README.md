@@ -364,7 +364,7 @@ builder.Services.AddEasyMessages(options =>
     options.CustomMessagesPath = "messages/custom.json";
     
     // Or load from database
-    options.UseLoader<DatabaseMessageLoader>();
+    options.UseLoader<DatabaseMessageStore>();
     
     // Localization (future)
     options.DefaultLocale = "en-US";
@@ -472,7 +472,7 @@ Inspired by real-world pain points in building consistent APIs.
 - **Documentation:** [Wiki](https://github.com/RecurPixel/EasyMessages/wiki)
 - **Issues:** [GitHub Issues](https://github.com/RecurPixel/EasyMessages/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/RecurPixel/EasyMessages/discussions)
-- **Email:** support@recurpixel.com
+- **Email:** support@recurpixel.io
 
 ---
 

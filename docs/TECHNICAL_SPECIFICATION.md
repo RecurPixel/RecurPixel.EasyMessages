@@ -13,5 +13,18 @@
 - Make Message a record type (immutable by default)
 - All With*() methods return NEW instances
 
-## 2. HTTP Status Code Precedence
-...
+## 2. Design Decision
+**Decision:** 
+-  Using IMessageStore instead of IMessageLoader or Both
+
+**Rationale:**
+
+- For **RecurPixel.EasyMessages**, this separation is **over-engineered**. Here's why:
+- **only support JSON** (and will for foreseeable future)
+- **Users don't need format flexibility** (JSON is the standard)
+- **YAGNI principle** (You Aren't Gonna Need It)
+
+**Implementation:**
+
+- Remove Loader Folder
+- Implement logic inside store(store represent. Where data comming from)

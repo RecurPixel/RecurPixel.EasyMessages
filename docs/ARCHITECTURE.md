@@ -342,13 +342,14 @@ MessageConfig.AddInterceptor<UserContextInterceptor>();
 
 #### 5. Custom Message Loaders
 ```csharp
-public interface IMessageLoader
+public interface IMessageStore
 {
     Task<Dictionary<string, MessageTemplate>> LoadAsync();
+    Task<bool> IsAvailableAsync() => Task.FromResult(true);
 }
 
 // User can load from database, API, etc.
-public class DatabaseMessageLoader : IMessageLoader
+public class DatabaseMessageStore : IMessageStore
 {
     public async Task<Dictionary<string, MessageTemplate>> LoadAsync()
     {
@@ -357,7 +358,7 @@ public class DatabaseMessageLoader : IMessageLoader
 }
 
 // Register it
-MessageConfig.UseLoader<DatabaseMessageLoader>();
+MessageConfig.UseLoader<DatabaseMessageStore>();
 ```
 
 ---
@@ -379,7 +380,7 @@ builder.Services.AddEasyMessages(options =>
     options.LoadCustomMessages("messages/custom.json");
     
     // Or from database
-    options.UseLoader<DatabaseMessageLoader>();
+    options.UseLoader<DatabaseMessageStore>();
     
     // Localization
     options.DefaultLocale = "en-US";
@@ -437,10 +438,11 @@ RecurPixel.EasyMessages
 ├── Configuration
 │   ├── MessageConfig.cs
 │   └── EasyMessagesOptions.cs
-├── Loaders
-│   ├── IMessageLoader.cs
-│   ├── JsonMessageLoader.cs
-│   └── EmbeddedResourceLoader.cs
+├── Storage
+│   ├── CompositeMessageStore.cs
+│   ├── DatabaseMessageStore.cs
+│   ├── DatabaseMessageStore.cs
+│   └── FileMessageStore.cs
 ├── Interceptors
 │   ├── IMessageInterceptor.cs
 │   └── LoggingInterceptor.cs
@@ -794,7 +796,7 @@ Msg.{Category}.{Action}() → .With{X}()* → .Log()? → .To{Output}()
 - **Users can add new codes** via custom.json + Msg.Custom()
 
 ### 3. ✅ Extensibility
-- **Interfaces provided**: IMessageFormatter, IMessageOutput, IMessageLoader, IMessageInterceptor
+- **Interfaces provided**: IMessageFormatter, IMessageOutput, , IMessageInterceptor
 - **Users can extend** without modifying library code
 - **Plugin architecture** for advanced scenarios
 

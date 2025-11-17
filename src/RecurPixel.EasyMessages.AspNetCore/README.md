@@ -385,7 +385,7 @@ builder.Services.AddEasyMessages(options =>
 
 ```csharp
 // Load messages from database instead of file
-public class DatabaseMessageLoader : IMessageLoader
+public class DatabaseMessageStore : IMessageStore
 {
     private readonly ApplicationDbContext _context;
 
@@ -405,7 +405,7 @@ public class DatabaseMessageLoader : IMessageLoader
 // Register it
 builder.Services.AddEasyMessages(options =>
 {
-    options.UseLoader<DatabaseMessageLoader>();
+    options.UseLoader<DatabaseMessageStore>();
 });
 ```
 
