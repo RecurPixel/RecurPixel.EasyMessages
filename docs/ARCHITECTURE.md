@@ -340,7 +340,7 @@ public class UserContextInterceptor : IMessageInterceptor
 MessageConfig.AddInterceptor<UserContextInterceptor>();
 ```
 
-#### 5. Custom Message Loaders
+#### 5. Custom Message Stores
 ```csharp
 public interface IMessageStore
 {
@@ -358,7 +358,7 @@ public class DatabaseMessageStore : IMessageStore
 }
 
 // Register it
-MessageConfig.UseLoader<DatabaseMessageStore>();
+MessageConfig.UseStore<DatabaseMessageStore>();
 ```
 
 ---
@@ -380,7 +380,7 @@ builder.Services.AddEasyMessages(options =>
     options.LoadCustomMessages("messages/custom.json");
     
     // Or from database
-    options.UseLoader<DatabaseMessageStore>();
+    options.UseStore<DatabaseMessageStore>();
     
     // Localization
     options.DefaultLocale = "en-US";

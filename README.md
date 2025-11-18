@@ -364,7 +364,7 @@ builder.Services.AddEasyMessages(options =>
     options.CustomMessagesPath = "messages/custom.json";
     
     // Or load from database
-    options.UseLoader<DatabaseMessageStore>();
+    options.UseStore<DatabaseMessageStore>();
     
     // Localization (future)
     options.DefaultLocale = "en-US";

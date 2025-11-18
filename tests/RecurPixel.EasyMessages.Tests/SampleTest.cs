@@ -3,6 +3,7 @@ using RecurPixel.EasyMessages;
 using RecurPixel.EasyMessages.Core;
 using RecurPixel.EasyMessages.Core.Extensions;
 using RecurPixel.EasyMessages.Exceptions;
+using RecurPixel.EasyMessages.Storage;
 
 namespace RecurPixel.EasyMessages.Tests;
 
@@ -132,5 +133,49 @@ public class SampleTest
 
         Assert.Contains("\"success\":true", json);
         Assert.Contains("\"code\":\"AUTH_003\"", json);
+    }
+
+    [Fact]
+    public void ToJson_ShouldLoadFromCustomFile()
+    {
+        // 1. Single file store (defaults automatic)
+        string absolutePath = @"C:\DevProjects\DotNet\Projects\RecurPixel.EasyMessages\custom.json";
+        MessageRegistry.Configure(new FileMessageStore(absolutePath));
+
+        var message = Msg.Auth.LoginFailed();
+        var json = message.ToJson();
+
+        Assert.Contains("Authentication Failed XXX", message.Title);
+        Assert.Contains("\"code\":\"AUTH_001\"", json);
+        Assert.Contains("\"success\":false", json);
+    }
+
+    [Fact]
+    public void ToJson_ShouldWorkWithCompositeMessageStore()
+    {
+        // 2. Multiple stores with priority
+        MessageRegistry.Configure(
+            new CompositeMessageStore(
+                new FileMessageStore("custom.json") // Lower priority
+            // new DatabaseMessageStore(connString), // Higher priority
+            // new DictionaryMessageStore(myDict) // Highest priority
+            )
+        );
+
+        var message = Msg.Auth.LoginSuccess();
+        var json = message.ToJson();
+
+        Assert.Contains("\"success\":true", json);
+        Assert.Contains("\"code\":\"AUTH_003\"", json);
+    }
+
+    [Fact]
+    public void ToJson_ShouldWorkWithoutCustomization()
+    {
+        // 3. Zero config - just use it (defaults only)
+        var msg = Msg.Auth.LoginFailed(); // Works without Configure()
+
+        Assert.Contains("Authentication Failed", msg.Title);
+        Assert.Contains("\"code\":\"AUTH_003\"", msg.Code);
     }
 }

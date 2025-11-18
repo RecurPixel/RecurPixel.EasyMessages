@@ -10,23 +10,23 @@ public class EmbeddedMessageStore : IMessageStore
 {
     private const string ResourceName = "RecurPixel.EasyMessages.Messages.defaults.json";
 
-    public async Task<Dictionary<string, MessageTemplate>> LoadAsync()
+    public Task<Dictionary<string, MessageTemplate>> LoadAsync()
     {
         var assembly = typeof(EmbeddedMessageStore).Assembly;
 
-        await using var stream = assembly.GetManifestResourceStream(ResourceName);
+        using var stream = assembly.GetManifestResourceStream(ResourceName);
         if (stream == null)
             throw new InvalidOperationException($"Embedded resource '{ResourceName}' not found");
 
         using var reader = new StreamReader(stream);
-        var json = await reader.ReadToEndAsync();
+        var json = reader.ReadToEnd();
 
-        return JsonSerializer.Deserialize<Dictionary<string, MessageTemplate>>(json)
+        var catalog = MessageCatalog.FromJson(json);
+
+        var messages =
+            catalog?.Messages
             ?? throw new InvalidOperationException("Failed to deserialize default messages");
+
+        return Task.FromResult(messages);
     }
 }
-
-
-// // Zero configuration - Just works!
-// var store = new EmbeddedMessageStore();
-// var messages = await store.LoadAsync(); // Loads from embedded defaults.json

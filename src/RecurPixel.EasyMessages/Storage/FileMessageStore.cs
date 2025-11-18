@@ -21,17 +21,8 @@ public class FileMessageStore : IMessageStore
             throw new FileNotFoundException($"Message file not found: {_filePath}");
 
         var json = await File.ReadAllTextAsync(_filePath);
+        var catalog = MessageCatalog.FromJson(json);
 
-        return JsonSerializer.Deserialize<Dictionary<string, MessageTemplate>>(json)
-            ?? new Dictionary<string, MessageTemplate>();
-    }
-
-    public Task<bool> IsAvailableAsync()
-    {
-        return Task.FromResult(File.Exists(_filePath));
+        return catalog?.Messages ?? new Dictionary<string, MessageTemplate>();
     }
 }
-
-// // Load custom messages from file
-// var store = new FileMessageStore("messages/custom.json");
-// var messages = await store.LoadAsync();

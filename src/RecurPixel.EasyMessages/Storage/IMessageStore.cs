@@ -10,10 +10,5 @@ public interface IMessageStore
     /// <summary>
     /// Load all messages from the store
     /// </summary>
-    internal Task<Dictionary<string, MessageTemplate>> LoadAsync();
-
-    /// <summary>
-    /// Check if store is available (optional operation)
-    /// </summary>
-    Task<bool> IsAvailableAsync() => Task.FromResult(true);
+    Task<Dictionary<string, MessageTemplate>> LoadAsync();
 }

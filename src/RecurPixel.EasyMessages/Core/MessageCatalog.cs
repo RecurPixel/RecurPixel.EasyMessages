@@ -7,10 +7,10 @@ namespace RecurPixel.EasyMessages.Core;
 public class MessageCatalog
 {
     [JsonPropertyName("$schema")]
-    public string Schema { get; set; }
+    public string? Schema { get; set; }
 
     [JsonPropertyName("version")]
-    public string Version { get; set; }
+    public string? Version { get; set; }
 
     [JsonPropertyName("messages")]
     public Dictionary<string, JsonElement> RawMessages { get; set; } = new();

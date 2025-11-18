@@ -381,7 +381,7 @@ builder.Services.AddEasyMessages(options =>
 });
 ```
 
-### Custom Message Loader
+### Custom Message Store
 
 ```csharp
 // Load messages from database instead of file
@@ -405,7 +405,7 @@ public class DatabaseMessageStore : IMessageStore
 // Register it
 builder.Services.AddEasyMessages(options =>
 {
-    options.UseLoader<DatabaseMessageStore>();
+    options.UseStore<DatabaseMessageStore>();
 });
 ```
 

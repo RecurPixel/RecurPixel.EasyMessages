@@ -1,130 +1,62 @@
-using System.Text.Json;
 using RecurPixel.EasyMessages.Exceptions;
+using RecurPixel.EasyMessages.Storage;
 
 namespace RecurPixel.EasyMessages.Core;
 
 public static class MessageRegistry
 {
     private static readonly Lazy<Dictionary<string, MessageTemplate>> _defaults = new(() =>
-        LoadEmbeddedMessages()
+        LoadDefaultsSync()
     );
 
     private static Dictionary<string, MessageTemplate>? _custom;
     private static readonly object _lock = new();
 
-    public static Message Get(string code)
+    /// <summary>
+    /// Configure custom message store(s)
+    /// Defaults are always used as fallback
+    /// </summary>
+    public static void Configure(IMessageStore store)
     {
-        // Check custom first
-        if (_custom?.TryGetValue(code, out var customTemplate) == true)
-            return customTemplate.ToMessage(code);
-
-        // Fall back to defaults
-        if (_defaults.Value.TryGetValue(code, out var defaultTemplate))
-            return defaultTemplate.ToMessage(code);
-
-        // Not found
-        throw new MessageNotFoundException(
-            $"Message code '{code}' not found in registry. "
-                + $"Available codes: {string.Join(", ", GetAllCodes().Take(10))}..."
-        );
-    }
-
-    public static void LoadCustomMessages(string jsonPath)
-    {
-        if (!File.Exists(jsonPath))
-        {
-            throw new FileNotFoundException($"Custom message file not found at path: {jsonPath}");
-        }
+        if (store == null)
+            throw new ArgumentNullException(nameof(store));
 
         lock (_lock)
         {
             try
             {
-                var json = File.ReadAllText(jsonPath);
-                var catalog = MessageCatalog.FromJson(json);
-                LoadCustomMessagesInternal(catalog.Messages);
+                // Load from store (can be single or composite)
+                var customMessages = store.LoadAsync().GetAwaiter().GetResult();
 
-                Console.WriteLine(
-                    $"Successfully loaded {_custom.Count} custom message(s) from '{jsonPath}'"
-                );
+                // Merge with defaults to complete partial templates
+                _custom = MessageMergeHelper.MergeWithDefaults(_defaults.Value, customMessages);
+
+                Console.WriteLine($"Successfully configured {_custom.Count} custom message(s)");
             }
-            catch (InvalidMessageFileException ex)
+            catch (Exception ex)
             {
-                throw new InvalidMessageFileException(
-                    $"Failed to load custom messages from '{jsonPath}': {ex.Message}",
-                    ex
-                );
-            }
-            catch (IOException ex)
-            {
-                throw new InvalidMessageFileException(
-                    $"Failed to read custom message file '{jsonPath}': {ex.Message}",
+                throw new InvalidOperationException(
+                    $"Failed to configure message store: {ex.Message}",
                     ex
                 );
             }
         }
     }
 
-    public static void LoadCustomMessages(Dictionary<string, MessageTemplate> messages)
+    public static Message Get(string code)
     {
-        if (messages == null || messages.Count == 0)
-        {
-            throw new ArgumentException(
-                "Custom messages dictionary cannot be null or empty.",
-                nameof(messages)
-            );
-        }
+        // 1. Check custom first (already merged with defaults)
+        if (_custom?.TryGetValue(code, out var customTemplate) == true)
+            return customTemplate.ToMessage(code);
 
-        lock (_lock)
-        {
-            LoadCustomMessagesInternal(messages);
-            Console.WriteLine(
-                $"Successfully loaded {_custom.Count} custom message(s) from dictionary"
-            );
-        }
-    }
+        // 2. Fallback to defaults
+        if (_defaults.Value.TryGetValue(code, out var defaultTemplate))
+            return defaultTemplate.ToMessage(code);
 
-    private static void LoadCustomMessagesInternal(Dictionary<string, MessageTemplate> messages)
-    {
-        _custom = new Dictionary<string, MessageTemplate>();
-        var warnings = new List<string>();
-
-        foreach (var (code, customTemplate) in messages)
-        {
-            if (_defaults.Value.TryGetValue(code, out var defaultTemplate))
-            {
-                _custom[code] = MergeTemplates(defaultTemplate, customTemplate);
-            }
-            else
-            {
-                _custom[code] = customTemplate;
-                warnings.Add($"'{code}': No default template found, using custom as-is");
-            }
-        }
-
-        // Optional: Log warnings about codes not in defaults
-        if (warnings.Any())
-        {
-            Console.WriteLine(
-                $"Note: {warnings.Count} custom message code(s) not found in defaults:\n"
-                    + string.Join("\n", warnings.Select(w => $"  - {w}"))
-            );
-        }
-    }
-
-    private static MessageTemplate MergeTemplates(
-        MessageTemplate defaultTemplate,
-        MessageTemplate customTemplate
-    )
-    {
-        return new MessageTemplate
-        {
-            Type = customTemplate?.Type ?? defaultTemplate.Type,
-            Title = customTemplate?.Title ?? defaultTemplate.Title,
-            Description = customTemplate?.Description ?? defaultTemplate.Description,
-            HttpStatusCode = customTemplate?.HttpStatusCode ?? defaultTemplate.HttpStatusCode,
-            Hint = customTemplate?.Hint ?? defaultTemplate.Hint,
-        };
+        // 3. Not found
+        throw new MessageNotFoundException(
+            $"Message code '{code}' not found. Available: {string.Join(", ", GetAllCodes().Take(10))}..."
+        );
     }
 
     public static IEnumerable<string> GetAllCodes()
@@ -135,19 +67,22 @@ public static class MessageRegistry
         return codes.OrderBy(c => c);
     }
 
-    private static Dictionary<string, MessageTemplate> LoadEmbeddedMessages()
+    private static Dictionary<string, MessageTemplate> LoadDefaultsSync()
     {
-        var assembly = typeof(MessageRegistry).Assembly;
-        var resourceName = "RecurPixel.EasyMessages.Messages.defaults.json";
+        var store = new EmbeddedMessageStore();
+        return store.LoadAsync().GetAwaiter().GetResult();
+    }
 
-        using var stream = assembly.GetManifestResourceStream(resourceName);
-        if (stream == null)
-            throw new InvalidOperationException($"Embedded resource '{resourceName}' not found");
+    // Legacy methods for backward compatibility (optional - can remove if not needed)
+    [Obsolete("Use Configure(IMessageStore) instead")]
+    public static void LoadCustomMessages(string jsonPath)
+    {
+        Configure(new FileMessageStore(jsonPath));
+    }
 
-        using var reader = new StreamReader(stream);
-        var json = reader.ReadToEnd();
-
-        return JsonSerializer.Deserialize<MessageCatalog>(json)?.Messages
-            ?? throw new InvalidOperationException("Failed to deserialize default messages");
+    [Obsolete("Use Configure(IMessageStore) instead")]
+    public static void LoadCustomMessages(Dictionary<string, MessageTemplate> messages)
+    {
+        Configure(new DictionaryMessageStore(messages));
     }
 }
