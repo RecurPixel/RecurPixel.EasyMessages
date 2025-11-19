@@ -1,7 +1,6 @@
 using System.Reflection;
 using RecurPixel.EasyMessages;
 using RecurPixel.EasyMessages.Core;
-using RecurPixel.EasyMessages.Core.Extensions;
 using RecurPixel.EasyMessages.Exceptions;
 using RecurPixel.EasyMessages.Storage;
 
@@ -177,5 +176,34 @@ public class SampleTest
 
         Assert.Contains("Authentication Failed", msg.Title);
         Assert.Contains("\"code\":\"AUTH_003\"", msg.Code);
+    }
+
+    [Fact]
+    public void Formater_ShouldFormatOutput()
+    {
+        var msg = Msg.Auth.LoginFailed();
+
+        // Plain text
+        var text = msg.ToPlainText();
+        // Output:
+        // Authentication Failed
+        // Invalid username or password.
+        // Code: AUTH_001
+
+        Assert.Contains("Authentication Failed", text);
+
+        // XML
+        var xml = msg.ToXml();
+        // Output:
+        // <message code="AUTH_001" type="Error">
+        //   <title>Authentication Failed</title>
+        //   <description>Invalid username or password.</description>
+        //   <metadata>
+        //     <timestamp>2024-01-15T10:30:00Z</timestamp>
+        //     <httpStatusCode>401</httpStatusCode>
+        //   </metadata>
+        // </message>
+
+        Assert.Contains("<message code=\"AUTH_001\" type=\"Error\">", xml);
     }
 }

@@ -1,4 +1,4 @@
-using RecurPixel.EasyMessages.Core;
+using RecurPixel.EasyMessages;
 
 public interface IMessage
 {

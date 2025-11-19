@@ -1,4 +1,4 @@
-namespace RecurPixel.EasyMessages.Core;
+namespace RecurPixel.EasyMessages;
 
 public enum MessageType
 {

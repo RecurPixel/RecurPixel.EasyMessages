@@ -28,3 +28,39 @@
 
 - Remove Loader Folder
 - Implement logic inside store(store represent. Where data comming from)
+
+
+## 3. New Centralized Message Formater
+
+**Rationale:**
+
+- There are many parts in the message, different application. And to format each message for each type is difficult.
+
+**Implementation:**
+
+- Make Central Formater with default/minimal/custom options for users to use.
+
+**Example Usage(non-exhaustive)**
+
+```charp
+
+var msg = Msg.Crud.Created("User")
+    .WithParams(new { username = "john" })
+    .WithData(new { id = 123 })
+    .WithCorrelationId("abc-123");
+
+// Full output
+var json = msg.ToJson();
+
+// Minimal output
+var minimal = msg.ToJson(FormatterOptions.Minimal);
+
+// Custom
+var custom = msg.ToJson(new FormatterOptions 
+{ 
+    IncludeMetadata = false,
+    IncludeTimestamp = false 
+});
+
+```
+> TODO: Add these changes in architecute specification.

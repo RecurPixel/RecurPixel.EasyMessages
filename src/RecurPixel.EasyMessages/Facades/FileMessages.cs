@@ -1,5 +1,4 @@
 using RecurPixel.EasyMessages.Core;
-using RecurPixel.EasyMessages.Core.Extensions;
 
 namespace RecurPixel.EasyMessages;
 
