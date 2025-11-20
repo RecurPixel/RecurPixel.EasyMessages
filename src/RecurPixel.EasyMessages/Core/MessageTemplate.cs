@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace RecurPixel.EasyMessages.Core;
 
 public sealed class MessageTemplate

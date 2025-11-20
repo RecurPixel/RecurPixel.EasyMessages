@@ -437,7 +437,7 @@ RecurPixel.EasyMessages
 │   └── ConsoleOutput.cs
 ├── Configuration
 │   ├── MessageConfig.cs
-│   └── EasyMessagesOptions.cs
+│   └── EasyMessagesOptions.cs // shift to ASP.NET part of DI
 ├── Storage
 │   ├── CompositeMessageStore.cs
 │   ├── DatabaseMessageStore.cs
@@ -445,11 +445,10 @@ RecurPixel.EasyMessages
 │   └── FileMessageStore.cs
 ├── Interceptors
 │   ├── IMessageInterceptor.cs
-│   └── LoggingInterceptor.cs
+│   └── LoggingInterceptor.cs // shift to ASP.NET
 └── Extensions
     ├── MessageExtensions.cs
-    ├── ServiceCollectionExtensions.cs
-    └── StringExtensions.cs
+    └── ServiceCollectionExtensions.cs // shirt to ASP.NET part of DI
 ```
 
 ---

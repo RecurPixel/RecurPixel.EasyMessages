@@ -1,8 +1,6 @@
-using RecurPixel.EasyMessages.Core;
-
 namespace RecurPixel.EasyMessages.Formatters;
 
-public class ConsoleFormatter : IMessageFormatter
+public class ConsoleFormatter : MessageFormatterBase
 {
     private readonly bool _useColors;
     private readonly bool _showTimestamp;
@@ -13,7 +11,7 @@ public class ConsoleFormatter : IMessageFormatter
         _showTimestamp = showTimestamp;
     }
 
-    public string Format(Message message)
+    protected override string FormatCore(Message message)
     {
         var icon = GetIcon(message.Type);
         var timestamp = _showTimestamp ? $"[{message.Timestamp:HH:mm:ss}] " : "";
@@ -21,7 +19,7 @@ public class ConsoleFormatter : IMessageFormatter
         return $"{icon} {message.Title}\n  {message.Description}\n  {timestamp}[{message.Code}]";
     }
 
-    public object FormatAsObject(Message message)
+    public override object FormatAsObject(Message message)
     {
         return new
         {

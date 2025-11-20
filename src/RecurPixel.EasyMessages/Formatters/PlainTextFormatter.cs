@@ -1,11 +1,9 @@
-using RecurPixel.EasyMessages.Core;
-
 namespace RecurPixel.EasyMessages.Formatters;
 
 /// <summary>
 /// Formats messages as plain text
 /// </summary>
-public class PlainTextFormatter : IMessageFormatter
+public class PlainTextFormatter : MessageFormatterBase
 {
     private readonly FormatterOptions _options;
 
@@ -14,7 +12,7 @@ public class PlainTextFormatter : IMessageFormatter
         _options = options ?? FormatterOptions.Default;
     }
 
-    public string Format(Message message)
+    protected override string FormatCore(Message message)
     {
         var lines = new List<string>
         {
@@ -46,5 +44,5 @@ public class PlainTextFormatter : IMessageFormatter
         return string.Join(Environment.NewLine, lines);
     }
 
-    public object FormatAsObject(Message message) => Format(message);
+    public override object FormatAsObject(Message message) => Format(message);
 }

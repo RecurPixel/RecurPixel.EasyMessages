@@ -1,12 +1,11 @@
 using System.Xml.Linq;
-using RecurPixel.EasyMessages.Core;
 
 namespace RecurPixel.EasyMessages.Formatters;
 
 /// <summary>
 /// Formats messages as XML
 /// </summary>
-public class XmlFormatter : IMessageFormatter
+public class XmlFormatter : MessageFormatterBase
 {
     private readonly FormatterOptions _options;
 
@@ -15,7 +14,7 @@ public class XmlFormatter : IMessageFormatter
         _options = options ?? FormatterOptions.Default;
     }
 
-    public string Format(Message message)
+    protected override string FormatCore(Message message)
     {
         var root = new XElement(
             "message",
@@ -83,7 +82,7 @@ public class XmlFormatter : IMessageFormatter
         return root.ToString();
     }
 
-    public object FormatAsObject(Message message)
+    public override object FormatAsObject(Message message)
     {
         return XDocument.Parse(Format(message));
     }

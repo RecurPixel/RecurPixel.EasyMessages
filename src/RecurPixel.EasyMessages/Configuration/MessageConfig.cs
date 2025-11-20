@@ -8,5 +8,4 @@ public class MessageConfiguration
     public bool IncludeTimestamp { get; set; } = true;
     public bool IncludeCorrelationId { get; set; } = true;
     public bool AutoLog { get; set; } = false;
-    // public LogLevel MinimumLogLevel { get; set; } = LogLevel.Warning;
 }

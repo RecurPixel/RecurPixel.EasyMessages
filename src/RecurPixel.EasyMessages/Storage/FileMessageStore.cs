@@ -1,5 +1,6 @@
 using System.Text.Json;
 using RecurPixel.EasyMessages.Core;
+using RecurPixel.EasyMessages.Exceptions;
 
 namespace RecurPixel.EasyMessages.Storage;
 
@@ -20,9 +21,18 @@ public class FileMessageStore : IMessageStore
         if (!File.Exists(_filePath))
             throw new FileNotFoundException($"Message file not found: {_filePath}");
 
-        var json = await File.ReadAllTextAsync(_filePath);
-        var catalog = MessageCatalog.FromJson(json);
-
-        return catalog?.Messages ?? new Dictionary<string, MessageTemplate>();
+        try
+        {
+            var json = await File.ReadAllTextAsync(_filePath);
+            var catalog = MessageCatalog.FromJson(json);
+            return catalog?.Messages ?? new Dictionary<string, MessageTemplate>();
+        }
+        catch (JsonException ex)
+        {
+            throw new InvalidMessageFileException(
+                "Message: \"Custom messages file contains invalid JSON\"\nCause: Malformed custom JSON file",
+                ex
+            );
+        }
     }
 }

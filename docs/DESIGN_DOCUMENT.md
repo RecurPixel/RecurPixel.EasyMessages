@@ -70,7 +70,7 @@ EasyMessages/
 ├── Configuration/
 │   └── MessageConfig.cs
 └── Extensions/
-    ├── ServiceCollectionExtensions.cs
+    ├── ServiceCollectionExtensions.cs // shift to ASP.NET part of DI
     └── MessageExtensions.cs
 ```
 

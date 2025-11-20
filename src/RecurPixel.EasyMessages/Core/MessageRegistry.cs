@@ -3,7 +3,7 @@ using RecurPixel.EasyMessages.Storage;
 
 namespace RecurPixel.EasyMessages.Core;
 
-public static class MessageRegistry
+public static partial class MessageRegistry
 {
     private static readonly Lazy<Dictionary<string, MessageTemplate>> _defaults = new(() =>
         LoadDefaultsSync()
@@ -71,18 +71,5 @@ public static class MessageRegistry
     {
         var store = new EmbeddedMessageStore();
         return store.LoadAsync().GetAwaiter().GetResult();
-    }
-
-    // Legacy methods for backward compatibility (optional - can remove if not needed)
-    [Obsolete("Use Configure(IMessageStore) instead")]
-    public static void LoadCustomMessages(string jsonPath)
-    {
-        Configure(new FileMessageStore(jsonPath));
-    }
-
-    [Obsolete("Use Configure(IMessageStore) instead")]
-    public static void LoadCustomMessages(Dictionary<string, MessageTemplate> messages)
-    {
-        Configure(new DictionaryMessageStore(messages));
     }
 }

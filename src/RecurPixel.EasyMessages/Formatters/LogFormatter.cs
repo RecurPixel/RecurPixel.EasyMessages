@@ -1,8 +1,6 @@
-using RecurPixel.EasyMessages.Core;
-
 namespace RecurPixel.EasyMessages.Formatters;
 
-public class LogFormatter : IMessageFormatter
+public class LogFormatter : MessageFormatterBase
 {
     /// <summary>
     /// Formats the message as a simple, human-readable string.
@@ -10,7 +8,7 @@ public class LogFormatter : IMessageFormatter
     /// </summary>
     /// <param name="message">The log message to format.</param>
     /// <returns>A formatted log string.</returns>
-    public string Format(Message message)
+    protected override string FormatCore(Message message)
     {
         // Format the timestamp
         string timestampStr = message.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -26,7 +24,7 @@ public class LogFormatter : IMessageFormatter
     /// </summary>
     /// <param name="message">The log message to format.</param>
     /// <returns>An object containing structured log data.</returns>
-    public object FormatAsObject(Message message)
+    public override object FormatAsObject(Message message)
     {
         // Using an anonymous type is a common way to return a structured object.
         // For more complex/dynamic scenarios, you might use a Dictionary<string, object> or a dedicated DTO.

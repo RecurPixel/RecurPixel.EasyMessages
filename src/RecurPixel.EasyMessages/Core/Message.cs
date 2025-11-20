@@ -1,6 +1,4 @@
-using RecurPixel.EasyMessages;
-
-namespace RecurPixel.EasyMessages.Core;
+namespace RecurPixel.EasyMessages;
 
 // public sealed record Message
 public sealed record Message : IMessage

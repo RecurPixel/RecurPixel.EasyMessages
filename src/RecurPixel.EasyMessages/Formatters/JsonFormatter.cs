@@ -1,11 +1,10 @@
-using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using RecurPixel.EasyMessages.Core;
+using RecurPixel.EasyMessages;
 
 namespace RecurPixel.EasyMessages.Formatters;
 
-public class JsonFormatter : IMessageFormatter
+public class JsonFormatter : MessageFormatterBase
 {
     private readonly FormatterOptions _options;
     private readonly JsonSerializerOptions _jsonOptions;
@@ -26,12 +25,12 @@ public class JsonFormatter : IMessageFormatter
             };
     }
 
-    public string Format(Message message)
+    protected override string FormatCore(Message message)
     {
         return JsonSerializer.Serialize(FormatAsObject(message), _jsonOptions);
     }
 
-    public object FormatAsObject(Message message)
+    public override object FormatAsObject(Message message)
     {
         var result = new Dictionary<string, object?>
         {
