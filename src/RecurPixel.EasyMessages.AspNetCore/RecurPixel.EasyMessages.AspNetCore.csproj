@@ -13,6 +13,8 @@
       Include="Microsoft.Extensions.DependencyInjection.Abstractions"
       Version="10.0.0"
     />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
   </ItemGroup>
 
   <PropertyGroup>

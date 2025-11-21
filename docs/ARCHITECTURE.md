@@ -436,8 +436,7 @@ RecurPixel.EasyMessages
 │   ├── ApiOutput.cs
 │   └── ConsoleOutput.cs
 ├── Configuration
-│   ├── MessageConfig.cs
-│   └── EasyMessagesOptions.cs // shift to ASP.NET part of DI
+│   └── MessageConfiguration.cs // shift to ASP.NET part of DI
 ├── Storage
 │   ├── CompositeMessageStore.cs
 │   ├── DatabaseMessageStore.cs
