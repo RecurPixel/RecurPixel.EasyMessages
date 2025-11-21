@@ -245,33 +245,43 @@ Msg.Custom("PAYMENT_001")
 ### Extension Points
 
 #### 1. Custom Formatters (IMessageFormatter)
+
+### With Interceptor Support (Recommended)
+Extend `MessageFormatterBase` to automatically invoke registered interceptors:
 ```csharp
-public interface IMessageFormatter
+public class CsvFormatter : MessageFormatterBase
 {
-    string Format(Message message);
-    object FormatAsObject(Message message);
+    protected override string FormatCore(Message message)
+    {
+        return $"{message.Code},{message.Title}";
+    }
+    
+    protected override object FormatAsObjectCore(Message message)
+    {
+        return new[] { message.Code, message.Title };
+    }
 }
+```
 
-// Built-in formatters
-- JsonFormatter
-- ConsoleFormatter
-- LogFormatter
-- XmlFormatter
-
-// User can add their own
-public class SlackFormatter : IMessageFormatter
+### Without Interceptor Support (Advanced)
+Implement `IMessageFormatter` directly for full control:
+```csharp
+public class SimpleFormatter : IMessageFormatter
 {
     public string Format(Message message)
     {
-        return $":warning: *{message.Title}* - {message.Description}";
+        return message.Title;
+    }
+    
+    public object FormatAsObject(Message message)
+    {
+        return Format(message);
     }
 }
+```
 
-// Register it
-MessageConfig.RegisterFormatter<SlackFormatter>();
-
-// Use it
-Msg.System.Error().ToFormat<SlackFormatter>();
+**Note:** Formatters that don't extend `MessageFormatterBase` won't invoke interceptors 
+(logging, correlation ID enrichment, etc.). This is useful for performance-critical scenarios.
 ```
 
 #### 2. Custom Output Targets (IMessageOutput)

@@ -325,17 +325,42 @@ EasyMessages produces consistent, predictable API responses:
 
 ### Custom Formatters
 
+#### With Interceptor Support (Recommended)
+Extend `MessageFormatterBase` to automatically invoke registered interceptors:
 ```csharp
-public class SlackFormatter : IMessageFormatter
+public class CsvFormatter : MessageFormatterBase
+{
+    protected override string FormatCore(Message message)
+    {
+        return $"{message.Code},{message.Title}";
+    }
+    
+    protected override object FormatAsObjectCore(Message message)
+    {
+        return new[] { message.Code, message.Title };
+    }
+}
+```
+
+#### Without Interceptor Support (Advanced)
+Implement `IMessageFormatter` directly for full control:
+```csharp
+public class SimpleFormatter : IMessageFormatter
 {
     public string Format(Message message)
     {
-        return $":warning: *{message.Title}*\n{message.Description}";
+        return message.Title;
+    }
+    
+    public object FormatAsObject(Message message)
+    {
+        return Format(message);
     }
 }
+```
 
-// Use it
-message.ToFormat<SlackFormatter>();
+**Note:** Formatters that don't extend `MessageFormatterBase` won't invoke interceptors 
+(logging, correlation ID enrichment, etc.). This is useful for performance-critical scenarios.
 ```
 
 ### Custom Output Targets

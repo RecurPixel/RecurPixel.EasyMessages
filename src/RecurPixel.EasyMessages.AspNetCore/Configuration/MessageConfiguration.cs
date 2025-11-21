@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using RecurPixel.EasyMessages.Interceptors;
 using RecurPixel.EasyMessages.Storage;
+using RecurPixel.EasyMessages.Formatters;
 
 namespace RecurPixel.EasyMessages.AspNetCore;
 
@@ -13,6 +14,7 @@ public class MessageConfiguration
     public bool IncludeCorrelationId { get; set; } = true;
     public List<IMessageStore>? CustomStores { get; set; }
     public List<IMessageInterceptor>? Interceptors { get; set; }
+    public Dictionary<string, Func<IMessageFormatter>>? CustomFormatters { get; set; }
     public bool AutoLog { get; set; } = false;
     public LogLevel MinimumLogLevel { get; set; } = LogLevel.Warning;
 }

@@ -5,6 +5,7 @@ using RecurPixel.EasyMessages.AspNetCore.Interceptors;
 using RecurPixel.EasyMessages.Core;
 using RecurPixel.EasyMessages.Interceptors;
 using RecurPixel.EasyMessages.Storage;
+using RecurPixel.EasyMessages.Formatters;
 
 namespace RecurPixel.EasyMessages.AspNetCore;
 
@@ -49,6 +50,17 @@ public static class ServiceCollectionExtensions
         if (stores.Any())
         {
             MessageRegistry.UseStores(stores.ToArray());
+        }
+    }
+
+    private static void ConfigureFormatters(MessageConfiguration options)
+    {
+        if (options.CustomFormatters?.Any() == true)
+        {
+            foreach (var (name, factory) in options.CustomFormatters)
+            {
+                FormatterRegistry.Register(name, factory);
+            }
         }
     }
 
