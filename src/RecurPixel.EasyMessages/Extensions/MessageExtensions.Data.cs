@@ -67,4 +67,27 @@ public static partial class MessageExtensions
             Parameters = paramDict,
         };
     }
+
+    /// <summary>
+    /// Apply parameters only if provided (non-null values)
+    /// </summary>
+    public static Message WithParamsIfProvided(this Message message, object? parameters)
+    {
+        if (parameters == null)
+            return message;
+
+        // Filter out null properties
+        var properties = parameters
+            .GetType()
+            .GetProperties()
+            .Where(p => p.GetValue(parameters) != null)
+            .ToDictionary(p => p.Name, p => p.GetValue(parameters)!);
+
+        if (!properties.Any())
+            return message;
+
+        // Create anonymous object with non-null values
+        var nonNullParams = properties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        return message.WithParams(nonNullParams);
+    }
 }

@@ -4,7 +4,7 @@ namespace RecurPixel.EasyMessages.Core;
 /// Standard message codes for RecurPixel.EasyMessages.
 /// Use these constants instead of magic strings for type safety and IntelliSense support.
 /// </summary>
-public static class MessageCodes
+public static class  MessageCodes
 {
     #region Authentication & Authorization (AUTH)
 
@@ -364,51 +364,258 @@ public static class MessageCodes
     /// <summary>All authentication and authorization message codes.</summary>
     public static class Auth
     {
-        public const string AuthenticationFailed = MessageCodes.AuthenticationFailed;
-        public const string UnauthorizedAccess = MessageCodes.UnauthorizedAccess;
-        public const string LoginSuccessful = MessageCodes.LoginSuccessful;
-        public const string SessionExpired = MessageCodes.SessionExpired;
-        public const string InvalidToken = MessageCodes.InvalidToken;
-        public const string AccountLocked = MessageCodes.AccountLocked;
-        public const string LogoutSuccessful = MessageCodes.LogoutSuccessful;
-        public const string PasswordResetRequired = MessageCodes.PasswordResetRequired;
-        public const string InvalidRefreshToken = MessageCodes.InvalidRefreshToken;
-        public const string MfaRequired = MessageCodes.MfaRequired;
+        public const string AuthenticationFailed =  MessageCodes.AuthenticationFailed;
+        public const string UnauthorizedAccess =  MessageCodes.UnauthorizedAccess;
+        public const string LoginSuccessful =  MessageCodes.LoginSuccessful;
+        public const string SessionExpired =  MessageCodes.SessionExpired;
+        public const string InvalidToken =  MessageCodes.InvalidToken;
+        public const string AccountLocked =  MessageCodes.AccountLocked;
+        public const string LogoutSuccessful =  MessageCodes.LogoutSuccessful;
+        public const string PasswordResetRequired =  MessageCodes.PasswordResetRequired;
+        public const string InvalidRefreshToken =  MessageCodes.InvalidRefreshToken;
+        public const string MfaRequired =  MessageCodes.MfaRequired;
     }
 
     /// <summary>All CRUD operation message codes.</summary>
     public static class Crud
     {
-        public const string CreatedSuccessfully = MessageCodes.CreatedSuccessfully;
-        public const string UpdatedSuccessfully = MessageCodes.UpdatedSuccessfully;
-        public const string DeletedSuccessfully = MessageCodes.DeletedSuccessfully;
-        public const string ResourceNotFound = MessageCodes.ResourceNotFound;
-        public const string RetrievedSuccessfully = MessageCodes.RetrievedSuccessfully;
-        public const string CreationFailed = MessageCodes.CreationFailed;
-        public const string UpdateFailed = MessageCodes.UpdateFailed;
-        public const string DeletionFailed = MessageCodes.DeletionFailed;
-        public const string NoChangesDetected = MessageCodes.NoChangesDetected;
-        public const string ConflictDetected = MessageCodes.ConflictDetected;
+        public const string CreatedSuccessfully =  MessageCodes.CreatedSuccessfully;
+        public const string UpdatedSuccessfully =  MessageCodes.UpdatedSuccessfully;
+        public const string DeletedSuccessfully =  MessageCodes.DeletedSuccessfully;
+        public const string ResourceNotFound =  MessageCodes.ResourceNotFound;
+        public const string RetrievedSuccessfully =  MessageCodes.RetrievedSuccessfully;
+        public const string CreationFailed =  MessageCodes.CreationFailed;
+        public const string UpdateFailed =  MessageCodes.UpdateFailed;
+        public const string DeletionFailed =  MessageCodes.DeletionFailed;
+        public const string NoChangesDetected =  MessageCodes.NoChangesDetected;
+        public const string ConflictDetected =  MessageCodes.ConflictDetected;
     }
 
     /// <summary>All validation message codes.</summary>
     public static class Validation
     {
-        public const string ValidationFailed = MessageCodes.ValidationFailed;
-        public const string RequiredFieldMissing = MessageCodes.RequiredFieldMissing;
-        public const string InvalidFormat = MessageCodes.InvalidFormat;
-        public const string ValueOutOfRange = MessageCodes.ValueOutOfRange;
-        public const string InvalidEmail = MessageCodes.InvalidEmail;
-        public const string InvalidPhoneNumber = MessageCodes.InvalidPhoneNumber;
-        public const string PasswordTooWeak = MessageCodes.PasswordTooWeak;
-        public const string PasswordsDontMatch = MessageCodes.PasswordsDontMatch;
-        public const string InvalidDate = MessageCodes.InvalidDate;
-        public const string ValueTooShort = MessageCodes.ValueTooShort;
-        public const string ValueTooLong = MessageCodes.ValueTooLong;
-        public const string InvalidUrl = MessageCodes.InvalidUrl;
-        public const string InvalidFileExtension = MessageCodes.InvalidFileExtension;
-        public const string DuplicateValue = MessageCodes.DuplicateValue;
-        public const string InvalidCharacters = MessageCodes.InvalidCharacters;
+        public const string ValidationFailed =  MessageCodes.ValidationFailed;
+        public const string RequiredFieldMissing =  MessageCodes.RequiredFieldMissing;
+        public const string InvalidFormat =  MessageCodes.InvalidFormat;
+        public const string ValueOutOfRange =  MessageCodes.ValueOutOfRange;
+        public const string InvalidEmail =  MessageCodes.InvalidEmail;
+        public const string InvalidPhoneNumber =  MessageCodes.InvalidPhoneNumber;
+        public const string PasswordTooWeak =  MessageCodes.PasswordTooWeak;
+        public const string PasswordsDontMatch =  MessageCodes.PasswordsDontMatch;
+        public const string InvalidDate =  MessageCodes.InvalidDate;
+        public const string ValueTooShort =  MessageCodes.ValueTooShort;
+        public const string ValueTooLong =  MessageCodes.ValueTooLong;
+        public const string InvalidUrl =  MessageCodes.InvalidUrl;
+        public const string InvalidFileExtension =  MessageCodes.InvalidFileExtension;
+        public const string DuplicateValue =  MessageCodes.DuplicateValue;
+        public const string InvalidCharacters =  MessageCodes.InvalidCharacters;
+    }
+
+    // System Messages (SYS)
+    
+    public static class Sys
+    {
+    
+
+    public const string SystemError =  MessageCodes.SystemError;
+
+    public const string ProcessingRequest =  MessageCodes.ProcessingRequest;
+
+    public const string ServiceDegraded =  MessageCodes.ServiceDegraded;
+
+    public const string MaintenanceMode =  MessageCodes.MaintenanceMode;
+
+    public const string OperationCompleted =  MessageCodes.OperationCompleted;
+
+    public const string RateLimitExceeded =  MessageCodes.RateLimitExceeded;
+
+    public const string ServiceUnavailable =  MessageCodes.ServiceUnavailable;
+
+    public const string RequestQueued =  MessageCodes.RequestQueued;
+
+    public const string Timeout =  MessageCodes.Timeout;
+
+    public const string ConfigurationError =  MessageCodes.ConfigurationError;
+
+
+}
+    // Database Operations (DB)
+
+
+    public static class Db
+    {
+    
+
+    public const string DatabaseConnectionFailed = MessageCodes.DatabaseConnectionFailed;
+
+    public const string DuplicateEntry = MessageCodes.DuplicateEntry;
+
+    public const string ForeignKeyConstraint = MessageCodes.ForeignKeyConstraint;
+
+    public const string TransactionFailed = MessageCodes.TransactionFailed;
+
+    public const string DataIntegrityError = MessageCodes.DataIntegrityError;
+
+    public const string QueryTimeout = MessageCodes.QueryTimeout;
+
+    public const string DeadlockDetected = MessageCodes.DeadlockDetected;
+
+    public const string MigrationPending = MessageCodes.MigrationPending;
+
+
+}
+    // File Operations (FILE)
+
+
+    public static class File
+    {
+    
+
+    public const string FileUploadedSuccessfully =  MessageCodes.FileUploadedSuccessfully ;
+
+    public const string InvalidFileType =  MessageCodes.InvalidFileType ;
+
+    public const string FileTooLarge =  MessageCodes.FileTooLarge ;
+
+    public const string FileUploadFailed =  MessageCodes.FileUploadFailed ;
+
+    public const string FileDownloadedSuccessfully =  MessageCodes.FileDownloadedSuccessfully ;
+
+    public const string FileNotFound =  MessageCodes.FileNotFound ;
+
+    public const string FileAccessDenied =  MessageCodes.FileAccessDenied ;
+
+    public const string FileDeletedSuccessfully =  MessageCodes.FileDeletedSuccessfully ;
+
+    public const string CorruptedFile =  MessageCodes.CorruptedFile ;
+
+    public const string StorageQuotaExceeded =  MessageCodes.StorageQuotaExceeded ;
+
+    public const string FileAlreadyExists =  MessageCodes.FileAlreadyExists ;
+
+    public const string VirusDetected =  MessageCodes.VirusDetected ;
+
+
+}
+    // Network & API (NET)
+
+
+    public static class Net
+    {
+    
+
+    public const string NetworkError =  MessageCodes.NetworkError;
+
+    public const string RequestTimeout =  MessageCodes.RequestTimeout;
+
+    public const string BadRequest =  MessageCodes.BadRequest;
+
+    public const string ServerError =  MessageCodes.ServerError;
+
+    public const string ApiRateLimitExceeded =  MessageCodes.ApiRateLimitExceeded;
+
+    public const string ConnectionRefused =  MessageCodes.ConnectionRefused;
+
+    public const string SslCertificateError =  MessageCodes.SslCertificateError;
+
+    public const string SlowConnection =  MessageCodes.SlowConnection;
+
+    public const string GatewayTimeout =  MessageCodes.GatewayTimeout;
+
+    public const string ConnectionEstablished =  MessageCodes.ConnectionEstablished;
+
+
+}
+    // Payment & Transactions (PAY)
+
+
+    public static class Pay
+    {
+    
+
+    public const string PaymentSuccessful =  MessageCodes.PaymentSuccessful;
+
+    public const string PaymentFailed =  MessageCodes.PaymentFailed;
+
+    public const string InsufficientFunds =  MessageCodes.InsufficientFunds;
+
+    public const string CardDeclined =  MessageCodes.CardDeclined;
+
+    public const string InvalidCardDetails =  MessageCodes.InvalidCardDetails;
+
+    public const string CardExpired =  MessageCodes.CardExpired;
+
+    public const string RefundProcessed =  MessageCodes.RefundProcessed;
+
+    public const string RefundFailed =  MessageCodes.RefundFailed;
+
+    public const string PaymentPending =  MessageCodes.PaymentPending;
+
+    public const string TransactionLimitExceeded =  MessageCodes.TransactionLimitExceeded;
+
+    public const string PaymentGatewayError =  MessageCodes.PaymentGatewayError;
+
+    public const string SubscriptionActivated =  MessageCodes.SubscriptionActivated;
+
+    public const string SubscriptionExpiringSoon =  MessageCodes.SubscriptionExpiringSoon;
+
+    public const string SubscriptionCancelled =  MessageCodes.SubscriptionCancelled;
+
+
+}
+    // Email & Notifications (EMAIL)
+
+
+    public static class Email
+    {
+    
+
+    public const string EmailSentSuccessfully = MessageCodes.EmailSentSuccessfully;
+
+    public const string EmailDeliveryFailed = MessageCodes.EmailDeliveryFailed;
+
+    public const string EmailVerified = MessageCodes.EmailVerified;
+
+    public const string InvalidVerificationLink = MessageCodes.InvalidVerificationLink;
+
+    public const string VerificationEmailSent = MessageCodes.VerificationEmailSent;
+
+
+}
+    // Search & Filter (SEARCH)
+
+
+    public static class Search
+    {
+    
+
+    public const string NoResultsFound = MessageCodes.NoResultsFound;
+
+    public const string SearchCompleted = MessageCodes.SearchCompleted;
+
+    public const string TooManyResults = MessageCodes.TooManyResults;
+
+    public const string InvalidSearchQuery = MessageCodes.InvalidSearchQuery;
+
+
+}
+    // Import/Export (IMPORT/EXPORT)
+
+
+    public static class ImportExport
+    {
+    
+
+    public const string ImportCompleted =  MessageCodes.ImportCompleted;
+
+    public const string ImportFailed =  MessageCodes.ImportFailed;
+
+    public const string PartialImport =  MessageCodes.PartialImport;
+
+    public const string ExportCompleted = MessageCodes.ExportCompleted;
+
+    public const string ExportFailed = MessageCodes.ExportFailed;
+
     }
 
     // Add other category groups as needed...

@@ -10,54 +10,68 @@
       "type": "Error",
       "title": "Authentication Failed",
       "description": "Invalid username or password.",
-      "hint": "Please check your credentials and try again."
+      "hint": "Please check your credentials and try again.",
+      "httpStatusCode": 401
     },
     "AUTH_002": {
       "type": "Error",
       "title": "Unauthorized Access",
       "description": "You don't have permission to access this resource.",
-      "hint": "Contact your administrator if you believe this is an error."
+      "hint": "Contact your administrator if you believe this is an error.",
+      "httpStatusCode": 403
     },
     "AUTH_003": {
       "type": "Success",
       "title": "Login Successful",
-      "description": "Welcome back, {username}!"
+      "description": "Welcome back, {username}!",
+      "httpStatusCode": 200
     },
     "AUTH_004": {
       "type": "Error",
       "title": "Session Expired",
-      "description": "Your session has expired. Please log in again."
+      "description": "Your session has expired. Please log in again.",
+      "hint": "Please log in again to continue.",
+      "httpStatusCode": 401
     },
     "AUTH_005": {
       "type": "Error",
       "title": "Invalid Token",
-      "description": "The authentication token is invalid or has expired."
+      "description": "The authentication token is invalid or has expired.",
+      "hint": "Please log in again.",
+      "httpStatusCode": 401
     },
     "AUTH_006": {
       "type": "Error",
       "title": "Account Locked",
       "description": "Your account has been locked due to multiple failed login attempts.",
-      "hint": "Please wait {lockoutMinutes} minutes or contact support."
+      "hint": "Please wait {lockoutMinutes} minutes or contact support.",
+      "httpStatusCode": 403
     },
     "AUTH_007": {
       "type": "Success",
       "title": "Logout Successful",
-      "description": "You have been successfully logged out."
+      "description": "You have been successfully logged out.",
+      "httpStatusCode": 200
     },
     "AUTH_008": {
       "type": "Error",
       "title": "Password Reset Required",
-      "description": "You must reset your password before continuing."
+      "description": "You must reset your password before continuing.",
+      "httpStatusCode": 401
     },
     "AUTH_009": {
       "type": "Error",
       "title": "Invalid Refresh Token",
-      "description": "Unable to refresh your session. Please log in again."
+      "description": "Unable to refresh your session. Please log in again.",
+      "hint": "Please log in again.",
+      "httpStatusCode": 401
     },
     "AUTH_010": {
       "type": "Error",
       "title": "Multi-Factor Authentication Required",
-      "description": "Please complete multi-factor authentication to continue."
+      "description": "Please complete multi-factor authentication to continue.",
+      "hint": "Check your authenticator app or email for the verification code.",
+      "httpStatusCode": 401
     },
 
     "_comment_crud": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",

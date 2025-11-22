@@ -127,7 +127,7 @@ public class SampleTest
     [Fact]
     public void ToJson_ShouldSerializeCorrectly()
     {
-        var message = Msg.Auth.LoginSuccess();
+        var message = Msg.Auth.LoginSuccessful();
         var json = message.ToJson();
 
         Assert.Contains("\"success\":true", json);
@@ -161,7 +161,7 @@ public class SampleTest
             )
         );
 
-        var message = Msg.Auth.LoginSuccess();
+        var message = Msg.Auth.LoginSuccessful();
         var json = message.ToJson();
 
         Assert.Contains("\"success\":true", json);
