@@ -420,7 +420,6 @@ builder.Services.AddEasyMessages(options =>
 |---------|-------------|--------|
 | `RecurPixel.EasyMessages` | Core library | ✅ Available |
 | `RecurPixel.EasyMessages.AspNetCore` | ASP.NET Core integration | ✅ Available |
-| `RecurPixel.EasyMessages.Console` | Console helpers | 🚧 Planned |
 
 ---
 

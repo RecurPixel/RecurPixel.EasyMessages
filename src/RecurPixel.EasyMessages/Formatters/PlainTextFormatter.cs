@@ -1,3 +1,5 @@
+using RecurPixel.EasyMessages.Configuration;
+
 namespace RecurPixel.EasyMessages.Formatters;
 
 /// <summary>
@@ -9,7 +11,7 @@ public class PlainTextFormatter : MessageFormatterBase
 
     public PlainTextFormatter(FormatterOptions? options = null)
     {
-        _options = options ?? FormatterOptions.Default;
+        _options = options ?? FormatterConfiguration.DefaultOptions;
     }
 
     protected override string FormatCore(Message message)

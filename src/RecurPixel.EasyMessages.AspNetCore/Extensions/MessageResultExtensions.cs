@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RecurPixel.EasyMessages;
-using Microsoft.AspNetCore.Http.Abstractions;
 
 namespace RecurPixel.EasyMessages.AspNetCore;
 
@@ -18,15 +18,12 @@ public static class MessageResultExtensions
             Data = message.Data,
             Timestamp = message.Timestamp,
             CorrelationId = message.CorrelationId,
-            Metadata = message.Metadata
+            Metadata = message.Metadata,
         };
-        
-        return new ObjectResult(response)
-        {
-            StatusCode = message.HttpStatusCode
-        };
+
+        return new ObjectResult(response) { StatusCode = message.HttpStatusCode };
     }
-    
+
     public static IResult ToMinimalApiResult(this Message message)
     {
         var response = new ApiResponse
@@ -39,9 +36,9 @@ public static class MessageResultExtensions
             Data = message.Data,
             Timestamp = message.Timestamp,
             CorrelationId = message.CorrelationId,
-            Metadata = message.Metadata
+            Metadata = message.Metadata,
         };
-        
+
         return Results.Json(response, statusCode: message.HttpStatusCode);
     }
 }

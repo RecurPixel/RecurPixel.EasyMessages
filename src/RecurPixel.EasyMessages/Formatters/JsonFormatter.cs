@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.Configuration;
 
 namespace RecurPixel.EasyMessages.Formatters;
 
@@ -14,7 +15,7 @@ public class JsonFormatter : MessageFormatterBase
         JsonSerializerOptions? jsonOptions = null
     )
     {
-        _options = options ?? FormatterOptions.Default;
+        _options = options ?? FormatterConfiguration.DefaultOptions;
         _jsonOptions =
             jsonOptions
             ?? new JsonSerializerOptions

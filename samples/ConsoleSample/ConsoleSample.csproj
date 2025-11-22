@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\RecurPixel.EasyMessages.Console\RecurPixel.EasyMessages.Console.csproj" />
+    <ProjectReference Include="..\..\src\RecurPixel.EasyMessages\RecurPixel.EasyMessages.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

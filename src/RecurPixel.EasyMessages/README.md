@@ -509,7 +509,6 @@ Msg.Auth.LoginFailed()
 ## 🔗 Related Packages
 
 - **RecurPixel.EasyMessages.AspNetCore** – ASP.NET Core integration
-- **RecurPixel.EasyMessages.Console** (Planned) – Enhanced console helpers
 
 ---
 

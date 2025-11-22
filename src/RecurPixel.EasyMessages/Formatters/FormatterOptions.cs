@@ -13,15 +13,21 @@ public class FormatterOptions
     // Null handling
     public bool IncludeNullFields { get; set; } = false;
 
-    public static FormatterOptions Default => new();
-    public static FormatterOptions Minimal =>
-        new()
+    /// <summary>
+    /// Create a deep copy of these options
+    /// </summary>
+    public FormatterOptions Clone()
+    {
+        return new FormatterOptions
         {
-            IncludeTimestamp = false,
-            IncludeCorrelationId = false,
-            IncludeHttpStatusCode = false,
-            IncludeMetadata = false,
-            IncludeParameters = false,
-            IncludeHint = false,
+            IncludeTimestamp = IncludeTimestamp,
+            IncludeCorrelationId = IncludeCorrelationId,
+            IncludeHttpStatusCode = IncludeHttpStatusCode,
+            IncludeMetadata = IncludeMetadata,
+            IncludeData = IncludeData,
+            IncludeParameters = IncludeParameters,
+            IncludeHint = IncludeHint,
+            IncludeNullFields = IncludeNullFields,
         };
+    }
 }

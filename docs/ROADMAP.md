@@ -18,8 +18,7 @@
   RecurPixel.EasyMessages/
   ├── src/
   │   ├── RecurPixel.EasyMessages/              (Main library)
-  │   ├── RecurPixel.EasyMessages.AspNetCore/   (ASP.NET integration)
-  │   └── RecurPixel.EasyMessages.Console/      (Console helpers)
+  │   └── RecurPixel.EasyMessages.AspNetCore/   (ASP.NET integration)
   ├── tests/
   │   ├── RecurPixel.EasyMessages.Tests/
   │   └── RecurPixel.EasyMessages.Integration.Tests/
