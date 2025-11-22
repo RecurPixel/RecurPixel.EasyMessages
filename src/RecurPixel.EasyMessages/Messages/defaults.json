@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "messages": {
     
-    "_comment_auth": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_auth": "────────────────────────────────────────────────────",
     "_comment_auth_desc": "Authentication & Authorization Messages",
     
     "AUTH_001": {
@@ -29,7 +29,7 @@
     "AUTH_004": {
       "type": "Error",
       "title": "Session Expired",
-      "description": "Your session has expired. Please log in again.",
+      "description": "Your session has expired.",
       "hint": "Please log in again to continue.",
       "httpStatusCode": 401
     },
@@ -44,7 +44,7 @@
       "type": "Error",
       "title": "Account Locked",
       "description": "Your account has been locked due to multiple failed login attempts.",
-      "hint": "Please wait {lockoutMinutes} minutes or contact support.",
+      "hint": "Please try again later or contact support.",
       "httpStatusCode": 403
     },
     "AUTH_007": {
@@ -62,7 +62,7 @@
     "AUTH_009": {
       "type": "Error",
       "title": "Invalid Refresh Token",
-      "description": "Unable to refresh your session. Please log in again.",
+      "description": "Unable to refresh your session.",
       "hint": "Please log in again.",
       "httpStatusCode": 401
     },
@@ -74,554 +74,648 @@
       "httpStatusCode": 401
     },
 
-    "_comment_crud": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_crud": "────────────────────────────────────────────────────",
     "_comment_crud_desc": "CRUD Operation Messages",
     
     "CRUD_001": {
       "type": "Success",
       "title": "Created Successfully",
-      "description": "{resource} has been created successfully."
+      "description": "{resource} has been created successfully.",
+      "httpStatusCode": 201
     },
     "CRUD_002": {
       "type": "Success",
       "title": "Updated Successfully",
-      "description": "{resource} has been updated successfully."
+      "description": "{resource} has been updated successfully.",
+      "httpStatusCode": 200
     },
     "CRUD_003": {
       "type": "Success",
       "title": "Deleted Successfully",
-      "description": "{resource} has been deleted successfully."
+      "description": "{resource} has been deleted successfully.",
+      "httpStatusCode": 200
     },
     "CRUD_004": {
       "type": "Error",
       "title": "Resource Not Found",
       "description": "The requested {resource} was not found.",
-      "hint": "Please verify the {resource} ID and try again."
+      "hint": "Please verify the ID and try again.",
+      "httpStatusCode": 404
     },
     "CRUD_005": {
       "type": "Success",
       "title": "Retrieved Successfully",
-      "description": "{resource} retrieved successfully."
+      "description": "{resource} retrieved successfully.",
+      "httpStatusCode": 200
     },
     "CRUD_006": {
       "type": "Error",
       "title": "Creation Failed",
       "description": "Failed to create {resource}.",
-      "hint": "Please check your input and try again."
+      "hint": "Please check your input and try again.",
+      "httpStatusCode": 400
     },
     "CRUD_007": {
       "type": "Error",
       "title": "Update Failed",
-      "description": "Failed to update {resource}."
+      "description": "Failed to update {resource}.",
+      "hint": "Please check your input and try again.",
+      "httpStatusCode": 400
     },
     "CRUD_008": {
       "type": "Error",
       "title": "Deletion Failed",
       "description": "Failed to delete {resource}.",
-      "hint": "This {resource} may be in use or protected."
+      "hint": "This {resource} may be in use or protected.",
+      "httpStatusCode": 409
     },
     "CRUD_009": {
       "type": "Warning",
       "title": "No Changes Detected",
-      "description": "No changes were made to {resource}."
+      "description": "No changes were made to {resource}.",
+      "httpStatusCode": 200
     },
     "CRUD_010": {
       "type": "Error",
       "title": "Conflict Detected",
       "description": "{resource} has been modified by another user.",
-      "hint": "Please refresh and try again."
+      "hint": "Please refresh and try again.",
+      "httpStatusCode": 409
     },
 
-    "_comment_val": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_val": "────────────────────────────────────────────────────",
     "_comment_val_desc": "Validation Messages",
     
     "VAL_001": {
       "type": "Error",
       "title": "Validation Failed",
-      "description": "Please check your input and try again."
+      "description": "Please check your input and try again.",
+      "httpStatusCode": 422
     },
     "VAL_002": {
       "type": "Error",
       "title": "Required Field Missing",
-      "description": "The field '{field}' is required."
+      "description": "The field '{field}' is required.",
+      "httpStatusCode": 422
     },
     "VAL_003": {
       "type": "Error",
       "title": "Invalid Format",
       "description": "The field '{field}' has an invalid format.",
-      "hint": "Expected format: {format}"
+      "hint": "Expected format: {format}",
+      "httpStatusCode": 422
     },
     "VAL_004": {
       "type": "Error",
       "title": "Value Out of Range",
-      "description": "The field '{field}' must be between {min} and {max}."
+      "description": "The field '{field}' must be between {min} and {max}.",
+      "httpStatusCode": 422
     },
     "VAL_005": {
       "type": "Error",
       "title": "Invalid Email Address",
-      "description": "Please provide a valid email address."
+      "description": "Please provide a valid email address.",
+      "httpStatusCode": 422
     },
     "VAL_006": {
       "type": "Error",
       "title": "Invalid Phone Number",
-      "description": "Please provide a valid phone number."
+      "description": "Please provide a valid phone number.",
+      "httpStatusCode": 422
     },
     "VAL_007": {
       "type": "Error",
       "title": "Password Too Weak",
       "description": "Password must meet security requirements.",
-      "hint": "Use at least {minLength} characters, including uppercase, lowercase, numbers, and special characters."
+      "hint": "Use at least {minLength} characters, including uppercase, lowercase, numbers, and special characters.",
+      "httpStatusCode": 422
     },
     "VAL_008": {
       "type": "Error",
       "title": "Passwords Don't Match",
-      "description": "Password and confirmation password must match."
+      "description": "Password and confirmation password must match.",
+      "httpStatusCode": 422
     },
     "VAL_009": {
       "type": "Error",
       "title": "Invalid Date",
-      "description": "The field '{field}' contains an invalid date."
+      "description": "The field '{field}' contains an invalid date.",
+      "httpStatusCode": 422
     },
     "VAL_010": {
       "type": "Error",
       "title": "Value Too Short",
-      "description": "The field '{field}' must be at least {minLength} characters long."
+      "description": "The field '{field}' must be at least {minLength} characters long.",
+      "httpStatusCode": 422
     },
     "VAL_011": {
       "type": "Error",
       "title": "Value Too Long",
-      "description": "The field '{field}' must not exceed {maxLength} characters."
+      "description": "The field '{field}' must not exceed {maxLength} characters.",
+      "httpStatusCode": 422
     },
     "VAL_012": {
       "type": "Error",
       "title": "Invalid URL",
-      "description": "Please provide a valid URL."
+      "description": "Please provide a valid URL.",
+      "httpStatusCode": 422
     },
     "VAL_013": {
       "type": "Error",
       "title": "Invalid File Extension",
-      "description": "The field '{field}' must be a valid {type}."
+      "description": "The field '{field}' must be a valid {type}.",
+      "httpStatusCode": 422
     },
     "VAL_014": {
       "type": "Error",
       "title": "Duplicate Value",
       "description": "The value '{value}' already exists.",
-      "hint": "Please use a unique value."
+      "hint": "Please use a unique value.",
+      "httpStatusCode": 422
     },
     "VAL_015": {
       "type": "Error",
       "title": "Invalid Characters",
       "description": "The field '{field}' contains invalid characters.",
-      "hint": "Only alphanumeric characters and {allowed} are allowed."
+      "hint": "Only alphanumeric characters and {allowed} are allowed.",
+      "httpStatusCode": 422
     },
 
-    "_comment_sys": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_sys": "────────────────────────────────────────────────────",
     "_comment_sys_desc": "System Messages",
     
     "SYS_001": {
       "type": "Critical",
       "title": "System Error",
       "description": "An unexpected error occurred. Please try again later.",
-      "hint": "If the problem persists, contact support."
+      "hint": "If the problem persists, contact support.",
+      "httpStatusCode": 500
     },
     "SYS_002": {
       "type": "Info",
       "title": "Processing Request",
-      "description": "Your request is being processed. Please wait..."
+      "description": "Your request is being processed. Please wait...",
+      "httpStatusCode": 202
     },
     "SYS_003": {
       "type": "Warning",
       "title": "Service Degraded",
       "description": "Some features may be temporarily unavailable.",
-      "hint": "We're working to restore full functionality."
+      "hint": "We're working to restore full functionality.",
+      "httpStatusCode": 503
     },
     "SYS_004": {
       "type": "Info",
       "title": "Maintenance Mode",
       "description": "The system is currently under maintenance.",
-      "hint": "Expected completion time: {estimatedTime}"
+      "hint": "Expected completion time: {estimatedTime}",
+      "httpStatusCode": 503
     },
     "SYS_005": {
       "type": "Success",
       "title": "Operation Completed",
-      "description": "The operation completed successfully."
+      "description": "The operation completed successfully.",
+      "httpStatusCode": 200
     },
     "SYS_006": {
       "type": "Warning",
       "title": "Rate Limit Exceeded",
       "description": "You have exceeded the rate limit.",
-      "hint": "Please try again in {retryAfter} seconds."
+      "hint": "Please try again in {retryAfter} seconds.",
+      "httpStatusCode": 429
     },
     "SYS_007": {
       "type": "Error",
       "title": "Service Unavailable",
       "description": "The service is temporarily unavailable.",
-      "hint": "Please try again later."
+      "hint": "Please try again later.",
+      "httpStatusCode": 503
     },
     "SYS_008": {
       "type": "Info",
       "title": "Request Queued",
       "description": "Your request has been queued for processing.",
-      "hint": "You will be notified when it's complete."
+      "hint": "You will be notified when it's complete.",
+      "httpStatusCode": 202
     },
     "SYS_009": {
       "type": "Error",
       "title": "Timeout",
-      "description": "The request timed out. Please try again."
+      "description": "The request timed out. Please try again.",
+      "httpStatusCode": 504
     },
     "SYS_010": {
       "type": "Critical",
       "title": "Configuration Error",
       "description": "A system configuration error occurred.",
-      "hint": "Please contact your system administrator."
+      "hint": "Please contact your system administrator.",
+      "httpStatusCode": 500
     },
 
-    "_comment_db": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_db": "────────────────────────────────────────────────────",
     "_comment_db_desc": "Database Messages",
     
     "DB_001": {
       "type": "Critical",
       "title": "Database Connection Failed",
       "description": "Unable to connect to the database.",
-      "hint": "Please contact support if this persists."
+      "hint": "Please contact support if this persists.",
+      "httpStatusCode": 500
     },
     "DB_002": {
       "type": "Error",
       "title": "Duplicate Entry",
-      "description": "{resource} with this {field} already exists."
+      "description": "{resource} with this {field} already exists.",
+      "httpStatusCode": 409
     },
     "DB_003": {
       "type": "Error",
       "title": "Foreign Key Constraint",
       "description": "Cannot perform this operation due to related records.",
-      "hint": "Please remove related {relatedResource} first."
+      "hint": "Please remove related {relatedResource} first.",
+      "httpStatusCode": 409
     },
     "DB_004": {
       "type": "Error",
       "title": "Transaction Failed",
-      "description": "The database transaction failed and has been rolled back."
+      "description": "The database transaction failed and has been rolled back.",
+      "httpStatusCode": 500
     },
     "DB_005": {
       "type": "Critical",
       "title": "Data Integrity Error",
       "description": "A data integrity error occurred.",
-      "hint": "Please contact support with error code: {errorCode}"
+      "hint": "Please contact support with error code: {errorCode}",
+      "httpStatusCode": 500
     },
     "DB_006": {
       "type": "Error",
       "title": "Query Timeout",
       "description": "The database query took too long to execute.",
-      "hint": "Please try refining your search criteria."
+      "hint": "Please try refining your search criteria.",
+      "httpStatusCode": 504
     },
     "DB_007": {
       "type": "Error",
       "title": "Deadlock Detected",
-      "description": "A database deadlock was detected. Please try again."
+      "description": "A database deadlock was detected. Please try again.",
+      "httpStatusCode": 500
     },
     "DB_008": {
       "type": "Warning",
       "title": "Migration Pending",
-      "description": "Database migrations are pending. Some features may not work correctly."
+      "description": "Database migrations are pending. Some features may not work correctly.",
+      "httpStatusCode": 503
     },
 
-    "_comment_file": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_file": "────────────────────────────────────────────────────",
     "_comment_file_desc": "File Operation Messages",
     
     "FILE_001": {
       "type": "Success",
       "title": "File Uploaded Successfully",
-      "description": "'{fileName}' has been uploaded successfully."
+      "description": "'{fileName}' has been uploaded successfully.",
+      "httpStatusCode": 201
     },
     "FILE_002": {
       "type": "Error",
       "title": "Invalid File Type",
-      "description": "Only {allowedTypes} files are allowed."
+      "description": "Only {allowedTypes} files are allowed.",
+      "httpStatusCode": 415
     },
     "FILE_003": {
       "type": "Error",
       "title": "File Too Large",
       "description": "Maximum file size is {maxSize}.",
-      "hint": "Current file size: {actualSize}"
+      "hint": "Current file size: {actualSize}",
+      "httpStatusCode": 413
     },
     "FILE_004": {
       "type": "Error",
       "title": "File Upload Failed",
       "description": "Failed to upload '{fileName}'.",
-      "hint": "Please check your connection and try again."
+      "hint": "Please check your connection and try again.",
+      "httpStatusCode": 500
     },
     "FILE_005": {
       "type": "Success",
       "title": "File Downloaded Successfully",
-      "description": "'{fileName}' has been downloaded successfully."
+      "description": "'{fileName}' has been downloaded successfully.",
+      "httpStatusCode": 200
     },
     "FILE_006": {
       "type": "Error",
       "title": "File Not Found",
-      "description": "The requested file '{fileName}' was not found."
+      "description": "The requested file '{fileName}' was not found.",
+      "httpStatusCode": 404
     },
     "FILE_007": {
       "type": "Error",
       "title": "File Access Denied",
-      "description": "You don't have permission to access '{fileName}'."
+      "description": "You don't have permission to access '{fileName}'.",
+      "httpStatusCode": 403
     },
     "FILE_008": {
       "type": "Success",
       "title": "File Deleted Successfully",
-      "description": "'{fileName}' has been deleted successfully."
+      "description": "'{fileName}' has been deleted successfully.",
+      "httpStatusCode": 200
     },
     "FILE_009": {
       "type": "Error",
       "title": "Corrupted File",
       "description": "The file '{fileName}' appears to be corrupted.",
-      "hint": "Please upload the file again."
+      "hint": "Please upload the file again.",
+      "httpStatusCode": 422
     },
     "FILE_010": {
       "type": "Error",
       "title": "Storage Quota Exceeded",
       "description": "You have exceeded your storage quota.",
-      "hint": "Please delete some files or upgrade your plan."
+      "hint": "Please delete some files or upgrade your plan.",
+      "httpStatusCode": 507
     },
     "FILE_011": {
       "type": "Warning",
       "title": "File Already Exists",
       "description": "A file named '{fileName}' already exists.",
-      "hint": "Do you want to replace it?"
+      "hint": "Do you want to replace it?",
+      "httpStatusCode": 409
     },
     "FILE_012": {
       "type": "Error",
       "title": "Virus Detected",
-      "description": "The file '{fileName}' contains malicious content and has been rejected."
+      "description": "The file '{fileName}' contains malicious content and has been rejected.",
+      "httpStatusCode": 422
     },
 
-    "_comment_net": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_net": "────────────────────────────────────────────────────",
     "_comment_net_desc": "Network & API Messages",
     
     "NET_001": {
       "type": "Error",
       "title": "Network Error",
-      "description": "A network error occurred. Please check your connection."
+      "description": "A network error occurred. Please check your connection.",
+      "httpStatusCode": 503
     },
     "NET_002": {
       "type": "Error",
       "title": "Request Timeout",
-      "description": "The request timed out. Please try again."
+      "description": "The request timed out. Please try again.",
+      "httpStatusCode": 504
     },
     "NET_003": {
       "type": "Error",
       "title": "Bad Request",
       "description": "The server could not understand your request.",
-      "hint": "Please check your input and try again."
+      "hint": "Please check your input and try again.",
+      "httpStatusCode": 400
     },
     "NET_004": {
       "type": "Error",
       "title": "Server Error",
-      "description": "The server encountered an error. Please try again later."
+      "description": "The server encountered an error. Please try again later.",
+      "httpStatusCode": 500
     },
     "NET_005": {
       "type": "Error",
       "title": "API Rate Limit Exceeded",
       "description": "You have exceeded the API rate limit.",
-      "hint": "Please wait {retryAfter} seconds before trying again."
+      "hint": "Please wait {retryAfter} seconds before trying again.",
+      "httpStatusCode": 429
     },
     "NET_006": {
       "type": "Error",
       "title": "Connection Refused",
       "description": "Unable to connect to the server.",
-      "hint": "Please check if the service is running."
+      "hint": "Please check if the service is running.",
+      "httpStatusCode": 503
     },
     "NET_007": {
       "type": "Error",
       "title": "SSL Certificate Error",
-      "description": "The server's SSL certificate is invalid or expired."
+      "description": "The server's SSL certificate is invalid or expired.",
+      "httpStatusCode": 495
     },
     "NET_008": {
       "type": "Warning",
       "title": "Slow Connection",
-      "description": "Your connection is slower than usual. This may affect performance."
+      "description": "Your connection is slower than usual. This may affect performance.",
+      "httpStatusCode": 200
     },
     "NET_009": {
       "type": "Error",
       "title": "Gateway Timeout",
-      "description": "The gateway did not receive a timely response from the upstream server."
+      "description": "The gateway did not receive a timely response from the upstream server.",
+      "httpStatusCode": 504
     },
     "NET_010": {
       "type": "Success",
       "title": "Connection Established",
-      "description": "Successfully connected to {service}."
+      "description": "Successfully connected to {service}.",
+      "httpStatusCode": 200
     },
 
-    "_comment_pay": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_pay": "────────────────────────────────────────────────────",
     "_comment_pay_desc": "Payment & Transaction Messages",
     
     "PAY_001": {
       "type": "Success",
       "title": "Payment Successful",
       "description": "Your payment of {amount} has been processed successfully.",
-      "hint": "Transaction ID: {transactionId}"
+      "hint": "Transaction ID: {transactionId}",
+      "httpStatusCode": 200
     },
     "PAY_002": {
       "type": "Error",
       "title": "Payment Failed",
       "description": "Your payment could not be processed.",
-      "hint": "Please check your payment details and try again."
+      "hint": "Please check your payment details and try again.",
+      "httpStatusCode": 402
     },
     "PAY_003": {
       "type": "Error",
       "title": "Insufficient Funds",
-      "description": "Your account has insufficient funds to complete this transaction."
+      "description": "Your account has insufficient funds to complete this transaction.",
+      "httpStatusCode": 402
     },
     "PAY_004": {
       "type": "Error",
       "title": "Card Declined",
       "description": "Your card was declined by the issuing bank.",
-      "hint": "Please contact your bank or try a different payment method."
+      "hint": "Please contact your bank or try a different payment method.",
+      "httpStatusCode": 402
     },
     "PAY_005": {
       "type": "Error",
       "title": "Invalid Card Details",
       "description": "The card details provided are invalid.",
-      "hint": "Please check the card number, expiry date, and CVV."
+      "hint": "Please check the card number, expiry date, and CVV.",
+      "httpStatusCode": 422
     },
     "PAY_006": {
       "type": "Error",
       "title": "Card Expired",
-      "description": "The card has expired. Please use a different payment method."
+      "description": "The card has expired. Please use a different payment method.",
+      "httpStatusCode": 422
     },
     "PAY_007": {
       "type": "Success",
       "title": "Refund Processed",
       "description": "Your refund of {amount} has been processed.",
-      "hint": "It may take 5-10 business days to appear in your account."
+      "hint": "It may take 5-10 business days to appear in your account.",
+      "httpStatusCode": 200
     },
     "PAY_008": {
       "type": "Error",
       "title": "Refund Failed",
       "description": "Unable to process your refund request.",
-      "hint": "Please contact support for assistance."
+      "hint": "Please contact support for assistance.",
+      "httpStatusCode": 500
     },
     "PAY_009": {
       "type": "Warning",
       "title": "Payment Pending",
-      "description": "Your payment is being processed. This may take a few minutes."
+      "description": "Your payment is being processed. This may take a few minutes.",
+      "httpStatusCode": 202
     },
     "PAY_010": {
       "type": "Error",
       "title": "Transaction Limit Exceeded",
-      "description": "This transaction exceeds your daily limit of {limit}."
+      "description": "This transaction exceeds your daily limit of {limit}.",
+      "httpStatusCode": 402
     },
     "PAY_011": {
       "type": "Error",
       "title": "Payment Gateway Error",
       "description": "The payment gateway is temporarily unavailable.",
-      "hint": "Please try again in a few minutes."
+      "hint": "Please try again in a few minutes.",
+      "httpStatusCode": 503
     },
     "PAY_012": {
       "type": "Success",
       "title": "Subscription Activated",
       "description": "Your subscription has been activated successfully.",
-      "hint": "Next billing date: {nextBillingDate}"
+      "hint": "Next billing date: {nextBillingDate}",
+      "httpStatusCode": 200
     },
     "PAY_013": {
       "type": "Warning",
       "title": "Subscription Expiring Soon",
       "description": "Your subscription will expire on {expiryDate}.",
-      "hint": "Renew now to avoid service interruption."
+      "hint": "Renew now to avoid service interruption.",
+      "httpStatusCode": 200
     },
     "PAY_014": {
       "type": "Error",
       "title": "Subscription Cancelled",
       "description": "Your subscription has been cancelled.",
-      "hint": "You have access until {accessUntil}"
+      "hint": "You have access until {accessUntil}",
+      "httpStatusCode": 200
     },
 
-    "_comment_email": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_email": "────────────────────────────────────────────────────",
     "_comment_email_desc": "Email & Notification Messages",
     
     "EMAIL_001": {
       "type": "Success",
       "title": "Email Sent Successfully",
-      "description": "Your email has been sent to {recipient}."
+      "description": "Your email has been sent to {recipient}.",
+      "httpStatusCode": 200
     },
     "EMAIL_002": {
       "type": "Error",
       "title": "Email Delivery Failed",
       "description": "Failed to send email to {recipient}.",
-      "hint": "Please verify the email address and try again."
+      "hint": "Please verify the email address and try again.",
+      "httpStatusCode": 500
     },
     "EMAIL_003": {
       "type": "Success",
       "title": "Email Verified",
-      "description": "Your email address has been verified successfully."
+      "description": "Your email address has been verified successfully.",
+      "httpStatusCode": 200
     },
     "EMAIL_004": {
       "type": "Error",
       "title": "Invalid Verification Link",
       "description": "The email verification link is invalid or has expired.",
-      "hint": "Please request a new verification email."
+      "hint": "Please request a new verification email.",
+      "httpStatusCode": 400
     },
     "EMAIL_005": {
       "type": "Info",
       "title": "Verification Email Sent",
       "description": "A verification email has been sent to {email}.",
-      "hint": "Please check your inbox and spam folder."
+      "hint": "Please check your inbox and spam folder.",
+      "httpStatusCode": 200
     },
 
-    "_comment_search": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_search": "────────────────────────────────────────────────────",
     "_comment_search_desc": "Search & Filter Messages",
     
     "SEARCH_001": {
       "type": "Info",
       "title": "No Results Found",
       "description": "No results found for '{query}'.",
-      "hint": "Try adjusting your search terms or filters."
+      "hint": "Try adjusting your search terms or filters.",
+      "httpStatusCode": 200
     },
     "SEARCH_002": {
       "type": "Success",
       "title": "Search Completed",
-      "description": "Found {count} result(s) for '{query}'."
+      "description": "Found {count} result(s) for '{query}'.",
+      "httpStatusCode": 200
     },
     "SEARCH_003": {
       "type": "Warning",
       "title": "Too Many Results",
       "description": "Your search returned too many results.",
-      "hint": "Please refine your search criteria."
+      "hint": "Please refine your search criteria.",
+      "httpStatusCode": 200
     },
     "SEARCH_004": {
       "type": "Error",
       "title": "Invalid Search Query",
-      "description": "The search query contains invalid characters or syntax."
+      "description": "The search query contains invalid characters or syntax.",
+      "httpStatusCode": 422
     },
 
-    "_comment_import": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_comment_import": "────────────────────────────────────────────────────",
     "_comment_import_desc": "Import/Export Messages",
     
     "IMPORT_001": {
       "type": "Success",
       "title": "Import Completed",
-      "description": "Successfully imported {count} record(s)."
+      "description": "Successfully imported {count} record(s).",
+      "httpStatusCode": 200
     },
     "IMPORT_002": {
       "type": "Error",
       "title": "Import Failed",
       "description": "Failed to import data from '{fileName}'.",
-      "hint": "Please check the file format and try again."
+      "hint": "Please check the file format and try again.",
+      "httpStatusCode": 400
     },
     "IMPORT_003": {
       "type": "Warning",
       "title": "Partial Import",
       "description": "Imported {successCount} of {totalCount} records.",
-      "hint": "{failedCount} records failed validation."
+      "hint": "{failedCount} records failed validation.",
+      "httpStatusCode": 207
     },
     "EXPORT_001": {
       "type": "Success",
       "title": "Export Completed",
-      "description": "Successfully exported {count} record(s) to '{fileName}'."
+      "description": "Successfully exported {count} record(s) to '{fileName}'.",
+      "httpStatusCode": 200
     },
     "EXPORT_002": {
       "type": "Error",
       "title": "Export Failed",
       "description": "Failed to export data.",
-      "hint": "Please try again or contact support."
+      "hint": "Please try again or contact support.",
+      "httpStatusCode": 500
     }
   }
 }
