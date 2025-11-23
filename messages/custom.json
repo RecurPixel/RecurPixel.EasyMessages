@@ -1,0 +1,35 @@
+{
+  "$schema": "https://example.com/schemas/easymessages.json",
+  "version": "1.0",
+  "messages": {
+    "AUTH_001": {
+      "type": "Error",
+      "title": "Authentication Failed (custom)",
+      "description": "Custom: Invalid username or password.",
+      "httpStatusCode": 401,
+      "hint": "Check credentials and try again"
+    },
+
+    "AUTH_003": {
+      "type": "Success",
+      "title": "Login Successful (custom)",
+      "description": "Welcome back, user! (custom)",
+      "httpStatusCode": 200
+    },
+
+    "CRUD_001": {
+      "type": "Success",
+      "title": "Created Successfully (custom)",
+      "description": "{resource} has been created successfully (custom).",
+      "httpStatusCode": 201
+    },
+
+    "CUSTOM_001": {
+      "type": "Info",
+      "title": "Custom Notice",
+      "description": "This is a user-defined custom message to demonstrate custom.json usage.",
+      "httpStatusCode": 200,
+      "hint": "No action required"
+    }
+  }
+}

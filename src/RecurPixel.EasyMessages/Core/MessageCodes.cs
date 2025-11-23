@@ -1,3 +1,5 @@
+#pragma warning disable CS1591 // Disable XML comment warning for this section
+
 namespace RecurPixel.EasyMessages.Core;
 
 /// <summary>
@@ -622,3 +624,6 @@ public static class  MessageCodes
 
     #endregion
 }
+
+
+#pragma warning restore CS1591 // Restore XML comment warning

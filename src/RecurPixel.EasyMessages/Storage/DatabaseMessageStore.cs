@@ -7,6 +7,10 @@ namespace RecurPixel.EasyMessages.Storage;
 /// </summary>
 public abstract class DatabaseMessageStore : IMessageStore
 {
+    /// <summary>
+    /// Loads messages from database asynchronously
+    /// </summary>
+    /// <returns></returns>
     public abstract Task<Dictionary<string, MessageTemplate>> LoadAsync();
 }
 

@@ -10,6 +10,12 @@ namespace RecurPixel.EasyMessages.Formatters;
 /// </summary>
 public abstract class MessageFormatterBase : IMessageFormatter
 {
+
+    /// <summary>
+    /// Formats the message, invoking interceptors before and after formatting.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Fomated String</returns>
     public string Format(Message message)
     {
         // Invoke interceptors before formatting

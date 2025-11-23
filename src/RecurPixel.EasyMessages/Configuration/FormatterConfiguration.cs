@@ -2,9 +2,19 @@ using RecurPixel.EasyMessages.Formatters;
 
 namespace RecurPixel.EasyMessages.Configuration;
 
+/// <summary>
+/// Configuration for global formatter options
+/// </summary>
 public static class FormatterConfiguration
 {
+    /// <summary>
+    /// The global default formatter options
+    /// </summary>
     private static FormatterOptions _defaultOptions = new();
+
+    /// <summary>
+    /// Lock object for thread safety
+    /// </summary>
     private static readonly object _lock = new();
 
     /// <summary>

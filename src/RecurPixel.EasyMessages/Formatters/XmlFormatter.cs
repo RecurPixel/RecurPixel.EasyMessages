@@ -10,11 +10,20 @@ public class XmlFormatter : MessageFormatterBase
 {
     private readonly FormatterOptions _options;
 
+    /// <summary>
+    /// Creates an XML message formatter
+    /// </summary>
+    /// <param name="options">FormatterOptions Object</param>
     public XmlFormatter(FormatterOptions? options = null)
     {
        _options = options ?? FormatterConfiguration.DefaultOptions;
     }
 
+    /// <summary>
+    /// Formats the message as an XML string.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Formated Message String</returns>
     protected override string FormatCore(Message message)
     {
         var root = new XElement(
@@ -83,6 +92,11 @@ public class XmlFormatter : MessageFormatterBase
         return root.ToString();
     }
 
+    /// <summary>
+    /// Formats the message as an XML object.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Formated Message Object</returns>
     public override object FormatAsObject(Message message)
     {
         return XDocument.Parse(Format(message));

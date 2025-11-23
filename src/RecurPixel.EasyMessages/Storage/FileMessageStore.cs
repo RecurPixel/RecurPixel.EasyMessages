@@ -11,10 +11,22 @@ public class FileMessageStore : IMessageStore
 {
     private readonly string _filePath;
 
+    /// <summary>
+    /// Creates file-based message store
+    /// </summary>
+    /// <param name="filePath">Takes File Path</param>
     public FileMessageStore(string filePath)
     {
         _filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
     }
+
+    /// <summary>
+    /// Loads messages from file asynchronously
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="FileNotFoundException"></exception>
+    /// <exception cref="InvalidMessageFileException"></exception>
+    /// <returns>Returns a Task</returns>
 
     public async Task<Dictionary<string, MessageTemplate>> LoadAsync()
     {

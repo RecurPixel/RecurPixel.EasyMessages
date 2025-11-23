@@ -1,5 +1,8 @@
 namespace RecurPixel.EasyMessages.Formatters;
 
+/// <summary>
+/// Formats messages for logging purposes
+/// </summary>
 public class LogFormatter : MessageFormatterBase
 {
     /// <summary>

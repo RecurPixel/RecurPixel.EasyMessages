@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\RecurPixel.EasyMessages\RecurPixel.EasyMessages.csproj" />
+    <ProjectReference Include="..\..\src\RecurPixel.EasyMessages.AspNetCore\RecurPixel.EasyMessages.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>

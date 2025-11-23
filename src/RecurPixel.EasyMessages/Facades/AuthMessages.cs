@@ -2,6 +2,9 @@ using RecurPixel.EasyMessages.Core;
 
 namespace RecurPixel.EasyMessages;
 
+/// <summary>
+/// Facade for authentication-related messages.
+/// </summary>
 public static partial class Msg
 {
     /// <summary>
@@ -40,6 +43,7 @@ public static partial class Msg
         /// <summary>Returns AUTH_010: Please complete multi-factor authentication to continue.</summary>
         public static Message MfaRequired() => MessageRegistry.Get(MessageCodes.Auth.MfaRequired);
 
+        /// <summary>Returns AUTH_002: You don't have permission to access this resource.</summary>
         public static Message Forbidden() => Unauthorized(); // Alias
     }
 }

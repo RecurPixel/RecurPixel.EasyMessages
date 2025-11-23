@@ -5,7 +5,13 @@
 
 [![NuGet](https://img.shields.io/nuget/v/RecurPixel.EasyMessages.svg)](https://www.nuget.org/packages/RecurPixel.EasyMessages/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![.NET](https://img.shields.io/badge/.NET-6%2C%207%2C%208-purple)](https://dotnet.microsoft.com/)
+[![.NET](https://img.shields.io/badge/.NET-6%2C%207%2C%208%2C%209%2C%2010-purple)](https://dotnet.microsoft.com/)
+[![NuGet](https://img.shields.io/nuget/v/RecurPixel.EasyMessages?label=alpha)](https://www.nuget.org/packages/RecurPixel.EasyMessages)
+
+⚠️ **ALPHA RELEASE - v0.1.0-alpha.1**  
+This is an early preview. APIs may change. Not recommended for production use.  
+[Report Issues](https://github.com/RecurPixel/EasyMessages/issues) | [Give Feedback](https://github.com/RecurPixel/EasyMessages/discussions)
+
 
 ---
 
@@ -416,10 +422,10 @@ builder.Services.AddEasyMessages(options =>
 
 ## 📦 Packages
 
-| Package | Description | Status |
-|---------|-------------|--------|
-| `RecurPixel.EasyMessages` | Core library | ✅ Available |
-| `RecurPixel.EasyMessages.AspNetCore` | ASP.NET Core integration | ✅ Available |
+| Package | Version | Status |
+|---------|---------|--------|
+| `RecurPixel.EasyMessages` | 0.1.0-alpha.1 | ⚠️ Alpha |
+| `RecurPixel.EasyMessages.AspNetCore` | - | 🔜 Coming in Beta |
 
 ---
 
@@ -488,6 +494,16 @@ MIT License - see [LICENSE](LICENSE) for details.
 Built with ❤️ by [RecurPixel](https://github.com/RecurPixel)
 
 Inspired by real-world pain points in building consistent APIs.
+
+---
+
+## ⚠️ Known Limitations (Alpha)
+
+- Limited to 100+ essential messages (more in beta)
+- Limited Built in formaters "Console, Json, Log, Plain Text, Xml". No CSV, Slack, Email etc.
+- DI feature for Logging, Configuration commingin in beta
+- AspNetCore package coming in beta
+- Documentation is work-in-progress
 
 ---
 

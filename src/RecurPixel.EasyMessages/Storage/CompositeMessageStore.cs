@@ -20,6 +20,10 @@ public class CompositeMessageStore : IMessageStore
         _stores = stores.ToList();
     }
 
+    /// <summary>
+    /// Loads messages from all stores, merging them with priority
+    /// </summary>
+    /// <returns></returns>
     public async Task<Dictionary<string, MessageTemplate>> LoadAsync()
     {
         var allMessages = new Dictionary<string, MessageTemplate>();

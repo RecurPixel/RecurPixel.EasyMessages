@@ -5,11 +5,25 @@ using RecurPixel.EasyMessages.Configuration;
 
 namespace RecurPixel.EasyMessages.Formatters;
 
+/// <summary>
+/// Formats messages as JSON strings
+/// </summary>
 public class JsonFormatter : MessageFormatterBase
 {
+    /// <summary>
+    /// Formatter options
+    /// </summary>
     private readonly FormatterOptions _options;
+    /// <summary>
+    /// JSON serialization options
+    /// </summary>
     private readonly JsonSerializerOptions _jsonOptions;
 
+    /// <summary>
+    /// Creates a JSON message formatter
+    /// </summary>
+    /// <param name="options">FormatterOptions Object</param>
+    /// <param name="jsonOptions">JsonSerializerOptions Object</param>
     public JsonFormatter(
         FormatterOptions? options = null,
         JsonSerializerOptions? jsonOptions = null
@@ -26,11 +40,21 @@ public class JsonFormatter : MessageFormatterBase
             };
     }
 
+    /// <summary>
+    /// Formats the message as a JSON string.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Formated Message String</returns>
     protected override string FormatCore(Message message)
     {
         return JsonSerializer.Serialize(FormatAsObject(message), _jsonOptions);
     }
 
+    /// <summary>
+    /// Formats the message as an object for JSON serialization.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Formated Message Object</returns>
     public override object FormatAsObject(Message message)
     {
         var result = new Dictionary<string, object?>
@@ -54,9 +78,17 @@ public class JsonFormatter : MessageFormatterBase
             ["title"] = message.Title,
             ["description"] = message.Description,
         };
-
+        
         if (_options.IncludeHint && !string.IsNullOrEmpty(message.Hint))
-            ((Dictionary<string, object?>)result["message"])["hint"] = message.Hint;
+        {
+            var msgValue = result["message"];
+
+            if (msgValue is Dictionary<string, object?> messageDict)
+            {
+                messageDict["hint"] = message.Hint;
+                result["message"] = messageDict;
+            }
+        }
 
         // Data
         if (_options.IncludeData && message.Data != null)

@@ -43,6 +43,11 @@ public static partial class MessageRegistry
         }
     }
 
+    /// <summary>
+    /// Gets the message by code, checking custom messages first, then defaults.
+    /// </summary>
+    /// <param name="code">Message Code</param>
+    /// <returns>Message Object</returns>
     public static Message Get(string code)
     {
         // 1. Check custom first (already merged with defaults)
@@ -59,6 +64,9 @@ public static partial class MessageRegistry
         );
     }
 
+    /// <summary>
+    ///  Gets all available message codes from both custom and default messages.
+    /// </summary>
     public static IEnumerable<string> GetAllCodes()
     {
         var codes = new HashSet<string>(_defaults.Value.Keys);
@@ -67,6 +75,9 @@ public static partial class MessageRegistry
         return codes.OrderBy(c => c);
     }
 
+    /// <summary>
+    /// Loads the default messages from the embedded store synchronously.
+    /// </summary>
     private static Dictionary<string, MessageTemplate> LoadDefaultsSync()
     {
         var store = new EmbeddedMessageStore();

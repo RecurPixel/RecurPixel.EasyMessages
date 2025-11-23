@@ -3,23 +3,51 @@ using RecurPixel.EasyMessages.Helpers;
 
 namespace RecurPixel.EasyMessages;
 
+/// <summary>
+/// Message Extension Methods for adding Data
+/// </summary>
 public static partial class MessageExtensions
 {
+    /// <summary>
+    /// Adds a hint string to the message.
+    /// </summary>
+    /// <param name="message">The message object to attach the hint to.</param>
+    /// <param name="hint">The text of the hint to be added.</param>
+    /// <returns>A new message instance with the updated Hint property.</returns>
     public static Message WithHint(this Message message, string hint)
     {
         return message with { Hint = hint };
     }
 
+    /// <summary>
+    /// Adds a data object to the message.
+    /// </summary>
+    /// <param name="message">The message object to attach the data to.</param>
+    /// <param name="data">The object of the data to be added.</param>
+    /// <returns>A new message instance with the updated data property.</returns>
     public static Message WithData(this Message message, object data)
     {
         return message with { Data = data };
     }
 
+    /// <summary>
+    /// Adds a correlationId string to the message.
+    /// </summary>
+    /// <param name="message">The message object to attach the correlationId to.</param>
+    /// <param name="correlationId">The text of the correlationId to be added.</param>
+    /// <returns>A new message instance with the updated correlationId property.</returns>
     public static Message WithCorrelationId(this Message message, string correlationId)
     {
         return message with { CorrelationId = correlationId };
     }
 
+    /// <summary>
+    /// Adds a Metadata object to the message.
+    /// </summary>
+    /// <param name="message">The message object to attach the Metadata to.</param>
+    /// <param name="key">The metadata key.</param>
+    /// <param name="value">The metadata value.</param>
+    /// <returns>A new message instance with the updated metadata object.</returns>
     public static Message WithMetadata(this Message message, string key, object value)
     {
         var metadata = new Dictionary<string, object>(message.Metadata ?? new());
@@ -27,11 +55,23 @@ public static partial class MessageExtensions
         return message with { Metadata = metadata };
     }
 
+    /// <summary>
+    /// Adds a statusCode to the message.
+    /// </summary>
+    /// <param name="message">The message object to attach the statusCode to.</param>
+    /// <param name="statusCode">The statusCode to be added.</param>
+    /// <returns>A new message instance with the updated statusCode property.</returns>
     public static Message WithStatusCode(this Message message, int statusCode)
     {
         return message with { HttpStatusCode = statusCode };
     }
 
+    /// <summary>
+    /// Adds a parameters to the message and updates Message description with matching field name.
+    /// </summary>
+    /// <param name="message">The message object to attach the parameters to.</param>
+    /// <param name="parameters">The parameters to be added.</param>
+    /// <returns>A new message instance with the updated parameters property.</returns>    
     public static Message WithParams(this Message message, object parameters)
     {
         if (!TypeExtensions.IsAnonymousType(parameters.GetType()))
@@ -64,7 +104,7 @@ public static partial class MessageExtensions
         {
             Title = title,
             Description = description,
-            Parameters = paramDict,
+            Parameters = paramDict
         };
     }
 

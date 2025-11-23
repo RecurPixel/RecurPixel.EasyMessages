@@ -2,11 +2,18 @@ using RecurPixel.EasyMessages;
 
 namespace RecurPixel.EasyMessages.Interceptors;
 
+/// <summary>
+/// Registry for Message Interceptors
+/// </summary>
 public static class InterceptorRegistry
 {
     private static readonly List<IMessageInterceptor> _interceptors = new();
     private static readonly object _lock = new();
 
+    /// <summary>
+    /// Registers a message interceptor.
+    /// </summary>
+    /// <param name="interceptor">IMessageInterceptor Object</param>
     public static void Register(IMessageInterceptor interceptor)
     {
         lock (_lock)
@@ -15,6 +22,9 @@ public static class InterceptorRegistry
         }
     }
 
+    /// <summary>
+    /// Clears all registered interceptors.
+    /// </summary>
     public static void Clear()
     {
         lock (_lock)
@@ -23,6 +33,11 @@ public static class InterceptorRegistry
         }
     }
 
+    /// <summary>
+    /// Invokes the OnBeforeFormat method of all registered interceptors.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Message Object</returns>
     internal static Message InvokeBeforeFormat(Message message)
     {
         var result = message;
@@ -36,6 +51,11 @@ public static class InterceptorRegistry
         return result;
     }
 
+    /// <summary>
+    /// Invokes the OnAfterFormat method of all registered interceptors.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Message Object</returns>
     internal static Message InvokeAfterFormat(Message message)
     {
         var result = message;

@@ -10,6 +10,10 @@ public class EmbeddedMessageStore : IMessageStore
 {
     private const string ResourceName = "RecurPixel.EasyMessages.Messages.defaults.json";
 
+    /// <summary>
+    /// Loads messages from embedded resource asynchronously
+    /// </summary>
+    /// <returns>Returns Task</returns>
     public Task<Dictionary<string, MessageTemplate>> LoadAsync()
     {
         var assembly = typeof(EmbeddedMessageStore).Assembly;

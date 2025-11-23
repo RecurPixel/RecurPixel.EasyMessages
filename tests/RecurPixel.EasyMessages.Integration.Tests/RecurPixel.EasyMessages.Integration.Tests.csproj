@@ -23,5 +23,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\RecurPixel.EasyMessages.AspNetCore\RecurPixel.EasyMessages.AspNetCore.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\samples\WebApiSample\WebApiSample.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.22" />
+  </ItemGroup>
 
 </Project>

@@ -2,12 +2,29 @@ using RecurPixel.EasyMessages.Exceptions;
 
 namespace RecurPixel.EasyMessages.Formatters;
 
+/// <summary>
+/// Registry for message formatters
+/// </summary>
 public static class FormatterRegistry
 {
+    /// <summary>
+    /// Factories for creating formatter instances
+    /// </summary>
     private static readonly Dictionary<string, Func<IMessageFormatter>> _factories = new();
+
+    /// <summary>
+    /// Singleton instances of formatters
+    /// </summary>
     private static readonly Dictionary<string, IMessageFormatter> _instances = new();
+
+    /// <summary>
+    /// Lock object for thread safety
+    /// </summary>
     private static readonly object _lock = new();
 
+    /// <summary>
+    /// Static constructor to register built-in formatters
+    /// </summary>
     static FormatterRegistry()
     {
         // Register built-in formatters

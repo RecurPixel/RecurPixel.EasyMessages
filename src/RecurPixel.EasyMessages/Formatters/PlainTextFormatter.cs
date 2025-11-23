@@ -9,11 +9,20 @@ public class PlainTextFormatter : MessageFormatterBase
 {
     private readonly FormatterOptions _options;
 
+    /// <summary>
+    /// Creates a plain text message formatter
+    /// </summary>
+    /// <param name="options">FormatterOptions Object</param>
     public PlainTextFormatter(FormatterOptions? options = null)
     {
         _options = options ?? FormatterConfiguration.DefaultOptions;
     }
 
+    /// <summary>
+    /// Formats the message as a plain text string.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Formated Message String</returns>
     protected override string FormatCore(Message message)
     {
         var lines = new List<string>
@@ -46,5 +55,10 @@ public class PlainTextFormatter : MessageFormatterBase
         return string.Join(Environment.NewLine, lines);
     }
 
+    /// <summary>
+    /// Formats the message as an object.
+    /// </summary>
+    /// <param name="message">Message Object</param>
+    /// <returns>Formated Object</returns>
     public override object FormatAsObject(Message message) => Format(message);
 }

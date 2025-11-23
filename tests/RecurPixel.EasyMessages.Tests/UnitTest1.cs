@@ -6,6 +6,11 @@ namespace RecurPixel.EasyMessages.Tests;
 
 public class UnitTest1
 {
+    public UnitTest1()
+    {
+        
+    }
+    
     [Fact]
     public void Test1()
     {
@@ -18,7 +23,7 @@ public class UnitTest1
     public void Test2()
     {
         var authFailed = Msg.Auth.LoginFailed();
-        Assert.Equal("hello", authFailed.Code);
+        Assert.Equal("AUTH_001", authFailed.Code);
 
     }
 
@@ -26,7 +31,7 @@ public class UnitTest1
     public void Test3()
     {
         var authFailed = Msg.Auth.LoginFailed();
-        Assert.Equal("hello", authFailed.Title);
+        Assert.Equal("Authentication Failed", authFailed.Title);
 
     }
 
@@ -34,7 +39,7 @@ public class UnitTest1
     public void Test4()
     {
         var authFailed = Msg.Auth.LoginFailed();
-        Assert.Equal("hello", authFailed.Description);
+        Assert.Equal("Invalid username or password.", authFailed.Description);
 
     }
 
@@ -42,7 +47,7 @@ public class UnitTest1
     public void Test5()
     {
         var authFailed = Msg.Auth.LoginFailed();
-        Assert.Equal(2000, authFailed.HttpStatusCode);
+        Assert.Equal(401, authFailed.HttpStatusCode);
 
     }
 }

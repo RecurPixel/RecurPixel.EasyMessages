@@ -4,22 +4,42 @@ using RecurPixel.EasyMessages.Exceptions;
 
 namespace RecurPixel.EasyMessages.Core;
 
+/// <summary>
+/// Represents a catalog of message templates loaded from JSON.
+/// </summary>
 public class MessageCatalog
 {
+    /// <summary>
+    /// Gets or sets the JSON Schema URL.
+    /// </summary>
     [JsonPropertyName("$schema")]
     public string? Schema { get; set; }
 
+    /// <summary>
+    /// Gets or sets the version of the message catalog.
+    /// </summary>
     [JsonPropertyName("version")]
     public string? Version { get; set; }
 
+    /// <summary>
+    /// Gets or sets the raw messages dictionary from JSON.
+    /// </summary>
     [JsonPropertyName("messages")]
     public Dictionary<string, JsonElement> RawMessages { get; set; } = new();
 
+    /// <summary>
+    /// Gets the processed messages dictionary.
+    /// </summary>
     internal Dictionary<string, MessageTemplate> Messages
     {
         get => ConvertRawMessages(this.RawMessages);
     }
 
+    /// <summary>
+    /// Load MessageCatalog from JSON string
+    /// </summary>
+    /// <param name="json"></param>
+    /// <returns>MessageCatalog instance</returns>
     public static MessageCatalog FromJson(string json)
     {
         if (string.IsNullOrWhiteSpace(json))
@@ -114,6 +134,11 @@ public class MessageCatalog
         }
     }
 
+    /// <summary>
+    /// Convert raw JSON elements to MessageTemplate instances
+    /// </summary>
+    /// <param name="rawData">Raw Json Data Object.</param>
+    /// <returns>Messages of type</returns>
     private Dictionary<string, MessageTemplate> ConvertRawMessages(
         Dictionary<string, JsonElement> rawData
     )
