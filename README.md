@@ -2,7 +2,7 @@
 
 ⚠️ **ALPHA RELEASE - v0.1.0-alpha.1**  
 This is an early preview. APIs may change. Not recommended for production use.  
-[Report Issues](https://github.com/RecurPixel/EasyMessages/issues) | [Give Feedback](https://github.com/RecurPixel/EasyMessages/discussions)
+[Report Issues](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues) | [Give Feedback](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
 
 ---
 
@@ -653,7 +653,7 @@ public class UsersController : ControllerBase
 }
 ```
 
-**Want ASP.NET Core support?** [Star the repo](https://github.com/RecurPixel/EasyMessages) and watch for beta release announcement!
+**Want ASP.NET Core support?** [Star the repo](https://github.com/RecurPixel/RecurPixel.EasyMessages) and watch for beta release announcement!
 
 ---
 
@@ -726,12 +726,12 @@ This is an early preview. Here's what's not included yet:
    - Different output formats
 
 3. **Report Issues**
-   - [Open an issue](https://github.com/RecurPixel/EasyMessages/issues)
+   - [Open an issue](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues)
    - Include code examples
    - Share your use case
 
 4. **Suggest Features**
-   - [Start a discussion](https://github.com/RecurPixel/EasyMessages/discussions)
+   - [Start a discussion](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
    - What messages do you need?
    - What features would help?
 
@@ -810,9 +810,9 @@ Special thanks to:
 
 ## 📞 Support
 
-- **Issues:** [GitHub Issues](https://github.com/RecurPixel/EasyMessages/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/RecurPixel/EasyMessages/discussions)
-- **Documentation:** [Wiki](https://github.com/RecurPixel/EasyMessages/wiki) (Coming Soon)
+- **Issues:** [GitHub Issues](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
+- **Documentation:** [Wiki](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki) (Coming Soon)
 
 ---
 
