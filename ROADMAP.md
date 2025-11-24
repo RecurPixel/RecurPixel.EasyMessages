@@ -1,6 +1,6 @@
 ## Roadmap
 
-### Phase 1: Alpha (Current - v0.1.0-alpha.1)
+### Phase 1: Alpha (Current - v0.1.0-alpha.x)
 **Goal:** Validate core design with early adopters
 
 **Supported Versions:** .NET 8, 9, 10

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RecurPixel.EasyMessages" Version="0.1.0-alpha.1" />
+    <PackageReference Include="RecurPixel.EasyMessages" Version="0.1.0-alpha.*" />
   </ItemGroup>
 
 </Project>

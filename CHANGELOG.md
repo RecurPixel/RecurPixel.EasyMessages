@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.1.0-alpha.1] - 2025-11-24
+## [0.1.0-alpha.x] - 2025-11-24
 
 ### 🎉 First Alpha Release
 
@@ -35,15 +35,6 @@ This is the first public preview of EasyMessages!
 
 ---
 
-## [0.1.0-alpha.2] - 2025-11-24
-
-### Documentations Sync
-
-- sync readme and other docs
-- Added proper links
-
----
-
 ## [Unreleased]
 
 ### Planned for Beta (v0.2.0-beta.1)
@@ -55,4 +46,4 @@ This is the first public preview of EasyMessages!
 
 ---
 
-[0.1.0-alpha.2]: https://github.com/RecurPixel/RecurPixel.EasyMessages/releases/tag/v0.1.0-alpha.2
+[0.1.0-alpha]: https://github.com/RecurPixel/RecurPixel.EasyMessages/releases/tag/v0.1.0-alpha
