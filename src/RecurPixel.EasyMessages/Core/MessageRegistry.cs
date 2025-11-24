@@ -1,10 +1,14 @@
-using RecurPixel.EasyMessages.Exceptions;
-using RecurPixel.EasyMessages.Storage;
 using System.Collections.Immutable;
 using System.Threading;
+using RecurPixel.EasyMessages.Core;
+using RecurPixel.EasyMessages.Exceptions;
+using RecurPixel.EasyMessages.Storage;
 
-namespace RecurPixel.EasyMessages.Core;
+namespace RecurPixel.EasyMessages;
 
+/// <summary>
+/// (Message Stores)Registry for managing message templates and retrieval
+/// </summary>
 public static partial class MessageRegistry
 {
     private static readonly Lazy<Dictionary<string, MessageTemplate>> _defaults = new(() =>

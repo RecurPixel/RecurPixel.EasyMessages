@@ -1,4 +1,6 @@
 ﻿using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.Configuration;
+using RecurPixel.EasyMessages.Formatters;
 using RecurPixel.EasyMessages.Interceptors;
 
 public class TimestampInterceptor : IMessageInterceptor
@@ -8,7 +10,7 @@ public class TimestampInterceptor : IMessageInterceptor
         Console.WriteLine($"[{DateTime.UtcNow:HH:mm:ss}] Formatting message {message.Code}");
         return message;
     }
-    
+
     public Message OnAfterFormat(Message message) => message with { HttpStatusCode = 999 };
 }
 
@@ -16,43 +18,24 @@ public class Class1
 {
     public static void Main()
     {
-
         // Register
         InterceptorRegistry.Register(new TimestampInterceptor());
 
-        object data = new { Name = "Alpha 1", Version = "1.1" };
+        // Configure default formatter options
+        FormatterConfiguration.SetDefaultOptions(
+            new FormatterOptions { IncludeTimestamp = true, IncludeHttpStatusCode = true }
+        );
 
-        var username = new { USERname = "abc@gmail.com"};
+        MessageRegistry.LoadCustomMessages("custom.json");
 
-        var testrequired = Msg.Validation.InvalidFormat("TestR");
+        Msg.Auth.LoginFailed().ToConsole();
 
-        testrequired = testrequired
-            .WithCorrelationId("abc-xyz-11px-123-oo-00")
-            .WithMetadata("Hero", "Lost")
-            .WithStatusCode(419)
-            .WithHint("Please provide a valid format.");
+        Msg.Custom("CUSTOM_ROOT_001").ToConsole();
 
-        testrequired.ToConsole();
-        Console.WriteLine("\n");
+        var msg = Msg.Crud.Created("Order").ToJson(FormatterConfiguration.Verbose);
+        Console.WriteLine(msg);
 
-        var json = testrequired.ToJson();
-
-        Console.WriteLine(json);
-
-        var jsonO = testrequired.ToJsonObject();
-
-        Console.WriteLine(jsonO);
-
-        var plainText = testrequired.ToPlainText();
-
-        Console.WriteLine(plainText);
-
-        var xml = testrequired.ToXml();
-
-        Console.WriteLine(xml);
-
-        var xmld = testrequired.ToXmlDocument();
-
-        Console.WriteLine(xmld);
+        var msg2 = Msg.Validation.InvalidEmail().ToXml(FormatterConfiguration.Minimal);
+        Console.WriteLine(msg2);
     }
 }

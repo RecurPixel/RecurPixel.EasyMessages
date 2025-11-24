@@ -1,0 +1,20 @@
+{
+  "$schema": "https://example.com/schemas/easymessages.json",
+  "version": "1.0",
+  "messages": {
+    "AUTH_001": {
+      "type": "Error",
+      "title": "Authentication Failed (root custom)",
+      "description": "Custom root: Invalid username or password.",
+      "httpStatusCode": 401,
+      "hint": "Check credentials and try again"
+    },
+
+    "CUSTOM_ROOT_001": {
+      "type": "Info",
+      "title": "Root Custom Notice",
+      "description": "Demonstration of a root-level custom.json.",
+      "httpStatusCode": 200
+    }
+  }
+}

@@ -1,6 +1,7 @@
+using RecurPixel.EasyMessages.Core;
 using RecurPixel.EasyMessages.Storage;
 
-namespace RecurPixel.EasyMessages.Core;
+namespace RecurPixel.EasyMessages;
 
 /// <summary>
 /// Alias methods for MessageRegistry for backward compatibility
