@@ -1,6 +1,6 @@
 # EasyMessages
 
-⚠️ **ALPHA RELEASE - v0.1.0-alpha.1**  
+⚠️ **ALPHA RELEASE - v0.1.0-alpha.2**  
 This is an early preview. APIs may change. Not recommended for production use.  
 [Report Issues](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues) | [Give Feedback](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
 
@@ -46,7 +46,7 @@ Msg.Crud.NotFound("User").ToJson();
 ### Installation
 
 ```bash
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.1
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.2
 ```
 
 **Note:** If you're on .NET 5, 6, or 7, please wait for Beta release (2 weeks) or upgrade to .NET 8+.
@@ -714,7 +714,7 @@ This is an early preview. Here's what's not included yet:
 
 1. **Try It Out**
    ```bash
-   dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.1
+   dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.2
    ```
 
 2. **Test These Scenarios**
@@ -826,7 +826,7 @@ If you find EasyMessages useful, please:
 
 ```bash
 # Get started now!
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.1
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.2
 ```
 
 ---
