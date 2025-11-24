@@ -36,7 +36,7 @@ public class ConsoleFormatter : MessageFormatterBase
         var icon = GetIcon(message.Type);
         var timestamp = _showTimestamp ? $"[{message.Timestamp:HH:mm:ss}] " : "";
 
-        return $"{icon} {message.Title}\n  {message.Description}\n  {timestamp}[{message.Code}]";
+        return $"{icon} {message.Title}\n  {message.Description}\n  {timestamp}[{message.Code}]\n {message.ToJson()}";
     }
 
     /// <summary>

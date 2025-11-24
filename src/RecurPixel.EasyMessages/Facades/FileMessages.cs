@@ -25,6 +25,20 @@ public static partial class Msg
             return allowedTypes != null ? message.WithParams(new { allowedTypes }) : message;
         }
 
+        /// <summary>Returns FILE_002: Only {allowedTypes} files are allowed.</summary>
+        public static Message InvalidType(params string[] allowedTypes)
+        {
+            if (allowedTypes != null)
+            {
+                var allowedTypesStr = string.Join(", ", allowedTypes);
+                return InvalidType(allowedTypesStr);
+            }
+            else
+            {
+                return InvalidType((string?)null);
+            }
+        }
+
         /// <summary>Returns FILE_003: Maximum file size is {maxSize}.</summary>
         public static Message TooLarge(string? maxSize)
         {
@@ -82,7 +96,8 @@ public static partial class Msg
         }
 
         /// <summary>Returns FILE_010: You have exceeded your storage quota.</summary>
-        public static Message QuotaExceeded() => MessageRegistry.Get(MessageCodes.File.StorageQuotaExceeded);
+        public static Message QuotaExceeded() =>
+            MessageRegistry.Get(MessageCodes.File.StorageQuotaExceeded);
 
         /// <summary>Returns FILE_011: A file named '{fileName}' already exists.</summary>
         public static Message AlreadyExists(string? fileName)

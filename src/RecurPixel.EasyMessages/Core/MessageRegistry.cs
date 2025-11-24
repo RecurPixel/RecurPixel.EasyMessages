@@ -83,4 +83,15 @@ public static partial class MessageRegistry
         var store = new EmbeddedMessageStore();
         return store.LoadAsync().GetAwaiter().GetResult();
     }
+
+    /// <summary>
+    /// Reset Custom Messages (for testing purposes)
+    /// </summary>
+    public static void Reset()
+    {
+        lock (_lock)
+        {
+            _custom = null;
+        }
+    }
 }

@@ -109,7 +109,9 @@ public class JsonFormatter : MessageFormatterBase
             if (message.Metadata?.Count > 0)
             {
                 foreach (var (key, value) in message.Metadata)
+                {
                     metadata[key] = value;
+                }
             }
 
             if (metadata.Count > 0)

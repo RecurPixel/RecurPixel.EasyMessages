@@ -1,17 +1,17 @@
 # EasyMessages
 
-> **Tired of writing the same error messages over and over?**  
-> EasyMessages gives you 200+ pre-built, standardized messages with a fluent API that just works.
-
-[![NuGet](https://img.shields.io/nuget/v/RecurPixel.EasyMessages.svg)](https://www.nuget.org/packages/RecurPixel.EasyMessages/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![.NET](https://img.shields.io/badge/.NET-6%2C%207%2C%208%2C%209%2C%2010-purple)](https://dotnet.microsoft.com/)
-[![NuGet](https://img.shields.io/nuget/v/RecurPixel.EasyMessages?label=alpha)](https://www.nuget.org/packages/RecurPixel.EasyMessages)
-
 ⚠️ **ALPHA RELEASE - v0.1.0-alpha.1**  
 This is an early preview. APIs may change. Not recommended for production use.  
 [Report Issues](https://github.com/RecurPixel/EasyMessages/issues) | [Give Feedback](https://github.com/RecurPixel/EasyMessages/discussions)
 
+---
+
+> **Tired of writing the same error messages over and over?**  
+> EasyMessages gives you 100+ pre-built, standardized messages with a fluent API that just works.
+
+[![NuGet](https://img.shields.io/badge/alpha-0.1.0--alpha.1-orange)](https://www.nuget.org/packages/RecurPixel.EasyMessages)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![.NET](https://img.shields.io/badge/.NET-8%20%7C%209%20%7C%2010-purple)](https://dotnet.microsoft.com/)
 
 ---
 
@@ -30,273 +30,513 @@ return NotFound("User not found");
 ### The Solution
 ```csharp
 // ✅ After: Standardized, fluent, discoverable
-return Msg.Auth.LoginFailed().ToApiResponse();
-return Msg.Auth.Unauthorized().ToApiResponse();
-return Msg.Crud.NotFound("User").ToApiResponse();
+Msg.Auth.LoginFailed().ToJson();
+Msg.Auth.Unauthorized().ToConsole();
+Msg.Crud.NotFound("User").ToJson();
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Alpha)
+
+### Requirements
+- .NET 8, 9, or 10
+- Broader version support (6, 7, Standard 2.1) coming in Beta
 
 ### Installation
 
 ```bash
-# Core library
-dotnet add package RecurPixel.EasyMessages
-
-# ASP.NET Core integration
-dotnet add package RecurPixel.EasyMessages.AspNetCore
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.1
 ```
 
-### Basic Usage
+**Note:** If you're on .NET 5, 6, or 7, please wait for Beta release (2 weeks) or upgrade to .NET 8+.
+
+### Your First Message (5 seconds)
 
 ```csharp
-using EasyMessages;
+using RecurPixel.EasyMessages;
 
-// Use built-in messages
-var message = Msg.Auth.LoginFailed();
+// Console app - works immediately!
+Msg.Auth.LoginFailed().ToConsole(useColors: true);
 
-// Add context and output
-return Msg.Crud.Created("User")
-    .WithData(newUser)
-    .ToApiResponse();
+// Output to JSON
+var json = Msg.Crud.Created("User").ToJson();
+Console.WriteLine(json);
+```
 
-// Validation with parameters
-return Msg.Validation.RequiredField("Email")
-    .ToApiResponse();
+**Output:**
+```
+✗ Authentication Failed
+  Invalid username or password.
+  [2024-01-15 14:30:00] [AUTH_001]
 
-// Console output with colors
-Msg.System.Error()
-    .WithData(exception)
-    .ToConsole();
+{
+  "success": true,
+  "code": "CRUD_001",
+  "type": "success",
+  "title": "Created Successfully",
+  "description": "User has been created.",
+  "timestamp": "2024-01-15T14:30:00Z"
+}
 ```
 
 ---
 
 ## 🎯 Why EasyMessages?
 
-### For You
-- **Zero Configuration** – Works out of the box
-- **IntelliSense-Friendly** – Discover messages as you type
-- **Type-Safe** – No magic strings
-- **Fluent API** – Chainable, readable code
-- **200+ Built-in Messages** – Cover 90% of scenarios
+### Zero Configuration
+```csharp
+// Works immediately - no setup needed
+Msg.System.Error().ToConsole();
+```
 
-### For Your Team
-- **Consistency** – Everyone uses the same messages
-- **Localization-Ready** – Built for i18n from day one
-- **Customizable** – Override any message
-- **Testable** – Mock-friendly design
-- **Production-Ready** – Thread-safe, performant
+### IntelliSense-Friendly
+```csharp
+// Discover messages as you type
+Msg.Auth.         // LoginFailed(), Unauthorized(), LoginSuccess()
+Msg.Crud.         // Created(), Updated(), Deleted(), NotFound()
+Msg.Validation.   // Failed(), RequiredField(), InvalidFormat()
+```
 
-### For Your Users
-- **Clear Error Messages** – Users understand what went wrong
-- **Standardized Responses** – Predictable API contracts
-- **Better UX** – Consistent language across your app
+### Type-Safe
+```csharp
+// No magic strings - compile-time safety
+Msg.Auth.LoginFailed();  // ✅ Compiler validated
+```
 
 ---
 
-## 📚 Message Categories
+## 📚 Message Categories (Alpha)
 
-EasyMessages organizes messages into logical categories:
+| Category | Prefix | Count | Examples |
+|----------|--------|-------|----------|
+| **Authentication** | `AUTH_*` | 10 | Login failed, Unauthorized, Token expired |
+| **CRUD Operations** | `CRUD_*` | 15 | Created, Updated, Deleted, Not found |
+| **Validation** | `VAL_*` | 12 | Required field, Invalid format, Out of range |
+| **System** | `SYS_*` | 8 | Error, Processing, Maintenance |
+| **Database** | `DB_*` | 5 | Connection failed, Query timeout |
+| **Files** | `FILE_*` | 10 | Uploaded, Invalid type, Size exceeded |
+| **Network** | `NET_*` | 8 | Timeout, Service unavailable |
+| **Custom** | `*` | ∞ | Your own messages |
 
-| Category | Prefix | Examples |
-|----------|--------|----------|
-| **Authentication** | `AUTH_*` | Login failed, Unauthorized, Session expired |
-| **CRUD Operations** | `CRUD_*` | Created, Updated, Deleted, Not found |
-| **Validation** | `VAL_*` | Required field, Invalid format, Out of range |
-| **System** | `SYS_*` | Error, Processing, Maintenance mode |
-| **Database** | `DB_*` | Connection failed, Query timeout |
-| **Files** | `FILE_*` | Uploaded, Invalid type, Size exceeded |
-| **Network** | `NET_*` | Request timeout, Service unavailable |
-| **Custom** | `*` | Your own business-specific messages |
+**Total: 100+ built-in messages in alpha**
 
 ---
 
 ## 💡 Core Features
 
-### 1. Fluent API Design
+### 1. Simple Console Output
 
 ```csharp
-// Chain methods naturally
-Msg.Auth.LoginFailed()
-    .WithData(new { attempts = 3 })
-    .WithCorrelationId(HttpContext.TraceIdentifier)
-    .Log(_logger)
-    .ToApiResponse();
+using RecurPixel.EasyMessages;
+
+class Program
+{
+    static void Main()
+    {
+        // Colored console output
+        Msg.Auth.LoginFailed().ToConsole(useColors: true);
+        
+        // Success messages
+        Msg.Crud.Created("User").ToConsole();
+        
+        // Error messages
+        Msg.System.Error().ToConsole();
+    }
+}
 ```
 
-### 2. Parameter Substitution
+### 2. JSON Output
 
 ```csharp
-// Messages support placeholders
-Msg.Validation.RequiredField("Email")
-// Result: "Email is required."
+// Basic JSON
+var json = Msg.Auth.LoginFailed().ToJson();
 
-Msg.File.InvalidType("PDF", "DOCX", "TXT")
-// Result: "Only PDF, DOCX, TXT files are allowed."
+// With data
+var json = Msg.Crud.Created("User")
+    .WithData(new { Id = 123, Name = "John" })
+    .ToJson();
+
+// Custom JSON options
+var json = Msg.Auth.LoginFailed().ToJson(
+    jsonOptions: new JsonSerializerOptions 
+    { 
+        WriteIndented = true 
+    });
 ```
 
 ### 3. Multiple Output Formats
 
 ```csharp
-// API Response (ASP.NET Core)
-return message.ToApiResponse();
+// JSON
+var json = message.ToJson();
 
-// Minimal API
-return message.ToMinimalApiResult();
+// XML
+var xml = message.ToXml();
+
+// Plain text
+var text = message.ToPlainText();
 
 // Console (with colors)
 message.ToConsole();
-
-// Raw JSON
-var json = message.ToJson();
 ```
 
-### 4. Custom Messages
-
-```json
-// custom-messages.json
-{
-  "PAYMENT_001": {
-    "type": "Success",
-    "title": "Payment Processed",
-    "description": "Your payment of {amount} was successful.",
-    "httpStatusCode": 200
-  }
-}
-```
+### 4. Parameter Substitution
 
 ```csharp
-// Use your custom message
-Msg.Custom("PAYMENT_001")
-    .WithParams(new { amount = "$50.00" })
-    .ToApiResponse();
+// Simple substitution
+Msg.Crud.Created("User");
+// Result: "User has been created."
+
+Msg.Validation.RequiredField("Email");
+// Result: "Email is required."
+
+Msg.File.InvalidType("PDF", "DOCX");
+// Result: "Only PDF, DOCX files are allowed."
+
+// Multiple parameters
+Msg.Custom("WELCOME_001")
+    .WithParams(new { name = "John", role = "Admin" });
+// Template: "Welcome {name}, your role is {role}."
+// Result: "Welcome John, your role is Admin."
 ```
 
-### 5. Smart HTTP Status Codes
+### 5. Rich Context with Metadata
 
 ```csharp
-// Automatically maps to correct status codes
-Msg.Auth.Unauthorized()     // 403 Forbidden
-Msg.Crud.NotFound("User")   // 404 Not Found
-Msg.Validation.Failed()     // 422 Unprocessable Entity
-Msg.System.Error()          // 500 Internal Server Error
+// Add contextual data
+Msg.Auth.LoginFailed()
+    .WithData(new { UserId = 123 })
+    .WithMetadata("attempt", 3)
+    .WithMetadata("ipAddress", "192.168.1.1")
+    .WithCorrelationId(Guid.NewGuid().ToString())
+    .ToJson();
+```
+
+### 6. Smart HTTP Status Codes
+
+```csharp
+// Automatically mapped status codes
+Msg.Auth.Unauthorized();     // 403
+Msg.Crud.NotFound("User");   // 404
+Msg.Validation.Failed();     // 422
+Msg.System.Error();          // 500
 
 // Override when needed
 Msg.Auth.LoginFailed()
-    .WithStatusCode(429) // Too Many Requests
-    .ToApiResponse();
+    .WithStatusCode(429)  // Too Many Requests
+    .ToJson();
 ```
 
 ---
 
-## 🔧 ASP.NET Core Integration
+## 📖 Examples
 
-### Setup (Optional)
-
-```csharp
-// Program.cs
-builder.Services.AddEasyMessages(options =>
-{
-    // Load custom messages
-    options.CustomMessagesPath = "messages/custom.json";
-    
-    // Configure behavior
-    options.AutoLog = true;
-    options.MinimumLogLevel = LogLevel.Warning;
-    options.IncludeTimestamp = true;
-});
-```
-
-### Controller Example
+### Example 1: Console Application
 
 ```csharp
-[ApiController]
-[Route("api/[controller]")]
-public class UsersController : ControllerBase
-{
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateUserDto dto)
-    {
-        if (!ModelState.IsValid)
-            return Msg.Validation.Failed().ToApiResponse();
-
-        var user = await _userService.CreateAsync(dto);
-        
-        return Msg.Crud.Created("User")
-            .WithData(user)
-            .ToApiResponse(); // Returns 201 Created
-    }
-
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        var user = await _userService.GetByIdAsync(id);
-        
-        if (user == null)
-            return Msg.Crud.NotFound("User").ToApiResponse(); // 404
-
-        return Ok(user);
-    }
-
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginDto dto)
-    {
-        var result = await _authService.LoginAsync(dto);
-        
-        if (!result.Success)
-            return Msg.Auth.LoginFailed().ToApiResponse(); // 401
-
-        return Msg.Auth.LoginSuccess()
-            .WithData(new { token = result.Token })
-            .ToApiResponse();
-    }
-}
-```
-
-### Minimal API Example
-
-```csharp
-app.MapPost("/api/users", async (CreateUserDto dto, IUserService service) =>
-{
-    var user = await service.CreateAsync(dto);
-    
-    return Msg.Crud.Created("User")
-        .WithData(user)
-        .ToMinimalApiResult(); // Returns TypedResults
-});
-```
-
----
-
-## 🎨 Console Applications
-
-```csharp
-using EasyMessages;
+using RecurPixel.EasyMessages;
 
 class Program
 {
     static async Task Main(string[] args)
     {
+        Console.WriteLine("Starting file processing...");
+        
         Msg.System.Processing()
             .WithParams(new { task = "File processing" })
-            .ToConsole(); // ℹ Processing: Your request is being processed.
+            .ToConsole();
 
         try
         {
             await ProcessFilesAsync();
             
             Msg.File.Uploaded()
-                .WithData(new { count = 42 })
-                .ToConsole(); // ✓ File Uploaded: File uploaded successfully.
+                .WithData(new { count = 42, size = "2.5 MB" })
+                .ToConsole();
         }
         catch (Exception ex)
         {
             Msg.System.Error()
-                .WithData(ex)
-                .ToConsole(); // ✗ System Error: An unexpected error occurred.
+                .WithMetadata("error", ex.Message)
+                .WithMetadata("stackTrace", ex.StackTrace)
+                .ToConsole();
+        }
+    }
+    
+    static async Task ProcessFilesAsync()
+    {
+        // Your logic here
+        await Task.Delay(1000);
+    }
+}
+```
+
+**Output:**
+```
+ℹ Processing
+  Your request is being processed.
+  [2024-01-15 10:30:00] [SYS_002]
+
+✓ File Uploaded
+  File uploaded successfully.
+  [2024-01-15 10:30:01] [FILE_001]
+```
+
+### Example 2: Data Import Job
+
+```csharp
+using RecurPixel.EasyMessages;
+
+public class DataImportService
+{
+    public async Task ImportUsersAsync(string filePath)
+    {
+        Msg.System.Processing()
+            .WithData(new { File = filePath })
+            .ToConsole(useColors: true);
+        
+        var users = await ReadUsersFromFileAsync(filePath);
+        int successCount = 0;
+        int errorCount = 0;
+        
+        foreach (var user in users)
+        {
+            try
+            {
+                await ImportUserAsync(user);
+                successCount++;
+                
+                Msg.Crud.Created("User")
+                    .WithData(new { user.Email })
+                    .ToConsole(useColors: true);
+            }
+            catch (Exception ex)
+            {
+                errorCount++;
+                
+                Msg.System.Error()
+                    .WithData(new { user.Email, Error = ex.Message })
+                    .ToConsole(useColors: true);
+            }
+        }
+        
+        // Summary
+        Console.WriteLine($"\nImport complete: {successCount} succeeded, {errorCount} failed");
+    }
+}
+```
+
+### Example 3: Custom Messages
+
+```json
+// messages/custom.json
+{
+  "PAYMENT_001": {
+    "type": "Success",
+    "title": "Payment Processed",
+    "description": "Payment of {amount} was successful. Transaction ID: {transactionId}",
+    "httpStatusCode": 200
+  },
+  "PAYMENT_002": {
+    "type": "Error",
+    "title": "Payment Failed",
+    "description": "Unable to process payment of {amount}. Reason: {reason}",
+    "httpStatusCode": 400
+  }
+}
+```
+
+```csharp
+using RecurPixel.EasyMessages;
+
+// Load custom messages
+MessageRegistry.LoadCustomMessages("messages/custom.json");
+
+// Use your custom messages
+Msg.Custom("PAYMENT_001")
+    .WithParams(new { amount = "$50.00", transactionId = "TXN123" })
+    .ToConsole();
+    
+Msg.Custom("PAYMENT_002")
+    .WithParams(new { amount = "$50.00", reason = "Insufficient funds" })
+    .ToConsole();
+```
+
+### Example 4: Format Configuration
+
+```csharp
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.Configuration;
+
+// Configure global formatting options
+FormatterConfiguration.Configure(options =>
+{
+    options.IncludeTimestamp = true;
+    options.IncludeCorrelationId = true;
+    options.IncludeMetadata = true;
+    options.IncludeData = true;
+});
+
+// All messages now use these settings
+var json = Msg.Auth.LoginFailed().ToJson();
+
+// Or use presets
+FormatterConfiguration.SetDefaultOptions(FormatterConfiguration.Minimal);
+FormatterConfiguration.SetDefaultOptions(FormatterConfiguration.Verbose);
+FormatterConfiguration.SetDefaultOptions(FormatterConfiguration.Debug);
+```
+
+### Example 5: Custom Formatter
+
+```csharp
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.Formatters;
+
+// Create custom CSV formatter
+public class CsvFormatter : MessageFormatterBase
+{
+    protected override string FormatCore(Message message)
+    {
+        return $"{message.Code},{message.Type},{message.Title},{message.Description}";
+    }
+    
+    protected override object FormatAsObjectCore(Message message)
+    {
+        return new[] { message.Code, message.Type.ToString(), message.Title, message.Description };
+    }
+}
+
+// Register it
+FormatterRegistry.Register("csv", () => new CsvFormatter());
+
+// Use it
+var csv = Msg.Auth.LoginFailed().ToFormat("csv");
+Console.WriteLine(csv);
+// Output: AUTH_001,Error,Authentication Failed,Invalid username or password.
+```
+
+### Example 6: Custom Interceptor
+
+```csharp
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.Interceptors;
+
+// Create custom interceptor
+public class TimestampInterceptor : IMessageInterceptor
+{
+    public Message OnBeforeFormat(Message message)
+    {
+        Console.WriteLine($"[{DateTime.UtcNow:HH:mm:ss}] Formatting message {message.Code}");
+        return message;
+    }
+    
+    public Message OnAfterFormat(Message message)
+    {
+        Console.WriteLine($"[{DateTime.UtcNow:HH:mm:ss}] Formatted successfully");
+        return message;
+    }
+}
+
+// Register it
+InterceptorRegistry.Register(new TimestampInterceptor());
+
+// All messages now trigger the interceptor
+Msg.Auth.LoginFailed().ToConsole();
+```
+
+### Example 7: Database Store
+
+```csharp
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.Stores;
+
+// Create custom database store
+public class SqlServerMessageStore : DatabaseMessageStore
+{
+    private readonly string _connectionString;
+    
+    public SqlServerMessageStore(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+    
+    public override async Task<Dictionary<string, MessageTemplate>> LoadAsync()
+    {
+        using var connection = new SqlConnection(_connectionString);
+        var messages = await connection.QueryAsync<MessageTemplate>(
+            "SELECT Code, Type, Title, Description, HttpStatusCode FROM Messages");
+        
+        return messages.ToDictionary(m => m.Code, m => m);
+    }
+}
+
+// Use it
+MessageRegistry.UseStore(new SqlServerMessageStore(connectionString));
+
+// Or combine multiple stores (priority: last wins)
+MessageRegistry.UseStores(
+    new EmbeddedMessageStore(),     // Built-in defaults
+    new FileMessageStore("custom.json"),
+    new SqlServerMessageStore(connectionString)
+);
+```
+
+### Example 8: File Processing with Validation
+
+```csharp
+using RecurPixel.EasyMessages;
+
+public class FileProcessor
+{
+    private readonly string[] _allowedTypes = { "pdf", "docx", "txt" };
+    private const long MaxFileSize = 10 * 1024 * 1024; // 10 MB
+    
+    public void ProcessFile(string filePath)
+    {
+        var fileInfo = new FileInfo(filePath);
+        var extension = fileInfo.Extension.TrimStart('.').ToLower();
+        
+        // Validate file type
+        if (!_allowedTypes.Contains(extension))
+        {
+            Msg.File.InvalidType(_allowedTypes)
+                .WithMetadata("actualType", extension)
+                .ToConsole();
+            return;
+        }
+        
+        // Validate file size
+        if (fileInfo.Length > MaxFileSize)
+        {
+            Msg.Custom("FILE_003")  // Assuming you have this message
+                .WithParams(new 
+                { 
+                    maxSize = "10 MB", 
+                    actualSize = $"{fileInfo.Length / 1024 / 1024} MB" 
+                })
+                .ToConsole();
+            return;
+        }
+        
+        // Process file
+        try
+        {
+            // Your processing logic
+            Msg.File.Uploaded()
+                .WithData(new 
+                { 
+                    FileName = fileInfo.Name,
+                    Size = $"{fileInfo.Length / 1024} KB"
+                })
+                .ToConsole();
+        }
+        catch (Exception ex)
+        {
+            Msg.System.Error()
+                .WithMetadata("file", filePath)
+                .WithMetadata("error", ex.Message)
+                .ToConsole();
         }
     }
 }
@@ -304,9 +544,122 @@ class Program
 
 ---
 
+## 🔧 Configuration (Alpha)
+
+### Formatter Configuration
+
+```csharp
+using RecurPixel.EasyMessages.Configuration;
+
+// Global configuration
+FormatterConfiguration.Configure(options =>
+{
+    options.IncludeTimestamp = true;
+    options.IncludeCorrelationId = true;
+    options.IncludeHttpStatusCode = true;
+    options.IncludeMetadata = true;
+    options.IncludeData = true;
+    options.IncludeNullFields = false;
+});
+
+// Or use presets
+FormatterConfiguration.SetDefaultOptions(FormatterConfiguration.Minimal);
+// Minimal: Only code, type, title, description
+
+FormatterConfiguration.SetDefaultOptions(FormatterConfiguration.Verbose);
+// Verbose: Include everything
+
+FormatterConfiguration.SetDefaultOptions(FormatterConfiguration.Debug);
+// Debug: Everything including null fields
+```
+
+### Custom Message Stores
+
+```csharp
+// Load from file
+MessageRegistry.LoadCustomMessages("messages/custom.json");
+
+// Or use store pattern
+MessageRegistry.UseStore(new FileMessageStore("messages/custom.json"));
+
+// Composite stores (priority: last wins)
+MessageRegistry.UseStores(
+    new EmbeddedMessageStore(),
+    new FileMessageStore("custom.json"),
+    new MyDatabaseStore(connectionString)
+);
+```
+
+### Custom Formatters
+
+```csharp
+// Register custom formatter
+FormatterRegistry.Register("csv", () => new CsvFormatter());
+FormatterRegistry.Register("markdown", () => new MarkdownFormatter());
+
+// Check registered formatters
+var formatters = FormatterRegistry.GetRegisteredNames();
+Console.WriteLine(string.Join(", ", formatters));
+// Output: json, xml, text, console, csv, markdown
+```
+
+### Custom Interceptors
+
+```csharp
+// Register interceptors
+InterceptorRegistry.Register(new TimestampInterceptor());
+InterceptorRegistry.Register(new LoggingInterceptor());
+
+// Clear all interceptors
+InterceptorRegistry.Clear();
+```
+
+---
+
+## 📦 ASP.NET Core Integration (Coming in Beta!)
+
+The following features are coming in the next release:
+
+```csharp
+// 🔜 Coming in Beta v0.2.0-beta.1
+
+// Easy API responses
+return Msg.Auth.LoginFailed().ToApiResponse();
+
+// Automatic logging
+return Msg.Crud.Created("User")
+    .Log(_logger)
+    .ToApiResponse();
+
+// DI Configuration
+builder.Services.AddEasyMessages(options =>
+{
+    options.AutoLog = true;
+    options.InterceptorOptions.AutoAddCorrelationId = true;
+});
+
+// Controller integration
+[ApiController]
+public class UsersController : ControllerBase
+{
+    [HttpPost]
+    public IActionResult Create(CreateUserDto dto)
+    {
+        var user = _userService.Create(dto);
+        return Msg.Crud.Created("User")
+            .WithData(user)
+            .ToApiResponse();  // 🔜 Beta feature
+    }
+}
+```
+
+**Want ASP.NET Core support?** [Star the repo](https://github.com/RecurPixel/EasyMessages) and watch for beta release announcement!
+
+---
+
 ## 📖 API Response Format
 
-EasyMessages produces consistent, predictable API responses:
+EasyMessages produces consistent, predictable responses:
 
 ```json
 {
@@ -315,171 +668,126 @@ EasyMessages produces consistent, predictable API responses:
   "type": "success",
   "title": "Created Successfully",
   "description": "User has been created.",
+  "timestamp": "2024-01-15T14:30:00Z",
   "data": {
     "id": 123,
-    "email": "user@example.com"
-  },
-  "timestamp": "2025-11-17T10:30:00Z",
-  "correlationId": "abc-123-def",
-  "metadata": {}
+    "name": "John Doe"
+  }
 }
 ```
 
 ---
 
-## 🔌 Extensibility
+## ⚠️ Known Limitations (Alpha)
 
-### Custom Formatters
+This is an early preview. Here's what's not included yet:
 
-#### With Interceptor Support (Recommended)
-Extend `MessageFormatterBase` to automatically invoke registered interceptors:
-```csharp
-public class CsvFormatter : MessageFormatterBase
-{
-    protected override string FormatCore(Message message)
-    {
-        return $"{message.Code},{message.Title}";
-    }
-    
-    protected override object FormatAsObjectCore(Message message)
-    {
-        return new[] { message.Code, message.Title };
-    }
-}
-```
+- ⚠️ **Limited .NET Version Support**
+  - Supports: .NET 8, 9, 10 only
+  - Coming in Beta: .NET 6, 7
+  - Coming in Stable: .NET Standard 2.1 (covers .NET 5+)
 
-#### Without Interceptor Support (Advanced)
-Implement `IMessageFormatter` directly for full control:
-```csharp
-public class SimpleFormatter : IMessageFormatter
-{
-    public string Format(Message message)
-    {
-        return message.Title;
-    }
-    
-    public object FormatAsObject(Message message)
-    {
-        return Format(message);
-    }
-}
-```
+- ❌ **ASP.NET Core package** - Coming in Beta (v0.2.0-beta.1)
+  - No `.ToApiResponse()` method
+  - No `.Log(ILogger)` integration
+  - No DI configuration (`AddEasyMessages()`)
+  
+- ❌ **Limited messages** - 100+ messages (200+ in beta)
 
-**Note:** Formatters that don't extend `MessageFormatterBase` won't invoke interceptors 
-(logging, correlation ID enrichment, etc.). This is useful for performance-critical scenarios.
-```
+- ❌ **Advanced interceptors** - Basic interceptors only
+  - No correlation ID interceptor (Beta)
+  - No metadata enrichment (Beta)
+  - Manual registration only
 
-### Custom Output Targets
+- ❌ **Documentation** - Work in progress
+  - Wiki coming after beta
+  - More examples coming
 
-```csharp
-public class EmailOutput : IMessageOutput
-{
-    public async Task SendAsync(Message message)
-    {
-        await _emailService.SendAsync(message);
-    }
-}
-
-// Use it
-await message.ToAsync<EmailOutput>();
-```
+- ❌ **Testing** - No(exhaustive) unit tests yet
+  - **This is why we need your help!** Please test and report issues
 
 ---
 
-## 🛠️ Configuration Options
+## 🤝 How You Can Help (Alpha Testing)
 
-```csharp
-builder.Services.AddEasyMessages(options =>
-{
-    // Custom messages
-    options.CustomMessagesPath = "messages/custom.json";
-    
-    // Or load from database
-    options.UseStore<DatabaseMessageStore>();
-    
-    // Localization (future)
-    options.DefaultLocale = "en-US";
-    options.SupportedLocales = new[] { "en-US", "es-ES", "fr-FR" };
-    
-    // Formatting
-    options.IncludeStackTrace = builder.Environment.IsDevelopment();
-    options.IncludeTimestamp = true;
-    options.IncludeCorrelationId = true;
-    
-    // Auto-logging
-    options.AutoLog = true;
-    options.MinimumLogLevel = LogLevel.Warning;
-    
-    // Custom formatters
-    options.RegisterFormatter<SlackFormatter>();
-    
-    // Interceptors (middleware)
-    options.AddInterceptor<UserContextInterceptor>();
-});
-```
+### We Need Your Feedback!
 
----
+1. **Try It Out**
+   ```bash
+   dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.1
+   ```
 
-## 📦 Packages
+2. **Test These Scenarios**
+   - Console applications
+   - Background jobs
+   - Data processing scripts
+   - Custom message files
+   - Custom formatters
+   - Different output formats
 
-| Package | Version | Status |
-|---------|---------|--------|
-| `RecurPixel.EasyMessages` | 0.1.0-alpha.1 | ⚠️ Alpha |
-| `RecurPixel.EasyMessages.AspNetCore` | - | 🔜 Coming in Beta |
+3. **Report Issues**
+   - [Open an issue](https://github.com/RecurPixel/EasyMessages/issues)
+   - Include code examples
+   - Share your use case
 
----
-
-## 🎯 Design Philosophy
-
-### 1. **Zero Configuration**
-Works immediately without setup. Configuration is optional.
-
-### 2. **Fail Fast, Fail Clear**
-Exceptions are descriptive with helpful context.
-
-### 3. **Work WITH Everything**
-Integrates with Serilog, FluentValidation, ProblemDetails, etc.
-
-### 4. **Replace Nothing**
-Complements your existing code—no vendor lock-in.
-
-### 5. **Immutable by Design**
-Thread-safe, predictable behavior.
+4. **Suggest Features**
+   - [Start a discussion](https://github.com/RecurPixel/EasyMessages/discussions)
+   - What messages do you need?
+   - What features would help?
 
 ---
 
 ## 🚦 Roadmap
 
-### Current: v0.1.0 (Beta)
-- ✅ Core message system
-- ✅ 200+ built-in messages
-- ✅ ASP.NET Core integration
-- ✅ Parameter substitution
-- ✅ Custom messages
+### Current: v0.1.0-alpha.1 ✅
+- Core message system
+- 100+ built-in messages
+- JSON, XML, Console, PlainText formatters
+- Parameter substitution
+- Custom messages
+- Formatter configuration
+- Basic interceptors
 
-### Next: v0.2.0
-- 🔜 Localization (i18n)
-- 🔜 Advanced templating
-- 🔜 Async logging
-- 🔜 Performance optimizations
+### Next: v0.2.0-beta.1 (2 weeks)
+- ASP.NET Core package
+- `.ToApiResponse()` extension
+- `.Log(ILogger)` integration
+- DI configuration
+- Correlation ID interceptor
+- Metadata enrichment
+- Expand to 150+ messages
 
-### Future: v1.0.0
-- 🔮 Telemetry integration
-- 🔮 Message versioning
-- 🔮 Community message packs
+### Future: v1.0.0 (6 weeks)
+- Production-ready
+- 200+ messages
+- Full documentation
+- Performance optimization
+- Semantic versioning commitment
 
 ---
 
-## 🤝 Contributing
+## 📊 Packages
 
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+| Package | Version | Status |
+|---------|---------|--------|
+| `RecurPixel.EasyMessages` | 0.1.0-alpha.1 | ⚠️ **Alpha** - Available Now |
+| `RecurPixel.EasyMessages.AspNetCore` | - | 🔜 **Coming in Beta** |
 
-**Ways to contribute:**
-- 🐛 Report bugs
-- 💡 Suggest features
-- 📝 Improve documentation
-- 🌍 Add translations
-- 🎨 Submit message templates
+---
+
+## 🎯 Design Philosophy
+
+### 1. Zero Configuration
+Works immediately without setup. Configuration is optional.
+
+### 2. Fail Fast, Fail Clear
+Exceptions are descriptive with helpful context.
+
+### 3. Immutable by Design
+Thread-safe, predictable behavior.
+
+### 4. Extensible
+Easy to add custom messages, formatters, and interceptors.
 
 ---
 
@@ -493,39 +801,36 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 Built with ❤️ by [RecurPixel](https://github.com/RecurPixel)
 
-Inspired by real-world pain points in building consistent APIs.
-
----
-
-## ⚠️ Known Limitations (Alpha)
-
-- Limited to 100+ essential messages (more in beta)
-- Limited Built in formaters "Console, Json, Log, Plain Text, Xml". No CSV, Slack, Email etc.
-- DI feature for Logging, Configuration commingin in beta
-- AspNetCore package coming in beta
-- Documentation is work-in-progress
+Special thanks to:
+- Early alpha testers
+- The .NET community
+- Everyone who provides feedback
 
 ---
 
 ## 📞 Support
 
-- **Documentation:** [Wiki](https://github.com/RecurPixel/EasyMessages/wiki)
 - **Issues:** [GitHub Issues](https://github.com/RecurPixel/EasyMessages/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/RecurPixel/EasyMessages/discussions)
-- **Email:** support@recurpixel.io
+- **Documentation:** [Wiki](https://github.com/RecurPixel/EasyMessages/wiki) (Coming Soon)
 
 ---
 
 ## ⭐ Show Your Support
 
-If EasyMessages makes your life easier, give it a star! ⭐
+If you find EasyMessages useful, please:
+- ⭐ Star the repository
+- 🐛 Report bugs
+- 💡 Suggest features
+- 📢 Share with others
 
 ```bash
-# Quick start
-dotnet new webapi -n MyApi
-cd MyApi
-dotnet add package RecurPixel.EasyMessages.AspNetCore
-# Start coding!
+# Get started now!
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.1
 ```
 
-**Happy Messaging! 🚀**
+---
+
+**Remember:** This is an alpha release. APIs may change. Use for testing only.
+
+**Your feedback will shape the future of EasyMessages!** 🚀
