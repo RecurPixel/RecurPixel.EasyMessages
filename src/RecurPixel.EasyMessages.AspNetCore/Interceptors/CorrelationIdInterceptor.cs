@@ -6,7 +6,7 @@ using RecurPixel.EasyMessages.Interceptors;
 public class CorrelationIdInterceptor : IMessageInterceptor
 {
     private readonly Func<IHttpContextAccessor> _httpContextAccessorFactory;
-    private IHttpContextAccessor _httpContextAccessor;
+    private IHttpContextAccessor? _httpContextAccessor;
 
     // Constructor accepts factory function
     public CorrelationIdInterceptor(Func<IHttpContextAccessor> httpContextAccessorFactory)
@@ -15,7 +15,7 @@ public class CorrelationIdInterceptor : IMessageInterceptor
     }
 
     // Lazy initialization
-    private IHttpContextAccessor HttpContextAccessor =>
+    private IHttpContextAccessor? HttpContextAccessor =>
         _httpContextAccessor ??= _httpContextAccessorFactory();
 
     public Message OnBeforeFormat(Message message)
@@ -23,7 +23,7 @@ public class CorrelationIdInterceptor : IMessageInterceptor
         // Only add correlation ID if not already set
         if (string.IsNullOrEmpty(message.CorrelationId))
         {
-            var correlationId = HttpContextAccessor.HttpContext?.TraceIdentifier;
+            var correlationId = HttpContextAccessor?.HttpContext?.TraceIdentifier;
             if (!string.IsNullOrEmpty(correlationId))
             {
                 return message with { CorrelationId = correlationId };

@@ -6,6 +6,7 @@ using Xunit;
 
 namespace RecurPixel.EasyMessages.Tests.Unit;
 
+[Collection("MessageRegistry")]
 public class MessageRegistryTests : UnitTestBase
 {
     [Fact]

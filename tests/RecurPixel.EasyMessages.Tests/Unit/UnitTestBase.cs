@@ -5,7 +5,10 @@ namespace RecurPixel.EasyMessages.Tests.Unit;
 
 public class UnitTestBase
 {
-    public UnitTestBase() => MessageRegistry.Reset();
+    // Note: avoid resetting the global MessageRegistry in the constructor because
+    // xUnit constructs test classes in parallel; a constructor-level reset would
+    // race with other tests. Tests should call `Dispose()` explicitly where needed.
+    public UnitTestBase() { }
 
     public void Dispose() => MessageRegistry.Reset();
 }

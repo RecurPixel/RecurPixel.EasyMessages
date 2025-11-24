@@ -6,6 +6,7 @@ using RecurPixel.EasyMessages.Storage;
 
 namespace RecurPixel.EasyMessages.Tests.Unit;
 
+[Collection("MessageRegistry")]
 public class SampleTest : UnitTestBase
 {
     public SampleTest() { }

@@ -1,5 +1,7 @@
 using RecurPixel.EasyMessages.Exceptions;
 using RecurPixel.EasyMessages.Storage;
+using System.Collections.Immutable;
+using System.Threading;
 
 namespace RecurPixel.EasyMessages.Core;
 
@@ -9,8 +11,8 @@ public static partial class MessageRegistry
         LoadDefaultsSync()
     );
 
-    private static Dictionary<string, MessageTemplate>? _custom;
-    private static readonly object _lock = new();
+    // Use an immutable dictionary for thread-safe snapshot semantics
+    private static ImmutableDictionary<string, MessageTemplate>? _custom;
 
     /// <summary>
     /// Configure custom message store(s)
@@ -21,25 +23,26 @@ public static partial class MessageRegistry
         if (store == null)
             throw new ArgumentNullException(nameof(store));
 
-        lock (_lock)
+        try
         {
-            try
-            {
-                // Load from store (can be single or composite)
-                var customMessages = store.LoadAsync().GetAwaiter().GetResult();
+            // Load from store (can be single or composite)
+            var customMessages = store.LoadAsync().GetAwaiter().GetResult();
 
-                // Merge with defaults to complete partial templates
-                _custom = MessageMergeHelper.MergeWithDefaults(_defaults.Value, customMessages);
+            // Merge with defaults to complete partial templates
+            var merged = MessageMergeHelper.MergeWithDefaults(_defaults.Value, customMessages);
 
-                Console.WriteLine($"Successfully configured {_custom.Count} custom message(s)");
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(
-                    $"Failed to configure message store: {ex.Message}",
-                    ex
-                );
-            }
+            // Convert to immutable and swap atomically
+            var immutable = merged.ToImmutableDictionary();
+            Interlocked.Exchange(ref _custom, immutable);
+
+            Console.WriteLine($"Successfully configured {_custom?.Count ?? 0} custom message(s)");
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(
+                $"Failed to configure message store: {ex.Message}",
+                ex
+            );
         }
     }
 
@@ -51,7 +54,8 @@ public static partial class MessageRegistry
     public static Message Get(string code)
     {
         // 1. Check custom first (already merged with defaults)
-        if (_custom?.TryGetValue(code, out var customTemplate) == true)
+        var snapshot = _custom;
+        if (snapshot != null && snapshot.TryGetValue(code, out var customTemplate))
             return customTemplate.ToMessage(code);
 
         // 2. Fallback to defaults
@@ -70,8 +74,9 @@ public static partial class MessageRegistry
     public static IEnumerable<string> GetAllCodes()
     {
         var codes = new HashSet<string>(_defaults.Value.Keys);
-        if (_custom != null)
-            codes.UnionWith(_custom.Keys);
+        var snapshot = _custom;
+        if (snapshot != null)
+            codes.UnionWith(snapshot.Keys);
         return codes.OrderBy(c => c);
     }
 
@@ -89,9 +94,6 @@ public static partial class MessageRegistry
     /// </summary>
     public static void Reset()
     {
-        lock (_lock)
-        {
-            _custom = null;
-        }
+        Interlocked.Exchange(ref _custom, null);
     }
 }

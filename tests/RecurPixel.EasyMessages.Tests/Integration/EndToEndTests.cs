@@ -5,6 +5,7 @@ using Xunit;
 
 namespace RecurPixel.EasyMessages.Tests.Integration;
 
+[Collection("MessageRegistry")]
 public class EndToEndTests : UnitTestBase
 {
     [Fact]

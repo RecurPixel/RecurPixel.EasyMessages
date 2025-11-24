@@ -386,6 +386,10 @@ var xml = new XmlFormatter().Format(message);
 - **✅ Thread-Safe:** Extension methods (return new instances)
 - **⚠️ NOT Thread-Safe:** `MessageRegistry.LoadCustomMessages()` – Call ONCE at startup
 
+Note about tests and real-world behavior:
+
+- **Testing decision:** In production the recommended usage is to call `MessageRegistry.LoadCustomMessages()` once during application startup. To mirror this real-world constraint, the test assembly runs tests sequentially by default (see `tests/RecurPixel.EasyMessages.Tests/AssemblyInfo.cs`) so tests that configure the `MessageRegistry` don't race each other. If you prefer to enable parallel test execution, the registry implementation has been updated to use immutable snapshots for custom messages; you may remove the assembly-level `DisableTestParallelization` attribute and run the tests in parallel, but keep in mind tests that intentionally reload messages can still interact in ways that may not reflect typical runtime usage.
+
 ### Performance
 
 - **Message Retrieval:** < 1ms (cached lookups)

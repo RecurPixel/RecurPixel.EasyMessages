@@ -8,6 +8,7 @@ using Xunit;
 
 namespace RecurPixel.EasyMessages.Tests.Unit;
 
+[Collection("MessageRegistry")]
 public class CustomFileStoreTests : UnitTestBase
 {
     private string? FindMessageFile()
@@ -40,6 +41,7 @@ public class CustomFileStoreTests : UnitTestBase
         var path = FindMessageFile();
         Assert.False(string.IsNullOrEmpty(path), "messages/custom.json not found in repo tree.");
 
+        // Use the FileMessageStore to load messages (original behavior)
         MessageRegistry.Configure(new FileMessageStore(path!));
 
         var custom = MessageRegistry.Get("CUSTOM_001");

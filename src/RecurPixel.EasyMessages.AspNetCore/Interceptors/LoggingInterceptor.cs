@@ -6,14 +6,15 @@ namespace RecurPixel.EasyMessages.AspNetCore.Interceptors;
 public class LoggingInterceptor : IMessageInterceptor
 {
     private readonly Func<ILogger> _loggerFactory;
-    private readonly ILogger _logger;
+    private ILogger? _logger;
 
     public LoggingInterceptor(Func<ILogger> loggerFactory)
     {
         _loggerFactory = loggerFactory;
     }
 
-    private ILogger logger => _logger ?? _loggerFactory();
+    // Lazy initialization
+    private ILogger? Logger => _logger ??= _loggerFactory();
 
     public Message OnBeforeFormat(Message message)
     {
@@ -32,9 +33,9 @@ public class LoggingInterceptor : IMessageInterceptor
             logState["CorrelationId"] = message.CorrelationId;
         }
 
-        using (_logger.BeginScope(logState))
+        using (_logger?.BeginScope(logState))
         {
-            _logger.Log(
+            _logger?.Log(
                 logLevel,
                 "[{Code}] {Title}: {Description}",
                 message.Code,

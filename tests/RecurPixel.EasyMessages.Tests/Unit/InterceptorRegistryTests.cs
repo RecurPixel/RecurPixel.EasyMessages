@@ -39,7 +39,15 @@ public class InterceptorRegistryTests : UnitTestBase
 
         // Assert
         var parsed = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
-        Assert.True(parsed["metadata"].TryGetProperty("intercepted", out _));
+        Assert.NotNull(parsed);
+        Assert.True(
+            parsed.ContainsKey("metadata"),
+            "Metadata property not found in serialized message."
+        );
+
+        var metadata = parsed["metadata"];
+
+        Assert.True(metadata.TryGetProperty("intercepted", out _));
 
         // Cleanup
         InterceptorRegistry.Clear();
