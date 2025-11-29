@@ -36,11 +36,16 @@ Msg.Crud.NotFound("User").ToJson();
 ```
 
 ---
+### Simple Alpha Demo
+
+[![Alpha Demo](https://img.youtube.com/vi/83ABUbKuIJc/0.jpg)](https://youtu.be/83ABUbKuIJc)
+
+---
 
 ## 🚀 Quick Start (Alpha)
 
 ### Requirements
-- .NET 8, 9, or 10
+- .NET 8, 9, or 10https://youtu.be/83ABUbKuIJc
 - Broader version support (6, 7, Standard 2.1) coming in Beta
 
 ### Installation
