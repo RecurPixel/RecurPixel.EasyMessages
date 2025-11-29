@@ -45,7 +45,7 @@ Msg.Crud.NotFound("User").ToJson();
 ## 🚀 Quick Start (Alpha)
 
 ### Requirements
-- .NET 8, 9, or 10https://youtu.be/83ABUbKuIJc
+- .NET 8, 9, or 10
 - Broader version support (6, 7, Standard 2.1) coming in Beta
 
 ### Installation
