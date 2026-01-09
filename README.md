@@ -36,6 +36,11 @@ Msg.Crud.NotFound("User").ToJson();
 ```
 
 ---
+### Simple Alpha Demo
+
+[![Alpha Demo](https://img.youtube.com/vi/83ABUbKuIJc/0.jpg)](https://youtu.be/83ABUbKuIJc)
+
+---
 
 ## 🚀 Quick Start (Alpha)
 
