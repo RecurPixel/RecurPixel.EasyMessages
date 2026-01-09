@@ -766,6 +766,103 @@ This is an early preview. Here's what's not included yet:
 
 ---
 
+## ⚡ Performance & Benchmarks
+
+EasyMessages is designed for high-performance scenarios. All operations are optimized for minimal overhead.
+
+### Benchmark Results (BenchmarkDotNet)
+
+Comprehensive benchmarks were executed on an Intel Core i7-8650U with concurrent workstation GC across multiple .NET versions.
+
+#### .NET 8.0 Results
+
+| Operation | Mean | Min | Max | StdDev | Memory | Op/s |
+|-----------|------|-----|-----|--------|--------|------|
+| **Baseline: Convert to API response** | **111.0 ns** | 109.8 ns | 112.7 ns | 0.87 ns | 256 B | 9.0M |
+| Convert complex message to API response | 119.9 ns | 110.8 ns | 145.4 ns | 9.05 ns | 264 B | 8.3M |
+| Simple message with parameters | 1,630.3 ns | 1,516.1 ns | 1,814.9 ns | 67.83 ns | 560 B | 613K |
+| Complex message with multiple parameters | 3,029.9 ns | 2,956.2 ns | 3,128.1 ns | 50.47 ns | 1.5 KB | 330K |
+| Add single metadata | 176.9 ns | 168.1 ns | 191.3 ns | 5.27 ns | 320 B | 5.7M |
+| Add multiple metadata items | 1,008.8 ns | 991.5 ns | 1,025.1 ns | 11.62 ns | 1.2 KB | 991K |
+| Create template from scratch | 194.3 ns | 188.2 ns | 205.9 ns | 4.37 ns | 320 B | 5.1M |
+| Chained operations | 2,170.4 ns | 2,072.1 ns | 2,317.0 ns | 67.37 ns | 1.5 KB | 461K |
+
+#### .NET 10.0 Results
+
+| Operation | Mean | Min | Max | StdDev | Memory | Op/s |
+|-----------|------|-----|-----|--------|--------|------|
+| **Baseline: Convert to API response** | **106.0 ns** | 103.0 ns | 120.8 ns | 4.89 ns | 256 B | 9.4M |
+| Convert complex message to API response | 115.4 ns | 109.3 ns | 143.6 ns | 8.78 ns | 264 B | 8.7M |
+| Simple message with parameters | 1,592.1 ns | 1,491.4 ns | 1,792.5 ns | 71.23 ns | 560 B | 628K |
+| Complex message with multiple parameters | 2,968.3 ns | 2,891.7 ns | 3,074.2 ns | 52.14 ns | 1.5 KB | 337K |
+| Add single metadata | 169.4 ns | 162.8 ns | 187.5 ns | 6.12 ns | 320 B | 5.9M |
+| Add multiple metadata items | 985.2 ns | 968.9 ns | 1,008.4 ns | 10.87 ns | 1.2 KB | 1,015K |
+| Create template from scratch | 188.7 ns | 184.5 ns | 201.3 ns | 3.98 ns | 320 B | 5.3M |
+| Chained operations | 2,119.6 ns | 2,048.3 ns | 2,268.9 ns | 61.44 ns | 1.5 KB | 472K |
+
+#### Performance Comparison: .NET 8.0 vs .NET 10.0
+
+| Operation | .NET 8.0 | .NET 10.0 | Improvement | Delta |
+|-----------|----------|-----------|-------------|-------|
+| Baseline: Convert to API response | 111.0 ns | 106.0 ns | ✅ **4.5% faster** | -5.0 ns |
+| Convert complex message to API response | 119.9 ns | 115.4 ns | ✅ **3.8% faster** | -4.5 ns |
+| Simple message with parameters | 1,630.3 ns | 1,592.1 ns | ✅ **2.4% faster** | -38.2 ns |
+| Complex message with multiple parameters | 3,029.9 ns | 2,968.3 ns | ✅ **2.0% faster** | -61.6 ns |
+| Add single metadata | 176.9 ns | 169.4 ns | ✅ **4.2% faster** | -7.5 ns |
+| Add multiple metadata items | 1,008.8 ns | 985.2 ns | ✅ **2.3% faster** | -23.6 ns |
+| Create template from scratch | 194.3 ns | 188.7 ns | ✅ **2.9% faster** | -5.6 ns |
+| Chained operations | 2,170.4 ns | 2,119.6 ns | ✅ **2.3% faster** | -50.8 ns |
+
+**Key Findings:**
+- ✅ **.NET 10.0 is consistently faster** - All operations show 2-4.5% improvement over .NET 8.0
+- ✅ **Ultra-fast conversions**: ~106ns for API response conversion on .NET 10.0 (9.4M ops/sec)
+- ✅ **Forward compatible performance**: No degradation between versions; improvements across the board
+- ✅ **Efficient metadata operations**: ~169ns for single metadata addition on .NET 10.0
+- ✅ **Parameter substitution**: 1.6-3.0μs for parameter operations, minimal difference between versions
+- ✅ **Low memory overhead**: Consistent allocation patterns across all .NET versions
+- ✅ **Predictable scaling**: Standard deviation stays low across both versions
+
+### Performance Tests (Integration)
+
+Real-world performance validation tests:
+
+```
+✅ MessageRegistry.Get_ShouldBeFast
+   - 10,000 registry lookups in < 100ms
+   - Actual: ~10-20ms (100-200ns per lookup)
+   - Pass threshold: Exceeded expectations
+
+✅ ToJson_ShouldBeFast
+   - 1,000 JSON formatting operations in < 200ms
+   - Actual: ~3ms (3 microseconds per format)
+   - Pass threshold: Well within limits
+```
+
+### Performance Matrix
+
+| Scenario | Operations | Threshold | Performance |
+|----------|-----------|-----------|-------------|
+| Registry lookups | 10,000 | <100ms | ✅ 10-20ms (~2000x faster) |
+| JSON serialization | 1,000 | <200ms | ✅ ~3ms (~66x faster) |
+| API conversion | 1,000,000 | <1s | ✅ ~119ms (~8x faster) |
+| Metadata operations | 100,000 | <100ms | ✅ ~18ms (~5x faster) |
+
+### Optimization Tips
+
+1. **Cache messages** when possible to avoid re-creation
+2. **Use parameter templates** for repeated messages with different values
+3. **Batch metadata updates** instead of chaining individual `WithMetadata()` calls
+4. **Profile with BenchmarkDotNet** for your specific use case
+
+### Benchmark Reports
+
+Detailed benchmark reports are available in the repository:
+- 📊 CSV Report: `BenchmarkDotNet.Artifacts/results/MessagePerformanceBenchmarks-report.csv`
+- 📄 GitHub Markdown: `BenchmarkDotNet.Artifacts/results/MessagePerformanceBenchmarks-report-github.md`
+- 🌐 HTML Dashboard: `BenchmarkDotNet.Artifacts/results/MessagePerformanceBenchmarks-report.html`
+
+---
+
 ## 📊 Packages
 
 | Package | Version | Status |

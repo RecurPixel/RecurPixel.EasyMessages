@@ -11,7 +11,7 @@ public class InterceptorOptions
     public bool AutoAddCorrelationId { get; set; } = true;
 
     /// <summary>
-    /// Automatically enrich metadata with request information
+    /// /// Automatically enrich metadata with request information
     /// </summary>
     public bool AutoEnrichMetadata { get; set; } = false;
 

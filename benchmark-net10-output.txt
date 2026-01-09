@@ -1,0 +1,2 @@
+Warning NETSDK1174: The abbreviation of -p for --project is deprecated. Please use --project.
+Couldn't find a project to run. Ensure a project exists in C:\DevProjects\DotNet\Projects\RecurPixel.EasyMessages, or pass the path to the project using --project.

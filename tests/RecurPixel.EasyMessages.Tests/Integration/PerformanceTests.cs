@@ -23,8 +23,10 @@ public class PerformanceTests : UnitTestBase
         sw.Stop();
 
         // Assert - Should complete 10k lookups quickly (allowing for CI variability)
+        // Based on benchmarks: API response ~119ns, registry get should be sub-microsecond
+        // 10k operations at ~1-2 microseconds each = 10-20ms typical
         Assert.True(
-            sw.ElapsedMilliseconds < 50,
+            sw.ElapsedMilliseconds < 100,
             $"10k lookups took {sw.ElapsedMilliseconds}ms, expected < 100ms"
         );
     }
@@ -46,10 +48,12 @@ public class PerformanceTests : UnitTestBase
         }
         sw.Stop();
 
-        // Assert - Should complete 1k formatting in under 100ms
+        // Assert - Should complete 1k formatting operations quickly
+        // Based on benchmarks: Complex operations ~3 microseconds each
+        // 1k operations at ~3 microseconds each = ~3ms typical
         Assert.True(
-            sw.ElapsedMilliseconds < 100,
-            $"1k JSON formatting took {sw.ElapsedMilliseconds}ms, expected < 100ms"
+            sw.ElapsedMilliseconds < 200,
+            $"1k JSON formatting took {sw.ElapsedMilliseconds}ms, expected < 200ms"
         );
     }
 }

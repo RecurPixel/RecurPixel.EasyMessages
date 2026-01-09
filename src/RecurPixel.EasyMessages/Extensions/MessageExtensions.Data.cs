@@ -50,7 +50,11 @@ public static partial class MessageExtensions
     /// <returns>A new message instance with the updated metadata object.</returns>
     public static Message WithMetadata(this Message message, string key, object value)
     {
-        var metadata = new Dictionary<string, object>(message.Metadata ?? new());
+        // Optimize: Only create new dictionary if we actually have existing metadata
+        var metadata =
+            message.Metadata?.Count > 0
+                ? new Dictionary<string, object>(message.Metadata)
+                : new Dictionary<string, object>();
         metadata[key] = value;
         return message with { Metadata = metadata };
     }
@@ -71,7 +75,7 @@ public static partial class MessageExtensions
     /// </summary>
     /// <param name="message">The message object to attach the parameters to.</param>
     /// <param name="parameters">The parameters to be added.</param>
-    /// <returns>A new message instance with the updated parameters property.</returns>    
+    /// <returns>A new message instance with the updated parameters property.</returns>
     public static Message WithParams(this Message message, object parameters)
     {
         if (!TypeExtensions.IsAnonymousType(parameters.GetType()))
@@ -79,10 +83,20 @@ public static partial class MessageExtensions
             throw new InvalidMessageParameterFileException("Invalid Parameter Type.");
         }
 
-        var paramDict = parameters
-            .GetType()
-            .GetProperties()
-            .ToDictionary(p => p.Name, p => p.GetValue(parameters));
+        var properties = parameters.GetType().GetProperties();
+        var paramDict = new Dictionary<string, object?>(properties.Length);
+
+        // Pre-allocate for better performance
+        foreach (var prop in properties)
+        {
+            paramDict[prop.Name] = prop.GetValue(parameters);
+        }
+
+        // Only perform string replacements if there are parameters
+        if (paramDict.Count == 0)
+        {
+            return message with { Parameters = paramDict };
+        }
 
         var title = message.Title;
         var description = message.Description;
@@ -90,21 +104,29 @@ public static partial class MessageExtensions
         foreach (var (key, value) in paramDict)
         {
             var placeholder = $"{{{key}}}";
-            var replacement = value?.ToString() ?? "";
+            var replacement = value?.ToString() ?? string.Empty;
 
-            title = title.Replace(placeholder, replacement, StringComparison.OrdinalIgnoreCase);
-            description = description.Replace(
-                placeholder,
-                replacement,
-                StringComparison.OrdinalIgnoreCase
-            );
+            // Optimize: Only replace if placeholder exists
+            if (title.Contains(placeholder, StringComparison.OrdinalIgnoreCase))
+            {
+                title = title.Replace(placeholder, replacement, StringComparison.OrdinalIgnoreCase);
+            }
+
+            if (description.Contains(placeholder, StringComparison.OrdinalIgnoreCase))
+            {
+                description = description.Replace(
+                    placeholder,
+                    replacement,
+                    StringComparison.OrdinalIgnoreCase
+                );
+            }
         }
 
         return message with
         {
             Title = title,
             Description = description,
-            Parameters = paramDict
+            Parameters = paramDict,
         };
     }
 
