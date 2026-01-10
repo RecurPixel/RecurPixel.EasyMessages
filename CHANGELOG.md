@@ -215,10 +215,10 @@ First beta release with comprehensive documentation and stable APIs.
 
 ## Links
 
+- [Documentation](https://recurpixel.github.io/RecurPixel.EasyMessages/)
 - [GitHub Repository](https://github.com/RecurPixel/RecurPixel.EasyMessages)
 - [NuGet Package (Core)](https://www.nuget.org/packages/RecurPixel.EasyMessages)
 - [NuGet Package (AspNetCore)](https://www.nuget.org/packages/RecurPixel.EasyMessages.AspNetCore)
-- [Wiki Documentation](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki)
 - [Issue Tracker](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues)
 - [Discussions](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
 

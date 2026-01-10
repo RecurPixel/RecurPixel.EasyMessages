@@ -18,12 +18,13 @@
       Feature-complete with comprehensive documentation. APIs are stable.
       Supports .NET 8, 9, 10. Ready for testing and feedback.
 
-      Documentation: https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki
-      Feedback: https://github.com/RecurPixel/EasyMessages/issues
+      Documentation: https://recurpixel.github.io/RecurPixel.EasyMessages/
+      Feedback: https://github.com/RecurPixel/RecurPixel.EasyMessages/issues
     </Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/RecurPixel/RecurPixel.EasyMessages</PackageProjectUrl>
+    <PackageProjectUrl>https://recurpixel.github.io/RecurPixel.EasyMessages/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/RecurPixel/RecurPixel.EasyMessages</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/RecurPixel/RecurPixel.EasyMessages/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>messages;localization;api;error-handling;errors;logging;beta;netstandard;net8;net9;net10;console;messaging</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

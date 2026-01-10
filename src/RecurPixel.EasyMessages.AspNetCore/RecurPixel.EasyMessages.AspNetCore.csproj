@@ -40,12 +40,13 @@
       Feature-complete with comprehensive documentation. APIs are stable.
       Includes .ToApiResponse(), IOptions configuration, logging integration.
 
-      Documentation: https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/ASP-NET-Core/Overview
-      Feedback: https://github.com/RecurPixel/EasyMessages/issues
+      Documentation: https://recurpixel.github.io/RecurPixel.EasyMessages/latest/ASP-NET-Core/Overview
+      Feedback: https://github.com/RecurPixel/RecurPixel.EasyMessages/issues
     </Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/RecurPixel/RecurPixel.EasyMessages</PackageProjectUrl>
+    <PackageProjectUrl>https://recurpixel.github.io/RecurPixel.EasyMessages/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/RecurPixel/RecurPixel.EasyMessages</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/RecurPixel/RecurPixel.EasyMessages/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>aspnetcore;webapi;messages;api;rest;error-handling;logging;beta;net8;net9;net10;minimal-api</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
