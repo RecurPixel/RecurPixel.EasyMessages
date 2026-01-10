@@ -17,12 +17,11 @@ EasyMessages provides **100+ pre-built, standardized messages** for common scena
 ## Installation
 
 ```bash
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-beta.*
 ```
 
 **Requirements:**
-- .NET 8.0+
-- Support for .NET 6, 7, and .NET Standard 2.1 coming in Beta
+- .NET 8.0, 9.0, 10.0
 
 ---
 
@@ -274,21 +273,21 @@ public class FileProcessor
 
 ## Documentation
 
-📚 **[Complete Documentation Wiki](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki)**
+📚 **[Complete Documentation](https://recurpixel.github.io/RecurPixel.EasyMessages/)**
 
 ### Quick Links
-- 🚀 [Getting Started](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/Getting-Started/Your-First-Message)
-- 📖 [Core Concepts](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/Core-Concepts/Messages-and-Message-Types)
-- 💡 [Examples](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/Examples/Console-Application)
-- 📝 [How-To Guides](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/How-To-Guides/Create-Custom-Messages)
-- 📚 [API Reference](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/API-Reference/Message-Codes-Reference)
+- 🚀 [Getting Started](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/Getting-Started/Your-First-Message)
+- 📖 [Core Concepts](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/Core-Concepts/Messages-and-Message-Types)
+- 💡 [Examples](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/Examples/Console-Application)
+- 📝 [How-To Guides](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/How-To-Guides/Create-Custom-Messages)
+- 📚 [API Reference](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/API-Reference/Message-Codes-Reference)
 
 ---
 
 ## Compatibility
 
-- **.NET 8.0+** (Current alpha support)
-- **.NET 6.0, 7.0** (Coming in Beta)
+- **.NET 8.0, 9.0, 10.0** (Current support)
+- **.NET 6.0, 7.0** (Coming in future releases)
 - **.NET Standard 2.1** (Coming in Stable - covers .NET 5+)
 
 ---
@@ -299,10 +298,10 @@ public class FileProcessor
 ASP.NET Core integration with DI, IOptions configuration, `.ToApiResponse()`, and logging integration.
 
 ```bash
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.*
 ```
 
-📖 [ASP.NET Core Documentation](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/ASP.NET-Core/Overview)
+📖 [ASP.NET Core Documentation](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/ASP-NET-Core/Overview)
 
 ---
 
@@ -315,13 +314,13 @@ EasyMessages is optimized for .NET 5-10:
 - ✅ 256B-1.5KB memory per operation
 - ✅ Span&lt;T&gt;, ArrayPool&lt;T&gt;, ValueStringBuilder optimizations
 
-📊 [Detailed Benchmarks](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/Advanced-Topics/Performance-Considerations-and-Benchmarks)
+📊 [Detailed Benchmarks](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/Advanced-Topics/Performance-Considerations-and-Benchmarks)
 
 ---
 
 ## Support
 
-- 📖 [Documentation](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki)
+- 📖 [Documentation](https://recurpixel.github.io/RecurPixel.EasyMessages/)
 - 🐛 [Report Issues](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues)
 - 💡 [Request Features](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
 - 📧 [Contact](https://github.com/RecurPixel)
@@ -334,9 +333,11 @@ MIT License - see [LICENSE](https://github.com/RecurPixel/RecurPixel.EasyMessage
 
 ---
 
-## Status: Alpha Release
+## Status: Beta Release
 
-⚠️ This is an **alpha preview** (v0.1.0-alpha.x). APIs may change. Not recommended for production use.
+✅ This is a **beta release** (v0.1.0-beta.1). APIs are **stable** - no breaking changes planned before 1.0.
+
+🎉 Ready for testing and feedback in real projects!
 
 📢 [Give Feedback](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions) | [Report Issues](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues)
 
