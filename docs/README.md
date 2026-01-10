@@ -187,15 +187,19 @@ Links should use relative paths:
 
 ## Jekyll Theme
 
-We use the **Cayman theme** which provides:
-- Clean, modern design
+We use the **Just the Docs** theme which provides:
+- Automatic sidebar generation from front matter
+- Built-in search functionality
 - Responsive layout (mobile-friendly)
-- Syntax highlighting for code blocks
-- GitHub integration
+- Table of contents on each page
+- Copy button on code blocks
+- GitHub edit links
+- Breadcrumb navigation
 
 Theme customization in `_config.yml`:
 - Site title and description
-- Navigation links
+- Navigation structure (auto-generated)
+- Search configuration
 - Base URL configuration
 - Markdown processor settings
 

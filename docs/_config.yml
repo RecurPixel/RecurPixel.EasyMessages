@@ -94,6 +94,7 @@ exclude:
   - archive/
   - dev/
   - reference/
+  - v0.1.0-beta.1/
   - README.md
   - Gemfile
   - Gemfile.lock

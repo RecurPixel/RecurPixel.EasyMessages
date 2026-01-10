@@ -23,18 +23,6 @@ permalink: /
 
 ---
 
-## Documentation Versions
-
-### [Latest (v0.1.0-beta.1) →](latest/)
-The current version documentation. Start here for the most up-to-date information.
-
-### Version History
-- [**v0.1.0-beta.1**](v0.1.0-beta.1/) - Beta Release (Current)
-  - Stable APIs ready for testing
-  - Full ASP.NET Core integration
-
----
-
 ## Quick Links
 
 ### For New Users
