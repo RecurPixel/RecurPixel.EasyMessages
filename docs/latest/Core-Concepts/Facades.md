@@ -413,11 +413,10 @@ public async Task<IActionResult> Upload(IFormFile file)
 **Purpose:** Network connectivity and external API errors
 
 ```csharp
-Msg.Network.Timeout()               // NET_001 - Request timeout
-Msg.Network.ServiceUnavailable()    // NET_002 - Service down
-Msg.Network.BadGateway()            // NET_003 - Upstream error
-Msg.Network.ConnectionRefused()     // NET_004 - Cannot connect
-Msg.Network.DnsError()              // NET_005 - DNS resolution
+Msg.Network.Timeout()               // NET_002 - Request timeout
+Msg.Network.BadRequest()            // NET_003 - Bad request
+Msg.Network.ServerError()           // NET_004 - Server error
+Msg.Network.ConnectionRefused()     // NET_006 - Cannot connect
 ```
 
 **Common Usage:**
@@ -438,7 +437,7 @@ public async Task<IActionResult> CallExternalApi()
     }
     catch (HttpRequestException ex)
     {
-        return Msg.Network.ServiceUnavailable()
+        return Msg.System.Unavailable()
             .WithMetadata("error", ex.Message)
             .Log(_logger)
             .ToApiResponse();

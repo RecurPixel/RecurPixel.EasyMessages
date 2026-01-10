@@ -424,7 +424,7 @@ Msg.File.TooLarge("10MB")
 ### Network (NET)
 ```csharp
 Msg.Network.Timeout()
-Msg.Network.ServiceUnavailable()
+Msg.Network.GatewayTimeout()
 // 10 total messages
 ```
 

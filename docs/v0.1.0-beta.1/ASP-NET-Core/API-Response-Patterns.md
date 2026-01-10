@@ -618,7 +618,7 @@ public async Task<IActionResult> SendEmail([FromBody] EmailDto dto)
     }
     catch (HttpRequestException ex)
     {
-        return Msg.Network.ServiceUnavailable()
+        return Msg.System.Unavailable()
             .WithMetadata("service", "EmailService")
             .WithMetadata("error", ex.Message)
             .Log(_logger)
