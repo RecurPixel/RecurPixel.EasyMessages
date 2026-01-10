@@ -1,6 +1,25 @@
-﻿# Installation
+---
+layout: default
+title: Installation
+parent: Getting Started
+grand_parent: Latest Documentation
+nav_order: 1
+---
+
+# Installation
+{: .no_toc }
 
 Learn how to install EasyMessages packages for your .NET applications.
+{: .fs-6 .fw-300 }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 
 ---
 
@@ -8,12 +27,12 @@ Learn how to install EasyMessages packages for your .NET applications.
 
 ### Supported Platforms
 
-**Current Alpha Release (v0.1.0-alpha.x):**
+**Current Beta Release (v0.1.0-beta.1):**
 - .NET 8.0 or later
 - .NET 9.0
 - .NET 10.0
 
-**Coming in Beta:**
+**Coming in Stable:**
 - .NET 6.0
 - .NET 7.0
 - .NET Standard 2.1 (covers .NET 5+)
@@ -75,13 +94,13 @@ EasyMessages provides two packages. Choose based on your application type:
 #### For Console Applications, Workers, Class Libraries:
 
 ```bash
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-beta.1
 ```
 
 #### For ASP.NET Core Applications:
 
 ```bash
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.1
 ```
 
 **Note:** **Note:** The AspNetCore package automatically includes the Core package as a dependency.
@@ -101,10 +120,10 @@ dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
 
 ```powershell
 # For console applications
-Install-Package RecurPixel.EasyMessages -Version 0.1.0-alpha.1 -IncludePrerelease
+Install-Package RecurPixel.EasyMessages -Version 0.1.0-beta.1 -IncludePrerelease
 
 # For ASP.NET Core applications
-Install-Package RecurPixel.EasyMessages.AspNetCore -Version 0.1.0-alpha.1 -IncludePrerelease
+Install-Package RecurPixel.EasyMessages.AspNetCore -Version 0.1.0-beta.1 -IncludePrerelease
 ```
 
 ### Option 4: Edit .csproj Directly
@@ -119,10 +138,10 @@ Add the package reference to your `.csproj` file:
 
   <ItemGroup>
     <!-- For console applications -->
-    <PackageReference Include="RecurPixel.EasyMessages" Version="0.1.0-alpha.*" />
+    <PackageReference Include="RecurPixel.EasyMessages" Version="0.1.0-beta.1" />
 
     <!-- OR for ASP.NET Core applications -->
-    <PackageReference Include="RecurPixel.EasyMessages.AspNetCore" Version="0.1.0-alpha.*" />
+    <PackageReference Include="RecurPixel.EasyMessages.AspNetCore" Version="0.1.0-beta.1" />
   </ItemGroup>
 </Project>
 ```
@@ -199,6 +218,7 @@ app.Run();
 ```csharp
 using Microsoft.AspNetCore.Mvc;
 using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
 
 [ApiController]
 [Route("api/test")]
@@ -273,12 +293,12 @@ Navigate to: `https://localhost:5001/api/test`
   <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
   ```
 
-### Issue: Alpha version not appearing
+### Issue: Beta version not appearing
 
 **Solution:**
 - Include prerelease packages:
   ```bash
-  dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.* --prerelease
+  dotnet add package RecurPixel.EasyMessages --version 0.1.0-beta.1 --prerelease
   ```
 - In Visual Studio, check "Include prerelease" in NuGet Package Manager
 
@@ -310,28 +330,18 @@ Now that you have EasyMessages installed:
 
 ## Upgrading
 
-### From Alpha to Beta (Coming Soon)
+### Version History
 
-When Beta is released, upgrade with:
-
-```bash
-# Update to beta version
-dotnet add package RecurPixel.EasyMessages --version 0.2.0-beta.*
-
-# Or for AspNetCore
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.2.0-beta.*
-```
-
-**Warning:** **Breaking Changes:** Alpha → Beta may include breaking changes. Check the [CHANGELOG](../../CHANGELOG.md) before upgrading.
+Check the [CHANGELOG](../../CHANGELOG.md) for version history and breaking changes.
 
 ### Staying Current
 
-To always get the latest alpha version, use:
+To always get the latest beta version, use:
 ```xml
-<PackageReference Include="RecurPixel.EasyMessages" Version="0.1.0-alpha.*" />
+<PackageReference Include="RecurPixel.EasyMessages" Version="0.1.0-beta.*" />
 ```
 
-The `*` wildcard will automatically pull the latest patch version within the alpha series.
+The `*` wildcard will automatically pull the latest patch version within the beta series.
 
 ---
 
@@ -363,7 +373,7 @@ Both packages include:
 
 ## Support & Resources
 
-- [Complete Documentation](../Home.md)
+- [Complete Documentation](../)
 - [Report Issues](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues)
 - **Note:** [Request Features](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
 - 📧 [Contact Support](https://github.com/RecurPixel)

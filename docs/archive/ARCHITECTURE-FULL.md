@@ -346,7 +346,7 @@ public class AuthController : ControllerBase
         }
         
         // Returns 200 with success message
-        return Msg.Auth.LoginSuccess()
+        return Msg.Auth.LoginSuccessful()
             .WithData(new { Token = GenerateToken(user) })
             .ToApiResponse();
     }
@@ -910,7 +910,7 @@ Msg.Custom("MYAPP_001")
 // Authentication
 Msg.Auth.LoginFailed()
 Msg.Auth.Unauthorized()
-Msg.Auth.LoginSuccess()
+Msg.Auth.LoginSuccessful()
 
 // CRUD Operations
 Msg.Crud.Created(string resource)
@@ -1529,7 +1529,7 @@ public class MessageTests
         var userData = new { Id = 123, Name = "John" };
         
         // Act
-        var message = Msg.Auth.LoginSuccess()
+        var message = Msg.Auth.LoginSuccessful()
             .WithData(userData);
         
         // Assert
@@ -1755,7 +1755,7 @@ InterceptorRegistry.Register(new MyInterceptor());
 public IActionResult Get()
 {
     MessageRegistry.LoadCustomMessages("other.json");  // [ ] NOT thread-safe!
-    return Msg.Auth.LoginSuccess().ToApiResponse();
+    return Msg.Auth.LoginSuccessful().ToApiResponse();
 }
 ```
 
@@ -1993,7 +1993,7 @@ public IActionResult Login(LoginRequest request)
             .ToApiResponse();
     }
     
-    return Msg.Auth.LoginSuccess()
+    return Msg.Auth.LoginSuccessful()
         .WithData(new { token = GenerateToken(user) })
         .ToApiResponse();
 }

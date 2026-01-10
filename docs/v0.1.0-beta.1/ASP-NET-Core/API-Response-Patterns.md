@@ -57,6 +57,10 @@ All EasyMessages API responses follow this standardized format:
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPost]
 public IActionResult Create([FromBody] CreateUserDto dto)
 {
@@ -109,6 +113,10 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpGet("{id}")]
 public IActionResult GetById(int id)
 {
@@ -172,6 +180,10 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpGet]
 public IActionResult GetAll()
 {
@@ -213,6 +225,10 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPut("{id}")]
 public IActionResult Update(int id, [FromBody] UpdateUserDto dto)
 {
@@ -270,6 +286,10 @@ Content-Type: application/json
 
 **Option 1: 204 No Content (Recommended)**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpDelete("{id}")]
 public IActionResult Delete(int id)
 {
@@ -295,6 +315,10 @@ HTTP/1.1 204 No Content
 
 **Option 2: 200 OK with Confirmation**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpDelete("{id}")]
 public IActionResult Delete(int id)
 {
@@ -389,6 +413,8 @@ Content-Type: application/json
 
 **Validator:**
 ```csharp
+using FluentValidation;
+
 public class CreateUserDtoValidator : AbstractValidator<CreateUserDto>
 {
     public CreateUserDtoValidator()
@@ -406,6 +432,10 @@ public class CreateUserDtoValidator : AbstractValidator<CreateUserDto>
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPost]
 public IActionResult Create([FromBody] CreateUserDto dto)
 {
@@ -485,6 +515,12 @@ Content-Type: application/json
 
 **Middleware:**
 ```csharp
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 public class GlobalExceptionHandler
 {
     private readonly RequestDelegate _next;
@@ -554,6 +590,11 @@ app.UseMiddleware<GlobalExceptionHandler>();
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPost]
 public IActionResult Create([FromBody] CreateUserDto dto)
 {
@@ -591,7 +632,7 @@ Content-Type: application/json
   "code": "DB_004",
   "type": "error",
   "title": "Transaction Failed",
-  "description": "The database transaction failed and has been rolled back.",,
+  "description": "The database transaction failed and has been rolled back.",
   "metadata": {
     "error": "Connection timeout occurred"
   }
@@ -606,6 +647,10 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPost("send-email")]
 public async Task<IActionResult> SendEmail([FromBody] EmailDto dto)
 {
@@ -644,6 +689,10 @@ public async Task<IActionResult> SendEmail([FromBody] EmailDto dto)
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPost("login")]
 public IActionResult Login([FromBody] LoginDto dto)
 {
@@ -719,6 +768,11 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpDelete("{id}")]
 [Authorize(Roles = "Admin")]
 public IActionResult Delete(int id)
@@ -764,6 +818,12 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpGet("profile")]
 [Authorize]
 public IActionResult GetProfile()
@@ -809,6 +869,10 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpGet]
 public IActionResult GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
 {
@@ -866,6 +930,10 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpGet("search")]
 public IActionResult Search([FromQuery] string query, [FromQuery] string role = null)
 {
@@ -909,6 +977,10 @@ Content-Type: application/json
 
 **Controller:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpGet("search")]
 public IActionResult Search([FromQuery] string query)
 {

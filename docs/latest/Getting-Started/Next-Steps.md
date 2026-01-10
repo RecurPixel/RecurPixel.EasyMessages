@@ -381,7 +381,7 @@ builder.Services.AddEasyMessages(
 ## Getting Help
 
 ### Documentation
-- [Full Wiki Documentation](../Home.md)
+- [Full Wiki Documentation](../)
 - 🔍 Use the search function (top right) to find specific topics
 
 ### Community

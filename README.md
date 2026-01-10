@@ -118,15 +118,15 @@ dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.*
 
 ## 📚 Documentation
 
-📖 **[Complete Documentation Wiki](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki)**
+📖 **[Complete Documentation](https://recurpixel.github.io/RecurPixel.EasyMessages/)**
 
 ### Quick Links
-- 🚀 [Getting Started in 5 Minutes](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/Getting-Started/Your-First-Message)
-- 📖 [Core Concepts](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/Core-Concepts/Messages-and-Message-Types)
-- 🌐 [ASP.NET Core Integration](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/ASP.NET-Core/Overview)
-- 📝 [Configuration Guide](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/ASP.NET-Core/Configuration-Guide)
-- 💡 [Examples](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/Examples/Console-Application)
-- 📚 [API Reference](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/API-Reference/Message-Codes-Reference)
+- 🚀 [Getting Started in 5 Minutes](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/Getting-Started/Your-First-Message)
+- 📖 [Core Concepts](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/Core-Concepts/Messages-and-Message-Types)
+- 🌐 [ASP.NET Core Integration](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/ASP-NET-Core/Overview)
+- 📝 [Configuration Guide](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/ASP-NET-Core/Setup-and-Configuration)
+- 💡 [Examples](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/Examples/)
+- 📚 [API Reference](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/API-Reference/Message-Codes-Reference)
 
 ---
 
@@ -171,7 +171,7 @@ public IActionResult Login(LoginDto dto)
         return Msg.Auth.LoginFailed().Log(_logger).ToApiResponse();
 
     var token = _authService.GenerateToken(dto);
-    return Msg.Auth.LoginSuccess()
+    return Msg.Auth.LoginSuccessful()
         .WithData(new { token })
         .Log(_logger)
         .ToApiResponse();
@@ -214,7 +214,7 @@ EasyMessages is optimized for .NET 5-10 with **minimal overhead**:
 - Lazy initialization patterns
 - Object pooling for frequently used instances
 
-📊 **[Detailed Benchmarks & Performance Analysis](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/Advanced-Topics/Performance-Considerations-and-Benchmarks)**
+📊 **[Detailed Benchmarks & Performance Analysis](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/Advanced-Topics/Performance-Considerations-and-Benchmarks)**
 
 ---
 
@@ -286,7 +286,7 @@ builder.Services.AddEasyMessages(
 );
 ```
 
-📝 **[Complete Configuration Guide](https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/ASP.NET-Core/Configuration-Guide)**
+📝 **[Complete Configuration Guide](https://recurpixel.github.io/RecurPixel.EasyMessages/latest/ASP-NET-Core/Setup-and-Configuration)**
 
 ---
 

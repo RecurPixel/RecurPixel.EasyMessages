@@ -1,6 +1,16 @@
-﻿# EasyMessages Documentation
+---
+layout: default
+title: Latest Documentation
+nav_order: 2
+has_children: true
+permalink: /latest/
+---
+
+# EasyMessages Documentation
+{: .no_toc }
 
 Welcome to the complete documentation for **EasyMessages** - a lightweight .NET library for consistent, fluent message management.
+{: .fs-6 .fw-300 }
 
 ---
 

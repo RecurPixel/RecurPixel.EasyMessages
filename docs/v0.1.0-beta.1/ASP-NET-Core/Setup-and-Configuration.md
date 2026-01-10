@@ -24,10 +24,10 @@ Install the ASP.NET Core package via NuGet:
 
 ```bash
 # .NET CLI
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.1
 
 # Package Manager Console
-Install-Package RecurPixel.EasyMessages.AspNetCore -Version 0.1.0-alpha.*
+Install-Package RecurPixel.EasyMessages.AspNetCore -Version 0.1.0-beta.1
 ```
 
 **Note:** The AspNetCore package includes the core package as a dependency, so you don't need to install both.
@@ -45,7 +45,7 @@ Your `.csproj` file should include:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RecurPixel.EasyMessages.AspNetCore" Version="0.1.0-alpha.*" />
+    <PackageReference Include="RecurPixel.EasyMessages.AspNetCore" Version="0.1.0-beta.1" />
   </ItemGroup>
 </Project>
 ```

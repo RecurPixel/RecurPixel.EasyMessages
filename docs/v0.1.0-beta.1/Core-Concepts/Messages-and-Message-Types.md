@@ -1,6 +1,25 @@
-﻿# Messages and Message Types
+---
+layout: default
+title: Messages and Message Types
+parent: Core Concepts
+grand_parent: Latest Documentation
+nav_order: 1
+---
+
+# Messages and Message Types
+{: .no_toc }
 
 Understanding the Message structure and types is fundamental to using EasyMessages effectively.
+{: .fs-6 .fw-300 }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 
 ---
 
@@ -185,8 +204,8 @@ Msg.System.Queued()              // Type: Info, HTTP: 202
 **Examples:**
 ```csharp
 Msg.Crud.NoChangesDetected()     // Type: Warning, HTTP: 200
-Msg.Validation.InvalidFormat()   // Type: Warning, HTTP: 200
 Msg.System.Degraded()            // Type: Warning, HTTP: 200
+Msg.System.RateLimitExceeded()   // Type: Warning, HTTP: 429
 ```
 
 **Console Output:** Yellow ⚠
@@ -251,9 +270,10 @@ Msg.System.Unavailable()         // Type: Critical, HTTP: 503
 
 **When to Use:**
 - Database unavailable
-- Service unavailable
-- Configuration error
-- Security issue detected
+- Out of memory
+- Disk full
+- Configuration corruption
+- Security breach detected
 - Data integrity violated
 
 ---
@@ -285,7 +305,7 @@ EasyMessages automatically maps message types to appropriate HTTP status codes:
 Msg.Crud.Created("User")         // HTTP 201 Created
 Msg.Crud.Updated("User")         // HTTP 200 OK
 Msg.Crud.Deleted("User")         // HTTP 200 OK (could be 204 No Content)
-Msg.Auth.LoginSuccessful()       // HTTP 200 OK
+Msg.Auth.LoginSuccessful()          // HTTP 200 OK
 ```
 
 ### Info Messages → 2xx

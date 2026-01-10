@@ -1,6 +1,25 @@
-﻿# Messages and Message Types
+---
+layout: default
+title: Messages and Message Types
+parent: Core Concepts
+grand_parent: Latest Documentation
+nav_order: 1
+---
+
+# Messages and Message Types
+{: .no_toc }
 
 Understanding the Message structure and types is fundamental to using EasyMessages effectively.
+{: .fs-6 .fw-300 }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 
 ---
 

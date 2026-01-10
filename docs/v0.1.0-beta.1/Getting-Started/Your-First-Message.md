@@ -11,7 +11,7 @@ Get started with EasyMessages in just 5 minutes. This tutorial covers the basics
 ```bash
 dotnet new console -n MyFirstEasyMessages
 cd MyFirstEasyMessages
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-beta.1
 ```
 
 ### Step 2: Write Your First Message
@@ -76,7 +76,7 @@ JSON Output:
 ```bash
 dotnet new webapi -n MyFirstEasyMessagesApi
 cd MyFirstEasyMessagesApi
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.1
 ```
 
 ### Step 2: Register EasyMessages
@@ -107,6 +107,7 @@ Create `Controllers/HelloController.cs`:
 ```csharp
 using Microsoft.AspNetCore.Mvc;
 using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
 
 namespace MyFirstEasyMessagesApi.Controllers;
 
@@ -383,6 +384,10 @@ catch (Exception ex)
 ### Pattern 2: Error Handling in APIs
 
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPost]
 public IActionResult Create(CreateDto dto)
 {
@@ -415,6 +420,10 @@ public IActionResult Create(CreateDto dto)
 ### Pattern 3: Validation Results
 
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPost]
 public IActionResult Create(CreateDto dto)
 {
@@ -432,6 +441,10 @@ public IActionResult Create(CreateDto dto)
 ### Pattern 4: Not Found Checks
 
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpGet("{id}")]
 public IActionResult GetById(int id)
 {

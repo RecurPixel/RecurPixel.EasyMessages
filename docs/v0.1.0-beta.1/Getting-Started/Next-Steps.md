@@ -381,7 +381,7 @@ builder.Services.AddEasyMessages(
 ## Getting Help
 
 ### Documentation
-- [Full Wiki Documentation](../Home.md)
+- [Full Wiki Documentation](../)
 - 🔍 Use the search function (top right) to find specific topics
 
 ### Community
@@ -398,33 +398,32 @@ builder.Services.AddEasyMessages(
 ## Stay Updated
 
 ### Releases
-- **Alpha** (Current): v0.1.0-alpha.x
-- **Beta** (Coming): v0.2.0-beta.x (ASP.NET Core complete, 150+ messages)
-- **Stable** (Future): v1.0.0 (Production-ready, 200+ messages)
+- **Beta** (Current): v0.1.0-beta.1
+- **Stable** (Future): v1.0.0 (Production-ready)
 
 ### What's Coming
-- ✨ More built-in messages (150+ in Beta, 200+ in Stable)
-- ✨ .NET 6, 7 support (Beta)
-- ✨ .NET Standard 2.1 support (Stable)
-- ✨ Enhanced logging integration (Beta)
-- ✨ More configuration options (Beta)
-- ✨ Additional integrations (Serilog, FluentValidation) (Post-1.0)
+- More built-in messages
+- .NET 6, 7 support (Stable)
+- .NET Standard 2.1 support (Stable)
+- Enhanced logging integration
+- More configuration options
+- Additional integrations (Serilog, FluentValidation)
 
 ### Subscribe
 - [Star the repo](https://github.com/RecurPixel/RecurPixel.EasyMessages) to get notified
-- 👁️ [Watch releases](https://github.com/RecurPixel/RecurPixel.EasyMessages/releases)
-- 📢 [Follow discussions](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
+- [Watch releases](https://github.com/RecurPixel/RecurPixel.EasyMessages/releases)
+- [Follow discussions](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
 
 ---
 
 ## Your Feedback Matters!
 
-As an **alpha** user, your feedback is invaluable:
+As a **beta** user, your feedback is invaluable:
 
 - **Note:** What features do you need?
 - What bugs have you encountered?
 - What documentation is unclear?
-- ✨ What would make EasyMessages better?
+- What would make EasyMessages better?
 
 **Share your thoughts:** [GitHub Discussions](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
 
@@ -439,4 +438,4 @@ Choose your path and dive in:
 - **Need Examples?** → [Examples Section](../Examples/Console-Application.md)
 - **Want Deep Knowledge?** → [Architecture Deep Dive](../Advanced-Topics/Architecture-Deep-Dive.md)
 
-**Happy coding with EasyMessages!** 🚀
+**Happy coding with EasyMessages!**

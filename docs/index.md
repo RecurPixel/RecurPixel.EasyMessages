@@ -1,6 +1,21 @@
-﻿# EasyMessages Documentation
+---
+layout: default
+title: Home
+nav_order: 1
+description: "EasyMessages - Centralized message management for .NET applications"
+permalink: /
+---
+
+# EasyMessages Documentation
+{: .fs-9 }
 
 **Centralized message management for .NET applications**
+{: .fs-6 .fw-300 }
+
+[Get Started](latest/Getting-Started/Installation){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[View on GitHub](https://github.com/RecurPixel/RecurPixel.EasyMessages){: .btn .fs-5 .mb-4 .mb-md-0 }
+
+---
 
 [![NuGet Core](https://img.shields.io/nuget/v/RecurPixel.EasyMessages.svg?label=Core)](https://www.nuget.org/packages/RecurPixel.EasyMessages)
 [![NuGet AspNetCore](https://img.shields.io/nuget/v/RecurPixel.EasyMessages.AspNetCore.svg?label=AspNetCore)](https://www.nuget.org/packages/RecurPixel.EasyMessages.AspNetCore)
@@ -23,23 +38,20 @@ The current version documentation. Start here for the most up-to-date informatio
 ## Quick Links
 
 ### For New Users
-- [**Installation**](latest/Getting-Started/Installation.md) - Get started in 5 minutes
-- [**Your First Message**](latest/Getting-Started/Your-First-Message.md) - Quick tutorial
-- [**Package Comparison**](latest/index.md#package-comparison) - Which package do you need?
+- [**Installation**](latest/Getting-Started/Installation) - Get started in 5 minutes
+- [**Your First Message**](latest/Getting-Started/Your-First-Message) - Quick tutorial
+- [**Package Comparison**](latest/#package-comparison) - Which package do you need?
 
 ### For Developers
-- [**Core Concepts**](latest/Core-Concepts/Messages-and-Message-Types.md) - Understand the architecture
-- [**ASP.NET Core Integration**](latest/ASP-NET-Core/Overview.md) - Web API patterns
-- [**Configuration Guide**](latest/ASP-NET-Core/Setup-and-Configuration.md) - Setup and configuration
+- [**Core Concepts**](latest/Core-Concepts/Messages-and-Message-Types) - Understand the architecture
+- [**ASP.NET Core Integration**](latest/ASP-NET-Core/Overview) - Web API patterns
+- [**Configuration Guide**](latest/ASP-NET-Core/Setup-and-Configuration) - Setup and configuration
 
 ### Reference
-- [**Message Codes Reference**](reference/MESSAGECODES.md) - All 100+ built-in messages
-- [**API Reference**](latest/API-Reference/Message-Codes-Reference.md) - Complete API documentation
+- [**API Reference**](latest/API-Reference/Message-Codes-Reference) - Complete API documentation
 
 ### For Contributors
 - [**Contributing Guide**](https://github.com/RecurPixel/RecurPixel.EasyMessages/blob/main/CONTRIBUTING.md) - How to contribute
-- [**Technical Specification**](dev/TECHNICAL_SPECIFICATION.md) - Design decisions
-- [**Performance Analysis**](dev/PERFORMANCE_OPTIMIZATIONS.md) - Benchmarks and optimizations
 
 ---
 

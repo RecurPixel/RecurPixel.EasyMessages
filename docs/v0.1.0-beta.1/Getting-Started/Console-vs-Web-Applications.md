@@ -42,7 +42,7 @@ Use `RecurPixel.EasyMessages` (Core package) for:
 ### Installation
 
 ```bash
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-beta.1
 ```
 
 ### Typical Usage Pattern
@@ -290,7 +290,7 @@ Use `RecurPixel.EasyMessages.AspNetCore` for:
 ### Installation
 
 ```bash
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.1
 ```
 
 **Note:** **Note:** This automatically includes the Core package.
@@ -320,6 +320,10 @@ app.Run();
 
 ```csharp
 // Controller
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
@@ -577,6 +581,7 @@ app.Run();
 // Controllers/UsersController.cs
 using Microsoft.AspNetCore.Mvc;
 using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -727,6 +732,7 @@ static void ProcessFile(string path)
 // ASP.NET Core - RecurPixel.EasyMessages.AspNetCore
 using Microsoft.AspNetCore.Mvc;
 using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
 
 [ApiController]
 [Route("api/files")]
@@ -779,7 +785,7 @@ If you're converting a console app to a web API:
 1. **Change package:**
 ```bash
 dotnet remove package RecurPixel.EasyMessages
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.1
 ```
 
 2. **Register with DI:**
@@ -811,12 +817,12 @@ If you need to use EasyMessages in both console and web:
 
 1. **Keep Core package for console code:**
 ```bash
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-beta.1
 ```
 
 2. **Use AspNetCore package for web code:**
 ```bash
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.1
 ```
 
 ---

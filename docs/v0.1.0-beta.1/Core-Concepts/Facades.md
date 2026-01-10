@@ -254,7 +254,7 @@ public IActionResult ValidateField(string field, string value)
 ```csharp
 // Status messages
 Msg.System.Processing()             // SYS_002 - In progress
-Msg.System.OperationCompleted()     // SYS_005 - General success
+Msg.System.OperationCompleted()     // SYS_005 - Operation success
 
 // Errors
 Msg.System.Error()                  // SYS_001 - General error

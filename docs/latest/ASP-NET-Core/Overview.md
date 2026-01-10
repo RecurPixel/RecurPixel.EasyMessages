@@ -1,6 +1,25 @@
-﻿# ASP.NET Core Integration Overview
+---
+layout: default
+title: Overview
+parent: ASP.NET Core
+grand_parent: Latest Documentation
+nav_order: 1
+---
+
+# ASP.NET Core Integration Overview
+{: .no_toc }
 
 The **RecurPixel.EasyMessages.AspNetCore** package extends the core library with ASP.NET Core-specific features, making it effortless to use standardized messages in web APIs.
+{: .fs-6 .fw-300 }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 
 ---
 

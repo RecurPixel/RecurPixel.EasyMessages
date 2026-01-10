@@ -1,6 +1,25 @@
-﻿# Installation
+---
+layout: default
+title: Installation
+parent: Getting Started
+grand_parent: Latest Documentation
+nav_order: 1
+---
+
+# Installation
+{: .no_toc }
 
 Learn how to install EasyMessages packages for your .NET applications.
+{: .fs-6 .fw-300 }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 
 ---
 
@@ -354,7 +373,7 @@ Both packages include:
 
 ## Support & Resources
 
-- [Complete Documentation](../Home.md)
+- [Complete Documentation](../)
 - [Report Issues](https://github.com/RecurPixel/RecurPixel.EasyMessages/issues)
 - **Note:** [Request Features](https://github.com/RecurPixel/RecurPixel.EasyMessages/discussions)
 - 📧 [Contact Support](https://github.com/RecurPixel)

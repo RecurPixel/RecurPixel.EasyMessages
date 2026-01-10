@@ -1,6 +1,25 @@
-﻿# ASP.NET Core Integration Overview
+---
+layout: default
+title: Overview
+parent: ASP.NET Core
+grand_parent: Latest Documentation
+nav_order: 1
+---
+
+# ASP.NET Core Integration Overview
+{: .no_toc }
 
 The **RecurPixel.EasyMessages.AspNetCore** package extends the core library with ASP.NET Core-specific features, making it effortless to use standardized messages in web APIs.
+{: .fs-6 .fw-300 }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 
 ---
 
@@ -89,7 +108,7 @@ app.MapPost("/users", (CreateUserDto dto) =>
 ### Installation
 
 ```bash
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.1
 ```
 
 ---
@@ -123,6 +142,10 @@ app.Run();
 
 **UsersController.cs:**
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [ApiController]
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
@@ -684,6 +707,10 @@ return Msg.Crud.Created("User")
 ### REST API CRUD
 
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
@@ -729,6 +756,10 @@ public class ProductsController : ControllerBase
 ### Validation Results
 
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpPost]
 public IActionResult Create(CreateUserDto dto)
 {
@@ -758,6 +789,10 @@ public IActionResult Create(CreateUserDto dto)
 ### Error Handling
 
 ```csharp
+using Microsoft.AspNetCore.Mvc;
+using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
+
 [HttpGet("{id}")]
 public IActionResult GetById(int id)
 {
