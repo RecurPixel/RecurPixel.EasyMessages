@@ -1,4 +1,4 @@
-# EasyMessages - Architecture & Design Decisions
+﻿# EasyMessages - Architecture & Design Decisions
 
 ## 1. API Pattern Analysis
 
@@ -18,12 +18,12 @@ Msg.{Category}.{Action}(params) → Message → .With{X}()* → .Log()? → .To{
 
 | Step | Purpose | Required? | Notes |
 |------|---------|-----------|-------|
-| `Msg` | Entry point | ✅ Yes | Static facade |
-| `.Crud` | Category | ✅ Yes | Groups related messages |
-| `.Created("user")` | What happened | ✅ Yes | Returns `Message` object |
-| `.WithData(newUser)` | Additional context | ❌ Optional | Chainable |
-| `.Log()` | Side effect | ❌ Optional | Chainable |
-| `.ToApiResponse()` | Output format | ✅ Yes | Terminal operation |
+| `Msg` | Entry point | [✓] Yes | Static facade |
+| `.Crud` | Category | [✓] Yes | Groups related messages |
+| `.Created("user")` | What happened | [✓] Yes | Returns `Message` object |
+| `.WithData(newUser)` | Additional context | [ ] Optional | Chainable |
+| `.Log()` | Side effect | [ ] Optional | Chainable |
+| `.ToApiResponse()` | Output format | [✓] Yes | Terminal operation |
 
 
 ---
@@ -88,13 +88,13 @@ public static class AuthMessages
 ```
 
 **Pros:**
-- ✅ Type-safe and discoverable
-- ✅ Method name documents the intent
-- ✅ Users can't break the mapping
-- ✅ Easy to maintain
+- [✓] Type-safe and discoverable
+- [✓] Method name documents the intent
+- [✓] Users can't break the mapping
+- [✓] Easy to maintain
 
 **Cons:**
-- ❌ Adding new methods requires code changes (but that's expected for a library)
+- [ ] Adding new methods requires code changes (but that's expected for a library)
 
 ---
 
@@ -572,11 +572,11 @@ Msg.Auth.LoginFailed()
 ```csharp
 // NO automatic generation - keep it explicit
 var message = Msg.Auth.LoginFailed(); 
-Assert.Null(message.CorrelationId); // ✅ Null by default
+Assert.Null(message.CorrelationId); // [✓] Null by default
 
 // User sets explicitly when needed
 var enriched = message.WithCorrelationId(HttpContext.TraceIdentifier);
-Assert.NotNull(enriched.CorrelationId); // ✅ Now set
+Assert.NotNull(enriched.CorrelationId); // [✓] Now set
 ```
 
 **Why opt-in?**
@@ -593,12 +593,12 @@ Assert.NotNull(enriched.CorrelationId); // ✅ Now set
 
 **Read-Only After Startup**
 ```csharp
-// ✅ Thread-safe operations:
+// [✓] Thread-safe operations:
 - MessageRegistry.Get(code)           // Always safe (immutable read)
 - Message instances                   // Immutable records - inherently safe
 - Extension methods                   // Return new instances - safe
 
-// ⚠️ NOT thread-safe:
+// **Warning:** NOT thread-safe:
 - MessageRegistry.LoadCustomMessages() // Call ONCE at startup only
 - Re-loading custom messages at runtime // NOT supported
 ```
@@ -730,14 +730,14 @@ PATCH: Bug fixes
 
 **Breaking Change Definition:**
 ```csharp
-// ✅ NOT BREAKING (safe to do):
+// [✓] NOT BREAKING (safe to do):
 - Adding new message codes
 - Adding new facade methods
 - Adding new extension methods
 - Adding new properties to Message (with default values)
 - Changing message text (title/description) - MINOR version bump
 
-// ⚠️ POTENTIALLY BREAKING (minor version with deprecation):
+// **Warning:** POTENTIALLY BREAKING (minor version with deprecation):
 - Marking methods as [Obsolete]
 - Renaming parameters (may break named arguments)
 
@@ -792,23 +792,23 @@ public static Message LoginFailed() => ...
 
 ## Summary: Answers to Your Questions
 
-### 1. ✅ API Pattern
+### 1. [✓] API Pattern
 **Final pattern:** 
 ```
 Msg.{Category}.{Action}() → .With{X}()* → .Log()? → .To{Output}()
 ```
 
-### 2. ✅ Code Mapping
+### 2. [✓] Code Mapping
 - **Hardcode method-to-code mapping** in facade classes
 - **Users can override message content** via custom.json
 - **Users can add new codes** via custom.json + Msg.Custom()
 
-### 3. ✅ Extensibility
+### 3. [✓] Extensibility
 - **Interfaces provided**: IMessageFormatter, IMessageOutput, , IMessageInterceptor
 - **Users can extend** without modifying library code
 - **Plugin architecture** for advanced scenarios
 
-### 4. ✅ Philosophy
+### 4. [✓] Philosophy
 - **Work WITH everything** (Serilog, FluentValidation, etc.)
 - **Replace nothing** (complement, don't compete)
 - **Zero config required** (but configurable when needed)

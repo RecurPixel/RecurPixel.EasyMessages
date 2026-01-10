@@ -7,23 +7,24 @@
 
     <!-- NuGet Package Metadata -->
     <PackageId>RecurPixel.EasyMessages</PackageId>
-    <Version>0.1.0-alpha.3</Version>
+    <Version>0.1.0-beta.1</Version>
     <Authors>RecurPixel</Authors>
     <Company>RecurPixel</Company>
     <Description>
       A centralized message management library for .NET applications
 
-      ⚠️ ALPHA RELEASE - Core message management library for .NET 8+
-      
-      This is an early preview. APIs may change. Not recommended for production.
-      Supports .NET 8, 9, 10. Broader version support coming in Beta.
-      
-      Feedback welcome at: https://github.com/RecurPixel/EasyMessages/issues
+      📦 BETA RELEASE - Core message management library for .NET 8+
+
+      Feature-complete with comprehensive documentation. APIs are stable.
+      Supports .NET 8, 9, 10. Ready for testing and feedback.
+
+      Documentation: https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki
+      Feedback: https://github.com/RecurPixel/EasyMessages/issues
     </Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/RecurPixel/RecurPixel.EasyMessages</PackageProjectUrl>
     <RepositoryUrl>https://github.com/RecurPixel/RecurPixel.EasyMessages</RepositoryUrl>
-    <PackageTags>messages;localization;api;error-handling;;errors;logging;alpha;netstandard;net8;net9;net10</PackageTags>
+    <PackageTags>messages;localization;api;error-handling;errors;logging;beta;netstandard;net8;net9;net10;console;messaging</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>

@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RecurPixel.EasyMessages" Version="0.1.0-alpha.*" />
+    <!-- Using ProjectReference for local testing before package is published -->
+    <ProjectReference Include="..\..\src\RecurPixel.EasyMessages\RecurPixel.EasyMessages.csproj" />
+    <!-- After publishing to NuGet, use this instead:
+    <PackageReference Include="RecurPixel.EasyMessages" Version="0.1.0-beta.*" />
+    -->
   </ItemGroup>
 
 </Project>

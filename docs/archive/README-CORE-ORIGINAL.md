@@ -1,4 +1,4 @@
-# RecurPixel.EasyMessages (Core)
+﻿# RecurPixel.EasyMessages (Core)
 
 > The foundation library for standardized messaging in .NET applications
 
@@ -7,7 +7,7 @@
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 dotnet add package RecurPixel.EasyMessages
@@ -15,7 +15,7 @@ dotnet add package RecurPixel.EasyMessages
 
 ---
 
-## 🎯 What's Inside
+## What's Inside
 
 The core library provides:
 
@@ -27,7 +27,7 @@ The core library provides:
 
 ---
 
-## 🚀 Quick Examples
+## Quick Examples
 
 ### Basic Usage
 
@@ -135,7 +135,7 @@ Msg.Custom("MYAPP_001")         // Access any custom message by code
 
 ---
 
-## 🔧 Core API
+## Core API
 
 ### Message Class
 
@@ -190,7 +190,7 @@ message.ToConsole(useColors: true);
 
 ---
 
-## 🎨 Console Output
+## Console Output
 
 EasyMessages provides rich console output with colors and icons:
 
@@ -292,7 +292,7 @@ Msg.Auth.LoginFailed().Description
 
 ---
 
-## 📊 Message Types
+## Message Types
 
 ```csharp
 public enum MessageType
@@ -381,10 +381,10 @@ var xml = new XmlFormatter().Format(message);
 
 ### Thread Safety
 
-- **✅ Thread-Safe:** `MessageRegistry.Get(code)` – Unlimited concurrent reads
-- **✅ Thread-Safe:** All `Message` instances (immutable records)
-- **✅ Thread-Safe:** Extension methods (return new instances)
-- **⚠️ NOT Thread-Safe:** `MessageRegistry.LoadCustomMessages()` – Call ONCE at startup
+- **[✓] Thread-Safe:** `MessageRegistry.Get(code)` – Unlimited concurrent reads
+- **[✓] Thread-Safe:** All `Message` instances (immutable records)
+- **[✓] Thread-Safe:** Extension methods (return new instances)
+- ****Warning:** NOT Thread-Safe:** `MessageRegistry.LoadCustomMessages()` – Call ONCE at startup
 
 Note about tests and real-world behavior:
 
@@ -399,21 +399,21 @@ Note about tests and real-world behavior:
 ### Best Practices
 
 ```csharp
-// ✅ DO: Load custom messages once at startup
+// [✓] DO: Load custom messages once at startup
 MessageRegistry.LoadCustomMessages("custom-messages.json");
 
-// ✅ DO: Use immutable pattern
+// [✓] DO: Use immutable pattern
 var newMessage = message.WithData(data); // Creates new instance
 
-// ✅ DO: Chain fluently
+// [✓] DO: Chain fluently
 var result = Msg.Auth.LoginFailed()
     .WithCorrelationId(traceId)
     .ToJson();
 
-// ❌ DON'T: Reload messages at runtime
+// [ ] DON'T: Reload messages at runtime
 // MessageRegistry.LoadCustomMessages(...); // NOT thread-safe
 
-// ❌ DON'T: Try to mutate messages
+// [ ] DON'T: Try to mutate messages
 // message.Data = newData; // Won't compile - records are immutable
 ```
 
@@ -500,7 +500,7 @@ Msg.Auth.LoginFailed()
 
 ---
 
-## 📦 Package Details
+## Package Details
 
 **Package:** `RecurPixel.EasyMessages`  
 **Version:** 0.1.0-beta  
@@ -510,13 +510,13 @@ Msg.Auth.LoginFailed()
 
 ---
 
-## 🔗 Related Packages
+## Related Packages
 
 - **RecurPixel.EasyMessages.AspNetCore** – ASP.NET Core integration
 
 ---
 
-## 📖 Documentation
+## Documentation
 
 - **Main Docs:** [GitHub Wiki](https://github.com/RecurPixel/EasyMessages/wiki)
 - **API Reference:** [API Docs](https://recurpixel.github.io/EasyMessages/)
@@ -530,7 +530,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](LICENSE)
 

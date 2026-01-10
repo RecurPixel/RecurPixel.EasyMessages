@@ -48,6 +48,7 @@ Console.WriteLine(json);
 
 ```csharp
 using RecurPixel.EasyMessages;
+using RecurPixel.EasyMessages.AspNetCore;
 
 // Program.cs
 builder.Services.AddEasyMessages();
@@ -107,10 +108,10 @@ public class UsersController : ControllerBase
 
 ```bash
 # For console apps, background jobs, class libraries
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-beta.*
 
 # For ASP.NET Core web applications
-dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages.AspNetCore --version 0.1.0-beta.*
 ```
 
 ---
@@ -291,16 +292,16 @@ builder.Services.AddEasyMessages(
 
 ## 🚦 Roadmap
 
-- [x] **v0.1.0-alpha** - Core functionality (Current)
+- [x] **v0.1.0-beta** - Core functionality (Current)
 - [ ] **v0.2.0-beta** - ASP.NET Core package complete
 - [ ] **v1.0.0** - Production-ready, 200+ messages
 - [ ] **v1.x** - Additional integrations (Serilog, FluentValidation, etc.)
 
 ---
 
-## ⚠️ Current Status: Alpha Release
+## ✨ Current Status: Beta Release
 
-This is an **alpha preview** (v0.1.0-alpha.x). APIs may change. Not recommended for production use.
+This is a **beta release** (v0.1.0-beta.1). APIs are stable and feature-complete. Ready for testing and feedback!
 
 **What's Working:**
 - ✅ Core message system
@@ -342,7 +343,7 @@ EasyMessages is licensed under the [MIT License](LICENSE).
 Built with ❤️ by [RecurPixel](https://github.com/RecurPixel)
 
 Special thanks to:
-- Early alpha testers
+- Early beta testers
 - The .NET community
 - Everyone who provides feedback
 
@@ -358,7 +359,7 @@ If you find EasyMessages useful:
 
 ```bash
 # Get started now!
-dotnet add package RecurPixel.EasyMessages --version 0.1.0-alpha.*
+dotnet add package RecurPixel.EasyMessages --version 0.1.0-beta.*
 ```
 
 ---

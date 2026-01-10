@@ -1,0 +1,63 @@
+# GitHub Pages Configuration for EasyMessages Documentation
+
+# Theme
+theme: jekyll-theme-cayman
+title: EasyMessages Documentation
+description: Centralized message management for .NET applications
+
+# Base URL for GitHub Pages
+baseurl: "/RecurPixel.EasyMessages"
+url: "https://recurpixel.github.io"
+
+# Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Enable GitHub metadata
+github:
+  repository_url: https://github.com/RecurPixel/RecurPixel.EasyMessages
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Latest Docs
+    url: /latest/
+  - title: Getting Started
+    url: /latest/Getting-Started/Installation
+  - title: GitHub
+    url: https://github.com/RecurPixel/RecurPixel.EasyMessages
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+# Exclude from processing
+exclude:
+  - archive/
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+
+# Include
+include:
+  - _*
+
+# Plugins
+plugins:
+  - jekyll-github-metadata
+  - jekyll-relative-links
+
+# Relative links
+relative_links:
+  enabled: true
+  collections: true
+
+# Syntax highlighting
+highlighter: rouge

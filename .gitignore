@@ -6,6 +6,17 @@
 # dotenv files
 .env
 
+# Planning and internal documents (not for repo)
+RELEASE_PLAN.md
+RELEASE_PLAN.md.backup
+ROADMAP.md
+DOCS_MIGRATION_SUMMARY.md
+DOCUMENTATION_CLEANUP_PLAN.md
+*_PLAN.md
+*_SUMMARY.md
+planning/
+*.backup
+
 # User-specific files
 *.rsuser
 *.suo

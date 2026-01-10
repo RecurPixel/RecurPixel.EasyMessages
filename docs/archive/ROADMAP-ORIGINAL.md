@@ -1,4 +1,4 @@
-# EasyMessages - Development Roadmap
+﻿# EasyMessages - Development Roadmap
 
 ## Overview
 
@@ -1296,26 +1296,26 @@ Categories to add:
 ## Success Criteria
 
 ### Technical
-- ✅ Zero configuration works
-- ✅ < 100 KB package size
-- ✅ < 1ms message retrieval
-- ✅ 200+ built-in messages
-- ✅ 80%+ test coverage
-- ✅ .NET 6, 7, 8+ support
-- ✅ Thread-safe operations
-- ✅ No external dependencies (Core package)
+- [✓] Zero configuration works
+- [✓] < 100 KB package size
+- [✓] < 1ms message retrieval
+- [✓] 200+ built-in messages
+- [✓] 80%+ test coverage
+- [✓] .NET 6, 7, 8+ support
+- [✓] Thread-safe operations
+- [✓] No external dependencies (Core package)
 
 ### User Experience
-- ✅ Works in < 5 minutes (first use)
-- ✅ IntelliSense shows all options
-- ✅ Clear error messages
-- ✅ Comprehensive examples
+- [✓] Works in < 5 minutes (first use)
+- [✓] IntelliSense shows all options
+- [✓] Clear error messages
+- [✓] Comprehensive examples
 
 ### Portfolio Impact
-- ✅ Demonstrates architecture skills
-- ✅ Shows API design expertise
-- ✅ Real-world problem solving
-- ✅ Production-ready code quality
+- [✓] Demonstrates architecture skills
+- [✓] Shows API design expertise
+- [✓] Real-world problem solving
+- [✓] Production-ready code quality
 
 ---
 
@@ -1795,8 +1795,8 @@ public void Should_ReturnMessage_When_CodeExists()
 
 ### 2. Keep It Simple
 Resist feature creep:
-- ❌ No: Complex templating engine
-- ✅ Yes: Simple {placeholder} replacement
+- [ ] No: Complex templating engine
+- [✓] Yes: Simple {placeholder} replacement
 
 ### 3. Performance First
 - Cache everything possible
@@ -1867,37 +1867,37 @@ Resist feature creep:
 
 ## Success Milestones
 
-### Week 1: ✅ Foundation Complete
+### Week 1: [✓] Foundation Complete
 - [ ] Solution builds
 - [ ] Core models implemented
 - [ ] 20+ messages loaded
 - [ ] Basic tests pass
 
-### Week 2: ✅ API Complete
+### Week 2: [✓] API Complete
 - [ ] Fluent API works
 - [ ] All facades implemented
 - [ ] Parameter substitution works
 - [ ] 80+ tests pass
 
-### Week 3: ✅ Outputs Complete
+### Week 3: [✓] Outputs Complete
 - [ ] JSON formatter works
 - [ ] Console formatter works
 - [ ] ASP.NET Core integration done
 - [ ] Sample API works
 
-### Week 4: ✅ Features Complete
+### Week 4: [✓] Features Complete
 - [ ] Logging integration works
 - [ ] Configuration system done
 - [ ] 200+ messages available
 - [ ] All formatters done
 
-### Week 5: ✅ Documentation Complete
+### Week 5: [✓] Documentation Complete
 - [ ] README is clear
 - [ ] Wiki is comprehensive
 - [ ] Samples are polished
 - [ ] Video is recorded
 
-### Week 6: ✅ Launch Complete
+### Week 6: [✓] Launch Complete
 - [ ] Package on NuGet
 - [ ] GitHub repo public
 - [ ] Blog post published

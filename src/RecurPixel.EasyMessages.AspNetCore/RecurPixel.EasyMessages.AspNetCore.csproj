@@ -25,6 +25,39 @@
     <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+
+    <!-- NuGet Package Metadata -->
+    <PackageId>RecurPixel.EasyMessages.AspNetCore</PackageId>
+    <Version>0.1.0-beta.1</Version>
+    <Authors>RecurPixel</Authors>
+    <Company>RecurPixel</Company>
+    <Description>
+      ASP.NET Core integration for RecurPixel.EasyMessages
+
+      📦 BETA RELEASE - ASP.NET Core message management for .NET 8+
+
+      Feature-complete with comprehensive documentation. APIs are stable.
+      Includes .ToApiResponse(), IOptions configuration, logging integration.
+
+      Documentation: https://github.com/RecurPixel/RecurPixel.EasyMessages/wiki/ASP-NET-Core/Overview
+      Feedback: https://github.com/RecurPixel/EasyMessages/issues
+    </Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/RecurPixel/RecurPixel.EasyMessages</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RecurPixel/RecurPixel.EasyMessages</RepositoryUrl>
+    <PackageTags>aspnetcore;webapi;messages;api;rest;error-handling;logging;beta;net8;net9;net10;minimal-api</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None
+      Include="../RecurPixel.EasyMessages.AspNetCore/Assets/icon.png"
+      Pack="true"
+      PackagePath="\"
+    />
+  </ItemGroup>
 </Project>
