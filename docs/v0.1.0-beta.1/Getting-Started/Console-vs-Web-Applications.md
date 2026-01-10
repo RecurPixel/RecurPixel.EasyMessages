@@ -62,12 +62,12 @@ class Program
             var result = ProcessData();
 
             // Output to console
-            Msg.System.Success()
+            Msg.System.OperationCompleted()
                 .WithData(new { RecordsProcessed = result.Count })
                 .ToConsole(useColors: true);
 
             // Or save to file as JSON
-            var json = Msg.System.Success()
+            var json = Msg.System.OperationCompleted()
                 .WithData(result)
                 .ToJson();
 
@@ -92,7 +92,7 @@ class Program
 
 ```csharp
 // Success messages (green)
-Msg.System.Success().ToConsole(useColors: true);
+Msg.System.OperationCompleted().ToConsole(useColors: true);
 
 // Error messages (red)
 Msg.System.Error().ToConsole(useColors: true);
@@ -104,7 +104,7 @@ Msg.Validation.Failed().ToConsole(useColors: true);
 Msg.System.Processing().ToConsole(useColors: true);
 
 // Disable colors
-Msg.System.Success().ToConsole(useColors: false);
+Msg.System.OperationCompleted().ToConsole(useColors: false);
 ```
 
 #### 2. File Output
@@ -123,7 +123,7 @@ var xml = Msg.Crud.Created("Record")
 File.WriteAllText("output.xml", xml);
 
 // Save as plain text
-var text = Msg.System.Success()
+var text = Msg.System.OperationCompleted()
     .WithData(myData)
     .ToPlainText();
 File.WriteAllText("output.txt", text);
@@ -211,7 +211,7 @@ try
     // Load data
     var records = LoadDataFromCsv("data.csv");
 
-    Msg.System.Success()
+    Msg.System.OperationCompleted()
         .WithData(new { RecordsLoaded = records.Count })
         .ToConsole(useColors: true);
 
@@ -251,14 +251,13 @@ try
         ProcessedAt = DateTime.UtcNow
     };
 
-    var json = Msg.System.Success()
+    var json = Msg.System.OperationCompleted()
         .WithData(summary)
         .ToJson();
 
     File.WriteAllText("processing-summary.json", json);
 
-    Msg.File.Uploaded()
-        .WithParams(new { filename = "processing-summary.json" })
+    Msg.File.UploadSuccessful("processing-summary.json")
         .ToConsole(useColors: true);
 }
 catch (Exception ex)
@@ -707,7 +706,7 @@ static void ProcessFile(string path)
 
         // Process...
 
-        Msg.System.Success()
+        Msg.System.OperationCompleted()
             .WithData(new { Processed = data.Length })
             .ToConsole(useColors: true);
     }
@@ -748,7 +747,7 @@ public class FilesController : ControllerBase
 
             var path = await SaveFileAsync(file);
 
-            return Msg.File.Uploaded()
+            return Msg.File.UploadSuccessful(file.FileName)
                 .WithData(new
                 {
                     FileName = file.FileName,
@@ -791,10 +790,10 @@ builder.Services.AddEasyMessages(builder.Configuration);
 3. **Replace console output with API responses:**
 ```csharp
 // Before (console)
-Msg.System.Success().ToConsole();
+Msg.System.OperationCompleted().ToConsole();
 
 // After (web API)
-return Msg.System.Success().ToApiResponse();
+return Msg.System.OperationCompleted().ToApiResponse();
 ```
 
 4. **Add logging:**

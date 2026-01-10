@@ -396,5 +396,5 @@ MIT License - Part of RecurPixel.EasyMessages
 ---
 
 **Last Updated:** v1.0.0  
-**Total Messages:** 98  
+**Total Messages:** 103  
 **Categories:** 11

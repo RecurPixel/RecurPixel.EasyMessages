@@ -443,7 +443,7 @@ public IActionResult Create([FromBody] CreateUserDto dto)
     // Check if email already exists
     if (_userService.EmailExists(dto.Email))
     {
-        return Msg.Validation.DuplicateEntry("Email")
+        return Msg.Validation.Duplicate("Email")
             .WithMetadata("email", dto.Email)
             .ToApiResponse(); // 422
     }
@@ -451,7 +451,7 @@ public IActionResult Create([FromBody] CreateUserDto dto)
     // Check if username is reserved
     if (_userService.IsReservedUsername(dto.Username))
     {
-        return Msg.Validation.InvalidValue("Username")
+        return Msg.Validation.InvalidFormat("Username")
             .WithHint("This username is reserved. Please choose another.")
             .ToApiResponse(); // 422
     }
@@ -467,10 +467,10 @@ Content-Type: application/json
 
 {
   "success": false,
-  "code": "VAL_007",
+  "code": "VAL_014",
   "type": "error",
-  "title": "Duplicate Entry",
-  "description": "Email already exists in the system.",
+  "title": "Duplicate Value",
+  "description": "The email 'john@example.com' already exists.",
   "metadata": {
     "email": "john@example.com"
   }
@@ -517,7 +517,7 @@ public class GlobalExceptionHandler
         }
         catch (DbUpdateException ex)
         {
-            await HandleExceptionAsync(context, ex, Msg.Database.QueryFailed()
+            await HandleExceptionAsync(context, ex, Msg.Database.TransactionFailed()
                 .WithMetadata("error", ex.Message));
         }
         catch (Exception ex)
@@ -567,13 +567,13 @@ public IActionResult Create([FromBody] CreateUserDto dto)
     catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 2627)
     {
         // Unique constraint violation
-        return Msg.Validation.DuplicateEntry("User")
+        return Msg.Validation.Duplicate("User")
             .WithMetadata("error", "A user with this email already exists")
             .ToApiResponse(); // 422
     }
     catch (DbUpdateException ex)
     {
-        return Msg.Database.QueryFailed()
+        return Msg.Database.TransactionFailed()
             .WithMetadata("error", ex.Message)
             .Log(_logger)
             .ToApiResponse(); // 500
@@ -588,10 +588,10 @@ Content-Type: application/json
 
 {
   "success": false,
-  "code": "DB_002",
+  "code": "DB_004",
   "type": "error",
-  "title": "Query Failed",
-  "description": "Database query execution failed.",
+  "title": "Transaction Failed",
+  "description": "The database transaction failed and has been rolled back.",,
   "metadata": {
     "error": "Connection timeout occurred"
   }
@@ -612,7 +612,7 @@ public async Task<IActionResult> SendEmail([FromBody] EmailDto dto)
     try
     {
         await _emailService.SendAsync(dto);
-        return Msg.System.Success()
+        return Msg.System.OperationCompleted()
             .WithData(new { sent = true })
             .ToApiResponse(); // 200 OK
     }
@@ -659,7 +659,7 @@ public IActionResult Login([FromBody] LoginDto dto)
 
     var token = _tokenService.GenerateToken(user);
 
-    return Msg.Auth.LoginSuccess()
+    return Msg.Auth.LoginSuccessful()
         .WithData(new
         {
             user = new { user.Id, user.Name, user.Email },
@@ -678,10 +678,10 @@ Content-Type: application/json
 
 {
   "success": true,
-  "code": "AUTH_002",
+  "code": "AUTH_003",
   "type": "success",
   "title": "Login Successful",
-  "description": "You have been logged in successfully.",
+  "description": "Welcome back, john!",
   "data": {
     "user": {
       "id": 123,
@@ -780,7 +780,7 @@ public IActionResult GetProfile()
 // In JWT middleware/filter
 if (tokenExpired)
 {
-    return Msg.Auth.TokenExpired()
+    return Msg.Auth.SessionExpired()
         .ToApiResponse(); // 401 Unauthorized
 }
 ```
@@ -792,10 +792,10 @@ Content-Type: application/json
 
 {
   "success": false,
-  "code": "AUTH_005",
+  "code": "AUTH_004",
   "type": "error",
-  "title": "Token Expired",
-  "description": "Your session has expired. Please log in again."
+  "title": "Session Expired",
+  "description": "Your session has expired."
 }
 ```
 
@@ -871,11 +871,9 @@ public IActionResult Search([FromQuery] string query, [FromQuery] string role = 
 {
     var users = _userService.Search(query, role);
 
-    return Msg.Search.ResultsFound()
+    return Msg.Search.Completed(users.Count, query)
         .WithData(users)
-        .WithMetadata("query", query)
         .WithMetadata("role", role)
-        .WithMetadata("count", users.Count)
         .ToApiResponse();
 }
 ```
@@ -887,10 +885,10 @@ Content-Type: application/json
 
 {
   "success": true,
-  "code": "SEARCH_001",
+  "code": "SEARCH_002",
   "type": "success",
-  "title": "Search Results Found",
-  "description": "Search completed successfully.",
+  "title": "Search Completed",
+  "description": "Found 2 result(s) for 'john'.",
   "data": [
     { "id": 5, "name": "John Doe", "role": "Admin" },
     { "id": 12, "name": "John Smith", "role": "User" }
@@ -918,15 +916,13 @@ public IActionResult Search([FromQuery] string query)
 
     if (!users.Any())
     {
-        return Msg.Search.NoResults()
+        return Msg.Search.NoResults(query)
             .WithData(new List<object>())
-            .WithMetadata("query", query)
             .ToApiResponse(); // 200 OK with empty array
     }
 
-    return Msg.Search.ResultsFound()
+    return Msg.Search.Completed(users.Count, query)
         .WithData(users)
-        .WithMetadata("count", users.Count)
         .ToApiResponse();
 }
 ```
@@ -938,10 +934,10 @@ Content-Type: application/json
 
 {
   "success": true,
-  "code": "SEARCH_002",
+  "code": "SEARCH_001",
   "type": "info",
   "title": "No Results Found",
-  "description": "No results matched your search criteria.",
+  "description": "No results found for 'xyz123'.",
   "data": [],
   "metadata": {
     "query": "xyz123"

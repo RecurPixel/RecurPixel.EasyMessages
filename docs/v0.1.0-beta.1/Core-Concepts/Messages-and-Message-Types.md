@@ -127,10 +127,10 @@ public enum MessageType
 
 **Examples:**
 ```csharp
-Msg.Auth.LoginSuccess()          // Type: Success, HTTP: 200
-Msg.Crud.Created("Product")      // Type: Success, HTTP: 200
-Msg.Crud.Updated("User")         // Type: Success, HTTP: 200
-Msg.System.Success()             // Type: Success, HTTP: 200
+Msg.Auth.LoginSuccessful()          // Type: Success, HTTP: 200
+Msg.Crud.Created("Product")         // Type: Success, HTTP: 200
+Msg.Crud.Updated("User")            // Type: Success, HTTP: 200
+Msg.System.OperationCompleted()     // Type: Success, HTTP: 200
 ```
 
 **Console Output:** Green ✓
@@ -157,8 +157,8 @@ Msg.System.Success()             // Type: Success, HTTP: 200
 **Examples:**
 ```csharp
 Msg.System.Processing()          // Type: Info, HTTP: 200
-Msg.Search.InProgress()          // Type: Info, HTTP: 200
-Msg.Import.Processing()          // Type: Info, HTTP: 202
+Msg.Search.Completed()           // Type: Info, HTTP: 200
+Msg.System.Queued()              // Type: Info, HTTP: 202
 ```
 
 **Console Output:** Blue ℹ
@@ -185,8 +185,8 @@ Msg.Import.Processing()          // Type: Info, HTTP: 202
 **Examples:**
 ```csharp
 Msg.Crud.NoChangesDetected()     // Type: Warning, HTTP: 200
-Msg.File.SizeWarning()           // Type: Warning, HTTP: 200
-Msg.System.Deprecated()          // Type: Warning, HTTP: 200
+Msg.Validation.InvalidFormat()   // Type: Warning, HTTP: 200
+Msg.System.Degraded()            // Type: Warning, HTTP: 200
 ```
 
 **Console Output:** Yellow ⚠
@@ -242,19 +242,18 @@ Msg.System.Error()               // Type: Error, HTTP: 500
 
 **Examples:**
 ```csharp
-Msg.Database.ConnectionLost()    // Type: Critical, HTTP: 503
-Msg.System.OutOfMemory()         // Type: Critical, HTTP: 500
-Msg.System.DataCorruption()      // Type: Critical, HTTP: 500
+Msg.Database.ConnectionFailed()  // Type: Critical, HTTP: 503
+Msg.System.Error()               // Type: Critical, HTTP: 500
+Msg.System.Unavailable()         // Type: Critical, HTTP: 503
 ```
 
 **Console Output:** Red ‼️
 
 **When to Use:**
 - Database unavailable
-- Out of memory
-- Disk full
-- Configuration corruption
-- Security breach detected
+- Service unavailable
+- Configuration error
+- Security issue detected
 - Data integrity violated
 
 ---
@@ -263,16 +262,16 @@ Msg.System.DataCorruption()      // Type: Critical, HTTP: 500
 
 | Scenario | Type | Example |
 |----------|------|---------|
-| [✓] User logged in successfully | Success | `Msg.Auth.LoginSuccess()` |
+| [✓] User logged in successfully | Success | `Msg.Auth.LoginSuccessful()` |
 | ℹ️ Processing file | Info | `Msg.System.Processing()` |
 | **Warning:** Update with no changes | Warning | `Msg.Crud.NoChangesDetected()` |
 | [ ] Invalid email format | Error | `Msg.Validation.InvalidEmail()` |
-| 🔴 Database connection lost | Critical | `Msg.Database.ConnectionLost()` |
+| 🔴 Database connection failed | Critical | `Msg.Database.ConnectionFailed()` |
 | [✓] Product created | Success | `Msg.Crud.Created("Product")` |
-| ℹ️ Search started | Info | `Msg.Search.InProgress()` |
-| **Warning:** File size near limit | Warning | `Msg.File.SizeWarning()` |
+| ℹ️ Search completed | Info | `Msg.Search.Completed()` |
+| **Warning:** Validation failed | Warning | `Msg.Validation.Failed()` |
 | [ ] Product not found | Error | `Msg.Crud.NotFound("Product")` |
-| 🔴 Out of disk space | Critical | `Msg.System.DiskFull()` |
+| 🔴 Service unavailable | Critical | `Msg.System.Unavailable()` |
 
 ---
 
@@ -283,24 +282,24 @@ EasyMessages automatically maps message types to appropriate HTTP status codes:
 ### Success Messages → 2xx
 
 ```csharp
-Msg.Crud.Created("User")         // HTTP 200 OK (could be 201 Created)
+Msg.Crud.Created("User")         // HTTP 201 Created
 Msg.Crud.Updated("User")         // HTTP 200 OK
 Msg.Crud.Deleted("User")         // HTTP 200 OK (could be 204 No Content)
-Msg.Auth.LoginSuccess()          // HTTP 200 OK
+Msg.Auth.LoginSuccessful()       // HTTP 200 OK
 ```
 
 ### Info Messages → 2xx
 
 ```csharp
-Msg.System.Processing()          // HTTP 200 OK
-Msg.Import.Processing()          // HTTP 202 Accepted
+Msg.System.Processing()          // HTTP 202 Accepted
+Msg.System.Queued()              // HTTP 202 Accepted
 ```
 
 ### Warning Messages → 2xx or 4xx
 
 ```csharp
 Msg.Crud.NoChangesDetected()     // HTTP 200 OK
-Msg.File.SizeWarning()           // HTTP 200 OK
+Msg.System.RateLimitExceeded()   // HTTP 429 Too Many Requests
 ```
 
 ### Error Messages → 4xx or 5xx
@@ -316,16 +315,16 @@ Msg.Auth.LoginFailed()           // HTTP 401 Unauthorized
 **Server Errors (5xx):**
 ```csharp
 Msg.System.Error()               // HTTP 500 Internal Server Error
-Msg.Database.ConnectionFailed()  // HTTP 503 Service Unavailable
+Msg.Database.ConnectionFailed()  // HTTP 500 Internal Server Error
 Msg.Network.Timeout()            // HTTP 504 Gateway Timeout
 ```
 
 ### Critical Messages → 5xx
 
 ```csharp
-Msg.System.OutOfMemory()         // HTTP 500 Internal Server Error
-Msg.Database.ConnectionLost()    // HTTP 503 Service Unavailable
-Msg.System.DataCorruption()      // HTTP 500 Internal Server Error
+Msg.System.Error()               // HTTP 500 Internal Server Error
+Msg.Database.ConnectionFailed()  // HTTP 500 Internal Server Error
+Msg.System.Unavailable()         // HTTP 503 Service Unavailable
 ```
 
 ### Overriding HTTP Status Codes
@@ -373,9 +372,9 @@ EasyMessages organizes messages into logical categories:
 ### Authentication & Authorization (AUTH)
 ```csharp
 Msg.Auth.LoginFailed()
-Msg.Auth.LoginSuccess()
+Msg.Auth.LoginSuccessful()
 Msg.Auth.Unauthorized()
-Msg.Auth.TokenExpired()
+Msg.Auth.SessionExpired()
 // 10 total messages
 ```
 
@@ -402,7 +401,7 @@ Msg.Validation.InvalidEmail()
 ```csharp
 Msg.System.Error()
 Msg.System.Processing()
-Msg.System.Success()
+Msg.System.OperationCompleted()
 // 10 total messages
 ```
 
@@ -410,15 +409,15 @@ Msg.System.Success()
 ```csharp
 Msg.Database.ConnectionFailed()
 Msg.Database.QueryTimeout()
-Msg.Database.ConnectionLost()
+Msg.Database.Deadlock()
 // 8 total messages
 ```
 
 ### File Operations (FILE)
 ```csharp
-Msg.File.Uploaded()
+Msg.File.UploadSuccessful("document.pdf")
 Msg.File.InvalidType("pdf", "docx")
-Msg.File.SizeExceeded()
+Msg.File.TooLarge("10MB")
 // 12 total messages
 ```
 
@@ -563,10 +562,10 @@ Msg.Auth.LoginFailed().ToConsole(useColors: true);
 //   [2026-01-09 14:30:00] [AUTH_001]
 
 // Critical (Red ‼️)
-Msg.Database.ConnectionLost().ToConsole(useColors: true);
-// ‼️ Database Connection Lost
-//   Connection to database was lost.
-//   [2026-01-09 14:30:00] [DB_008]
+Msg.Database.ConnectionFailed().ToConsole(useColors: true);
+// ‼️ Database Connection Failed
+//   Unable to establish database connection.
+//   [2026-01-09 14:30:00] [DB_001]
 ```
 
 ---

@@ -315,7 +315,7 @@ Msg.Auth.LoginFailed().Log(_logger);
 
 **Critical → Critical:**
 ```csharp
-Msg.Database.ConnectionLost().Log(_logger);
+Msg.Database.ConnectionFailed().Log(_logger);
 // Logged at: Critical
 ```
 

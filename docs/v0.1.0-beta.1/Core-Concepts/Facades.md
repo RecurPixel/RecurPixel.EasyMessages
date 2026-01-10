@@ -64,10 +64,9 @@ Msg.Auth.Unauthorized()             // AUTH_002 - No permission
 Msg.Auth.Forbidden()                // AUTH_002 - Alias for Unauthorized
 
 // Tokens & sessions
-Msg.Auth.TokenExpired()             // AUTH_004 - Token/session timeout
+Msg.Auth.SessionExpired()           // AUTH_004 - Session/token timeout
 Msg.Auth.InvalidToken()             // AUTH_005 - Invalid JWT
 Msg.Auth.InvalidRefreshToken()      // AUTH_009 - Cannot refresh
-Msg.Auth.SessionExpired()           // AUTH_004 - Session timeout
 
 // Account status
 Msg.Auth.AccountLocked()            // AUTH_006 - Too many attempts
@@ -255,21 +254,23 @@ public IActionResult ValidateField(string field, string value)
 ```csharp
 // Status messages
 Msg.System.Processing()             // SYS_002 - In progress
-Msg.System.Success()                // SYS_001 - General success
+Msg.System.OperationCompleted()     // SYS_005 - General success
 
 // Errors
-Msg.System.Error()                  // SYS_003 - General error
+Msg.System.Error()                  // SYS_001 - General error
 Msg.System.Maintenance()            // SYS_004 - Under maintenance
-Msg.System.ServiceUnavailable()     // SYS_005 - Temporarily down
+Msg.System.Unavailable()            // SYS_007 - Temporarily down
 
-// Resource issues
-Msg.System.OutOfMemory()            // SYS_006 - Memory exhausted
-Msg.System.DiskFull()               // SYS_007 - Storage full
-Msg.System.ConfigurationError()     // SYS_008 - Invalid config
+// Operations & States
+Msg.System.Processing()             // SYS_002 - Request processing
+Msg.System.OperationCompleted()     // SYS_005 - Success
+Msg.System.RateLimitExceeded()      // SYS_006 - Rate limit
+Msg.System.Degraded()               // SYS_003 - Partial outage
+Msg.System.ConfigurationError()     // SYS_010 - Invalid config
 
-// Deprecation
-Msg.System.Deprecated()             // SYS_009 - Feature deprecated
-Msg.System.NotImplemented()         // SYS_010 - Feature not ready
+// Background Tasks
+Msg.System.Queued()                 // SYS_008 - Request queued
+Msg.System.Timeout()                // SYS_009 - Request timeout
 ```
 
 **Common Usage:**
@@ -287,7 +288,7 @@ public async Task<IActionResult> Import(ImportDto dto)
     try
     {
         await _service.ImportAsync(dto);
-        return Msg.System.Success()
+        return Msg.System.OperationCompleted()
             .WithData(new { Imported = dto.RecordCount })
             .ToApiResponse();
     }
@@ -320,10 +321,12 @@ public IActionResult Health()
 
 ```csharp
 Msg.Database.ConnectionFailed()     // DB_001 - Cannot connect
-Msg.Database.QueryTimeout()         // DB_002 - Query too slow
-Msg.Database.ConstraintViolation()  // DB_003 - FK/UK violation
-Msg.Database.DeadlockDetected()     // DB_004 - Deadlock
-Msg.Database.ConnectionLost()       // DB_008 - Connection dropped
+Msg.Database.DuplicateEntry("User", "email")  // DB_002 - Unique constraint
+Msg.Database.ForeignKeyConstraint() // DB_003 - FK violation
+Msg.Database.TransactionFailed()    // DB_004 - Transaction error
+Msg.Database.QueryTimeout()         // DB_006 - Query too slow
+Msg.Database.Deadlock()             // DB_007 - Deadlock
+Msg.Database.MigrationPending()     // DB_008 - Migration needed
 ```
 
 **Common Usage:**
@@ -346,7 +349,7 @@ public async Task<IActionResult> GetData()
     }
     catch (SqlException ex) when (ex.Number == 1205) // Deadlock
     {
-        return Msg.Database.DeadlockDetected()
+        return Msg.Database.Deadlock()
             .Log(_logger)
             .ToApiResponse();
     }
@@ -357,22 +360,19 @@ public async Task<IActionResult> GetData()
 
 **Purpose:** File upload, download, and validation
 
-```csharp
 // Success
-Msg.File.Uploaded()                         // FILE_001 - Upload success
-Msg.File.Downloaded()                       // FILE_002 - Download success
+Msg.File.UploadSuccessful("document.pdf")    // FILE_001 - Upload success
+Msg.File.DownloadSuccessful("report.xlsx")   // FILE_005 - Download success
 
 // Validation
-Msg.File.InvalidType("pdf", "docx")         // FILE_003 - Wrong type
-Msg.File.SizeExceeded()                     // FILE_004 - Too large
-Msg.File.SizeWarning()                      // FILE_005 - Near limit
+Msg.File.InvalidType("pdf", "docx")          // FILE_002 - Wrong type
+Msg.File.TooLarge("10MB")                    // FILE_003 - Too large
 
 // Errors
-Msg.File.NotFound()                         // FILE_006 - File missing
-Msg.File.ReadError()                        // FILE_007 - Cannot read
-Msg.File.WriteError()                       // FILE_008 - Cannot write
-Msg.File.CorruptFile()                      // FILE_009 - Corrupted
-```
+Msg.File.NotFound("missing.pdf")             // FILE_006 - File missing
+Msg.File.AccessDenied("secret.pdf")          // FILE_007 - No access
+Msg.File.Corrupted("damaged.pdf")            // FILE_009 - Corrupted
+Msg.File.VirusDetected("malware.exe")        // FILE_012 - Malicious file
 
 **Common Usage:**
 ```csharp
@@ -394,7 +394,7 @@ public async Task<IActionResult> Upload(IFormFile file)
     const long maxSize = 10 * 1024 * 1024; // 10 MB
     if (file.Length > maxSize)
     {
-        return Msg.File.SizeExceeded()
+        return Msg.File.TooLarge("10 MB")
             .WithMetadata("maxSize", "10 MB")
             .WithMetadata("actualSize", $"{file.Length / 1024 / 1024} MB")
             .ToApiResponse();
@@ -402,7 +402,7 @@ public async Task<IActionResult> Upload(IFormFile file)
 
     // Upload
     await _service.UploadAsync(file);
-    return Msg.File.Uploaded()
+    return Msg.File.UploadSuccessful(file.FileName)
         .WithData(new { FileName = file.FileName, Size = file.Length })
         .ToApiResponse();
 }
@@ -766,12 +766,12 @@ Msg.Validation.InvalidFormat("Field")
 // System
 Msg.System.Error()
 Msg.System.Processing()
-Msg.System.Success()
+Msg.System.OperationCompleted()
 
 // Files
-Msg.File.Uploaded()
+Msg.File.UploadSuccessful("document.pdf")
 Msg.File.InvalidType("pdf", "docx")
-Msg.File.SizeExceeded()
+Msg.File.TooLarge("10MB")
 
 // Custom
 Msg.Custom("YOUR_CODE")

@@ -459,9 +459,9 @@ public IActionResult GetById(int id)
 ```csharp
 // Authentication
 Msg.Auth.LoginFailed()
-Msg.Auth.LoginSuccess()
+Msg.Auth.LoginSuccessful()
 Msg.Auth.Unauthorized()
-Msg.Auth.TokenExpired()
+Msg.Auth.SessionExpired()
 
 // CRUD Operations
 Msg.Crud.Created("Entity")
@@ -478,12 +478,12 @@ Msg.Validation.InvalidFormat("FieldName")
 // System
 Msg.System.Error()
 Msg.System.Processing()
-Msg.System.Success()
+Msg.System.OperationCompleted()
 
 // Files
-Msg.File.Uploaded()
+Msg.File.UploadSuccessful("document.pdf")
 Msg.File.InvalidType("pdf", "docx")
-Msg.File.SizeExceeded()
+Msg.File.TooLarge("10MB")
 ```
 
 ### Most Common Methods

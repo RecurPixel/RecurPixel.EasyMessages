@@ -440,7 +440,7 @@ public class SecurityClassificationInterceptor : IMessageInterceptor
 InterceptorRegistry.Register(new SecurityClassificationInterceptor());
 
 // Usage
-Msg.Database.ConnectionLost().ToJson();
+Msg.Database.ConnectionFailed().ToJson();
 // metadata: { "SecurityClassification": "SENSITIVE" }
 ```
 
@@ -528,7 +528,7 @@ InterceptorRegistry.Register(
 );
 
 // Usage
-Msg.System.Success().ToJson();
+Msg.System.OperationCompleted().ToJson();
 // metadata: {
 //   "Environment": "Production",
 //   "MachineName": "WEB-SERVER-01",
@@ -1099,7 +1099,7 @@ public class CorrelationIdInterceptorTests
         // Arrange
         var httpContextAccessor = CreateMockAccessor("test-trace-id");
         var interceptor = new CorrelationIdInterceptor(() => httpContextAccessor);
-        var message = Msg.Auth.LoginSuccess();
+        var message = Msg.Auth.LoginSuccessful();
 
         // Act
         var result = interceptor.OnBeforeFormat(message);
@@ -1114,7 +1114,7 @@ public class CorrelationIdInterceptorTests
         // Arrange
         var httpContextAccessor = CreateMockAccessor("new-trace-id");
         var interceptor = new CorrelationIdInterceptor(() => httpContextAccessor);
-        var message = Msg.Auth.LoginSuccess()
+        var message = Msg.Auth.LoginSuccessful()
             .WithCorrelationId("existing-id");
 
         // Act

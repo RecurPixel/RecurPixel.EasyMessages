@@ -668,7 +668,7 @@ Messages automatically map to appropriate HTTP status codes:
 | `Msg.Auth.Unauthorized()` | 403 Forbidden | `ObjectResult` (403) |
 | `Msg.Validation.Failed()` | 422 Unprocessable Entity | `UnprocessableEntityObjectResult` |
 | `Msg.System.Error()` | 500 Internal Server Error | `ObjectResult` (500) |
-| `Msg.Database.ConnectionLost()` | 503 Service Unavailable | `ObjectResult` (503) |
+| `Msg.Database.ConnectionFailed()` | 503 Service Unavailable | `ObjectResult` (503) |
 
 **Override if needed:**
 ```csharp
@@ -770,7 +770,7 @@ public IActionResult GetById(int id)
     }
     catch (DbException ex)
     {
-        return Msg.Database.QueryFailed()
+        return Msg.Database.TransactionFailed()
             .WithMetadata("error", ex.Message)
             .Log(_logger)
             .ToApiResponse(); // Returns 500 Internal Server Error
